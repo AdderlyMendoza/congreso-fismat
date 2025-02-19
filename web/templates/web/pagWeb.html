@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Congreso FISMAT{% endblock %}</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet"> -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body>
+
+    <header class="fixed flex items-center justify-between w-full text-black px-20 py-8 z-10 text-white ">
+        <div class="flex items-end space-x-1 justify-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
+                alt="" class="w-20">
+            <h1 class="border-l pl-2">
+                Universidad <br>
+                Nacional del<br>
+                Altiplano de Puno
+            </h1>
+        </div>
+
+        <nav class="flex items-center text-xl">
+            <ul class="p-2 hover:bg-black/50 cursor-pointer">Nosotros</ul>
+            <ul class="p-2 hover:bg-black/50 cursor-pointer">Contacto</ul>
+        </nav>
+
+    </header>
+
+    <main class="h-screen flex flex-col items-center justify-center relative">
+
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 bg-cover bg-center brightness-50"
+            style="background-image: url('https://mentor.pe/wp-content/uploads/2023/09/una-puno-frontis.jpg');"></div>
+
+        <!-- Contenido encima del fondo -->
+        <div class="z-10 ">
+            <div class="flex">
+
+                <div class="text-center">
+                    <h1 class="text-8xl font-black text-red-500">XII</h1>
+                    <div class="bg-sky-800 flex items-center justify-center">
+                        <h1 class="text-4xl font-black text-white">CIMAC</h1>
+                    </div>
+                </div>
+
+                <div class="font-black text-white p-2 mt-2 space-y-2">
+                    <h2 class="text-3xl text-red-500 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
+                    <h2 class="text-3xl text-sky-500 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
+                    <h2 class="text-3xl text-sky-500 drop-shadow-lg">COMPUTACIONAL</h2>
+                </div>
+
+            </div>
+
+            <div class="bg-amber-400 text-center">
+                <h1 class="text-3xl font-black text-black/50">DEL 11 AL 15 DE AGOSTO DEL 2025</h1>
+            </div>
+
+        </div>
+
+
+
+    </main>
+
+    <div class="absolute top-1/2 mt-20 w-full flex justify-center">
+
+        <button
+            class="px-4 py-2 text-white text-lg bg-red-500 mt-10 font-semibold z-10 rounded-2xl cursor-pointer hover:bg-red-600">
+            <a href="registro/">INSCRIBIRME</a>
+        </button>
+    </div>
+
+</body>
+
+</html>
+
+{% comment %}
+
+Set-ExecutionPolicy Unrestricted -Scope Process
+venv\Scripts\activate
+
+{% endcomment %}

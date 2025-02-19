@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white p-8 rounded shadow-md w-96">
+        <h2 class="text-2xl font-bold mb-4 text-center">Inscripción al Congreso</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-4">
+                <label class="block text-gray-700">DNI:</label>
+                {{ form.dni }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700">Nombre:</label>
+                {{ form.nombres }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700">Apellido Paterno:</label>
+                {{ form.apellido_paterno }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700">Apellido Materno:</label>
+                {{ form.apellido_materno }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700">Email:</label>
+                {{ form.email }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700">Teléfono:</label>
+                {{ form.telefono }}
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                Inscribirme
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>
