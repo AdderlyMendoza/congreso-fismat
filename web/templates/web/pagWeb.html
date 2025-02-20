@@ -12,18 +12,19 @@
 
 <body>
 
-    <header class="fixed flex items-center justify-between w-full text-black px-20 py-8 z-10 text-white ">
-        <div class="flex items-end space-x-1 justify-center">
+    <header
+        class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-10 text-white px-4 py-4 ">
+        <div class="flex items-end space-x-1 justify-center ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
-                alt="" class="w-20">
-            <h1 class="border-l pl-2">
+                alt="" class="w-15">
+            <h1 class="border-l pl-2 md:text-md sm:text-sm">
                 Universidad <br>
                 Nacional del<br>
                 Altiplano de Puno
             </h1>
         </div>
 
-        <nav class="flex items-center text-xl">
+        <nav class="flex items-center md:text-md sm:text-sm">
             <ul class="p-2 hover:bg-black/50 cursor-pointer">Nosotros</ul>
             <ul class="p-2 hover:bg-black/50 cursor-pointer">Contacto</ul>
         </nav>
@@ -33,30 +34,34 @@
     <main class="h-screen flex flex-col items-center justify-center relative">
 
         <!-- Imagen de fondo -->
-        <div class="absolute inset-0 bg-cover bg-center brightness-50"
+        <div class="absolute inset-0 bg-cover bg-center brightness-40"
             style="background-image: url('https://mentor.pe/wp-content/uploads/2023/09/una-puno-frontis.jpg');"></div>
 
         <!-- Contenido encima del fondo -->
-        <div class="z-10 ">
-            <div class="flex">
+        <div class="z-10">
 
-                <div class="text-center">
-                    <h1 class="text-8xl font-black text-red-500">XII</h1>
-                    <div class="bg-sky-800 flex items-center justify-center">
-                        <h1 class="text-4xl font-black text-white">CIMAC</h1>
+            <div class="flex flex-col sm:flex-row items-center justify-center sm:space-y-2 sm:space-x-2">
+
+                <!-- Sección izquierda (Texto "XII" y "CIMAC") -->
+                <div class="text-center sm:text-left">
+                    <h1 class="text-6xl sm:text-8xl font-black text-red-500">XII</h1>
+                    <div class="bg-sky-800 flex items-center justify-center sm:justify-start p-2">
+                        <h1 class="text-3xl sm:text-4xl font-black text-white">CIMAC</h1>
                     </div>
                 </div>
 
-                <div class="font-black text-white p-2 mt-2 space-y-2">
-                    <h2 class="text-3xl text-red-500 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
-                    <h2 class="text-3xl text-sky-500 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
-                    <h2 class="text-3xl text-sky-500 drop-shadow-lg">COMPUTACIONAL</h2>
+                <!-- Sección derecha (Texto del Congreso) -->
+                <div class="font-black text-white sm:py-2 mt-2 space-y-2 text-center sm:text-left">
+                    <h2 class="text-2xl sm:text-3xl text-red-500 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
+                    <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
+                    <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">COMPUTACIONAL</h2>
                 </div>
 
             </div>
 
-            <div class="bg-amber-400 text-center">
-                <h1 class="text-3xl font-black text-black/50">DEL 11 AL 15 DE AGOSTO DEL 2025</h1>
+
+            <div class="bg-amber-400 text-center mt-2 p-2">
+                <h1 class="text-2xl sm:text-3xl font-black text-black/50">DEL 11 AL 15 DE AGOSTO DEL 2025</h1>
             </div>
 
         </div>
@@ -65,12 +70,13 @@
 
     </main>
 
-    <div class="absolute top-1/2 mt-20 w-full flex justify-center">
+    <div class="absolute top-1/2 mt-40 sm:mt-20 w-full flex justify-center">
 
         <button
-            class="px-4 py-2 text-white text-lg bg-red-500 mt-10 font-semibold z-10 rounded-2xl cursor-pointer hover:bg-red-600">
+            class="px-4 py-2 text-white text-lg bg-red-500 mt-15 font-semibold z-10 rounded-2xl cursor-pointer hover:bg-red-600">
             <a href="registro/">INSCRIBIRME</a>
         </button>
+
     </div>
 
 </body>

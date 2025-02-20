@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import RegistroForm
 
+# import directo la base de datos
+
 def registro_view(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)

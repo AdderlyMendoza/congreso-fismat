@@ -2,4 +2,4 @@
 
 Esta es la vista anterior xd
 
-![Imagen de Ejemplo](antiguo.png "Ejemplo de Imagen")
+![Imagen de Ejemplo](antiguo.png)
