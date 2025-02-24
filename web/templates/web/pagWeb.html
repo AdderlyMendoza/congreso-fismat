@@ -31,55 +31,321 @@
 
     </header>
 
-    <main class="h-screen flex flex-col items-center justify-center relative">
+    <main>
 
-        <!-- Imagen de fondo -->
-        <div class="absolute inset-0 bg-cover bg-center brightness-40"
-            style="background-image: url('https://mentor.pe/wp-content/uploads/2023/09/una-puno-frontis.jpg');"></div>
+        <section class="h-screen flex flex-col items-center justify-center relative">
 
-        <!-- Contenido encima del fondo -->
-        <div class="z-10">
 
-            <div class="flex flex-col sm:flex-row items-center justify-center sm:space-y-2 sm:space-x-2">
+            <!-- Imagen de fondo -->
+            <div class="absolute inset-0 bg-cover bg-center brightness-40"
+                style="background-image: url('https://mentor.pe/wp-content/uploads/2023/09/una-puno-frontis.jpg');">
+            </div>
 
-                <!-- Sección izquierda (Texto "XII" y "CIMAC") -->
-                <div class="text-center sm:text-left">
-                    <h1 class="text-6xl sm:text-8xl font-black text-red-500">XII</h1>
-                    <div class="bg-sky-800 flex items-center justify-center sm:justify-start p-2">
-                        <h1 class="text-3xl sm:text-4xl font-black text-white">CIMAC</h1>
+            <!-- Contenido encima del fondo -->
+            <div class="z-10">
+
+                <div class="flex flex-col sm:flex-row items-center justify-center sm:space-y-2 sm:space-x-2">
+
+                    <!-- Sección izquierda (Texto "XII" y "CIMAC") -->
+                    <div class="text-center sm:text-left">
+                        <h1 class="text-6xl sm:text-8xl font-black text-red-500">XII</h1>
+                        <div class="bg-sky-800 flex items-center justify-center sm:justify-start p-2">
+                            <h1 class="text-3xl sm:text-4xl font-black text-white">CIMAC</h1>
+                        </div>
+                    </div>
+
+                    <!-- Sección derecha (Texto del Congreso) -->
+                    <div class="font-black text-white sm:py-2 mt-2 space-y-2 text-center sm:text-left">
+                        <h2 class="text-2xl sm:text-3xl text-red-500 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
+                        <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
+                        <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">COMPUTACIONAL</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="bg-amber-400 text-center mt-2 p-2">
+                    <h1 class="text-2xl sm:text-3xl font-black text-black/50">DEL 11 AL 15 DE AGOSTO DEL 2025</h1>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="absolute top-1/2 mt-40 sm:mt-20 w-full flex justify-center">
+
+                <button
+                    class="px-4 py-2 text-white text-lg bg-red-500 mt-15 font-semibold z-10 rounded-2xl cursor-pointer hover:bg-red-600">
+                    <a href="registro/">ENVIAR PROYECTO</a>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">ENVÍO DE TRABAJOS</h1>
+
+            <div class="flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4">
+
+                <div class="relative cursor-pointer">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg bg-blue-600"></span>
+                    <div
+                        class="relative p-6 bg-white  border-2 border-indigo-500 border-gray-300 rounded-lg hover:scale-105 transition duration-500">
+                        <div class="flex items-center">
+                            <span class="text-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21.75 9v.906a2.25 2.25 0 0 1-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 0 0 1.183 1.981l6.478 3.488m8.839 2.51-4.66-2.51m0 0-1.023-.55a2.25 2.25 0 0 0-2.134 0l-1.022.55m0 0-4.661 2.51m16.5 1.615a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V8.844a2.25 2.25 0 0 1 1.183-1.981l7.5-4.039a2.25 2.25 0 0 1 2.134 0l7.5 4.039a2.25 2.25 0 0 1 1.183 1.98V19.5Z" />
+                                </svg>
+                            </span>
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Envío de resumenes y propuestas</h3>
+                        </div>
+                        <p class="text-gray-600 ">
+                            Hasta el 30 de junio de 2025
+                        </p>
                     </div>
                 </div>
 
-                <!-- Sección derecha (Texto del Congreso) -->
-                <div class="font-black text-white sm:py-2 mt-2 space-y-2 text-center sm:text-left">
-                    <h2 class="text-2xl sm:text-3xl text-red-500 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
-                    <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
-                    <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">COMPUTACIONAL</h2>
+                <div class="relative cursor-pointer">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg bg-blue-600"></span>
+                    <div
+                        class="relative p-6 bg-white border-2 border-blue-500 border-blue-300 rounded-lg hover:scale-105 transition duration-500">
+                        <div class="flex items-center">
+                            <span class="text-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                                </svg>
+                            </span>
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Notificación a los autores</h3>
+                        </div>
+                        <p class="text-gray-600 text-gray-300">
+                            05 de julio de 2025
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 
+            <div class="sm:flex space-x-4 sm:mt-20 mt-10">
+
+                <div
+                    class="flex-1 border-2 p-6 space-y-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-8 w-8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>
+
+                    <h1 class="font-bold text-2xl">Envío de resúmenes y propuestas</h1>
+                    <p>Hasta el 30 de junio de 2025</p>
+
+                </div>
+
+                <div
+                    class="flex-1 border-2 p-6 space-y-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-8 w-8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                    </svg>
+
+                    <h1 class="font-bold text-2xl">Notificación a los autores de resúmenes</h1>
+                    <p>05 de julio de 2025</p>
+
+                </div>
+            </div>
+             -->
+
+
+        </section>
+
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">ÁREAS TEMÁTICAS</h1>
+
+            <div class="sm:flex space-x-2 sm:mt-16 p-2 mt-6">
+
+                <div class="flex-1">
+                    <ul>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>
+                            Modelamiento Matemático en Ingeniería
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Ingeniería Matemática
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Análisis y Procesamiento de Imágenes
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Aplicaciones a las Operaciones de Procesos
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Teoría de Control
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Control Óptimo y Cálculo de Variaciones
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Estocástica y sus Aplicaciones
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Aplicaciones al Análisis y Métodos Numéricos
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Meteorología, Climatodología y Oceanografía
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Biomatemática
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Computación Científica
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex-1">
+                    <ul>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Dinámica de Fluidos Computacional y Flujos en Medios Porosos
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Wavelets y sus Aplicaciones
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Sistemas Integrados de Computación
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Enseñanza de la Matemática
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Diseño Geométrico Asistido por Medios Computacionales
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Diseño de Sistemas óptimos con Múltiples Objetivos
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Iniciación Científica
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Estadística Aplicada
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                            </svg>Optimización Matemática
+                        </li>
+                    </ul>
                 </div>
 
             </div>
 
 
-            <div class="bg-amber-400 text-center mt-2 p-2">
-                <h1 class="text-2xl sm:text-3xl font-black text-black/50">DEL 11 AL 15 DE AGOSTO DEL 2025</h1>
-            </div>
-
-        </div>
-
+        </section>
 
 
     </main>
 
-    <div class="absolute top-1/2 mt-40 sm:mt-20 w-full flex justify-center">
+    <footer class="mt-10 text-center p-4 text-gray-700 mx-10">
+        <hr class="border-t-2 border-gray-700 mb-4">
+        <h1>Universidad Nacional del Altiplano - Puno</h1>
+        <h1>Escuela Profesional de Ciencias Físico Matemáticas</h1>
+        <h1>© Adderly.M</h1>
+    </footer>
 
-        <button
-            class="px-4 py-2 text-white text-lg bg-red-500 mt-15 font-semibold z-10 rounded-2xl cursor-pointer hover:bg-red-600">
-            <a href="registro/">INSCRIBIRME</a>
-        </button>
-
-    </div>
 
 </body>
+
+
 
 </html>
 
