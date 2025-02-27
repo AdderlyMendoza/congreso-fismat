@@ -13,7 +13,7 @@
 <body>
 
     <header
-        class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-10 text-white px-4 py-4 ">
+        class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-50 text-white px-4 py-4 ">
         <div class="flex items-end space-x-1 justify-center ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
                 alt="" class="w-15">
@@ -76,7 +76,7 @@
             <div class="absolute top-1/2 mt-40 sm:mt-20 w-full flex justify-center">
 
                 <button
-                    class="px-4 py-2 text-white text-lg bg-red-500 mt-15 font-semibold z-10 rounded-2xl cursor-pointer hover:bg-red-600">
+                    class="px-4 py-2 text-white text-lg bg-red-500 mt-15 font-semibold z-10 rounded-2xl cursor-pointer hover:bg-red-600 font-semibold">
                     <a href="registro/">ENVIAR PROYECTO</a>
                 </button>
 
@@ -90,12 +90,12 @@
 
             <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">ENVÍO DE TRABAJOS</h1>
 
-            <div class="flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4">
+            <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10">
 
                 <div class="relative cursor-pointer">
                     <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg bg-blue-600"></span>
                     <div
-                        class="relative p-6 bg-white  border-2 border-indigo-500 border-gray-300 rounded-lg hover:scale-105 transition duration-500">
+                        class="relative p-6 bg-white  border-2 border-indigo-500 border-gray-300 rounded-lg hover:scale-107 transition duration-500 sm:w-100">
                         <div class="flex items-center">
                             <span class="text-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -112,10 +112,10 @@
                     </div>
                 </div>
 
-                <div class="relative cursor-pointer">
+                <div class="relative cursor-pointer sm:ml-6">
                     <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg bg-blue-600"></span>
                     <div
-                        class="relative p-6 bg-white border-2 border-blue-500 border-blue-300 rounded-lg hover:scale-105 transition duration-500">
+                        class="relative p-6 bg-white border-2 border-blue-500 border-blue-300 rounded-lg hover:scale-107 transition duration-500 mt-4 md:mt-0 sm:w-100">
                         <div class="flex items-center">
                             <span class="text-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -170,7 +170,7 @@
 
         </section>
 
-        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10 px-4">
 
             <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">ÁREAS TEMÁTICAS</h1>
 
@@ -344,6 +344,28 @@
 
 
 </body>
+
+
+
+<script>
+
+    function handleScroll() {
+        const header = document.querySelector('header');
+
+        if (header) {
+            if (window.scrollY > 0) {
+                header.classList.add('backdrop-filter', 'backdrop-blur-lg', 'bg-black/50', 'bg-opacity-60');
+            } else {
+                header.classList.remove('backdrop-filter', 'backdrop-blur-lg', 'bg-black/50', 'bg-opacity-60');
+            }
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+
+</script>
 
 
 

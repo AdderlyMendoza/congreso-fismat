@@ -79,7 +79,15 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
+    'bdCongreso': {
+        'ENGINE': 'django.db.backends.mysql',  # O el motor de base de datos que estés utilizando
+        'NAME': 'congreso_fismat',  # Nombre de la base de datos externa
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
 }
 
 
