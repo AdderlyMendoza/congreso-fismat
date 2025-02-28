@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+
+    <!-- tailwindcss -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-gradient-to-r from-red-400 to-blue-400">
@@ -26,17 +30,14 @@
         <nav class="flex items-center md:text-md sm:text-sm">
             <a href="/" class="p-2 hover:bg-black/50 cursor-pointer">INICIO</a>
         </nav>
-
     </header>
 
-
     <main class="h-full items-center justify-center flex">
-
         <div class="relative md:-rotate-188 sm:bg-blue-600 h-181 w-110 my-40 rounded-2xl"></div>
 
-        <form method="POST" class="absolute bg-white p-8 rounded-2xl shadow-md my-40 ">
+        <form method="POST" enctype="multipart/form-data" class="absolute bg-white p-8 rounded-2xl shadow-md my-40 "
+            id="enviarForm">
             {% csrf_token %}
-
             <div class="mb-2">
                 <label for="dni" class="text-gray-700 font-semibold">DNI:</label>
                 {{ form.dni }}
@@ -63,7 +64,7 @@
             </div>
 
             <div class="mb-2">
-                <label for="telefono" class="text-gray-700 font-semibold">CELULAR:</label>
+                <label for="celular" class="text-gray-700 font-semibold">CELULAR:</label>
                 {{ form.celular }}
             </div>
 
@@ -71,20 +72,84 @@
                 <label for="proyecto_investigacion" class="flex-1 text-gray-700 font-semibold">PROYECTO DE
                     INVESTIGACIÓN:</label>
                 <div class="flex">
-                    <span class="absolute mt-1 bg-gray-800 p-2 text-white text-lg px-3">ELEGIR ARCHIVO</span>
                     {{ form.proyecto_investigacion }}
                 </div>
             </div>
 
-
-
-            <button type="submit" class="mt-4 w-full cursor-pointer bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+            <button id="enviarForSweetAlert" type="button"
+                class="mt-4 w-full cursor-pointer bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
                 Inscribirme
             </button>
-        </form>
 
+        </form>
     </main>
 
 </body>
+
+<script>
+    // Función para agregar o quitar el borde rojo en caso de error
+    function toggleErrorClass(field, isValid) {
+        if (isValid) {
+            field.classList.remove('border-red-500');
+        } else {
+            field.classList.add('border-red-500');
+        }
+    }
+
+    // Función para validar todos los campos del formulario
+    function validarFormulario() {
+        let isValid = true;
+        const fields = [
+            { id: 'id_dni', type: 'integer' },
+            { id: 'id_nombres', type: 'text' },
+            { id: 'id_apellido_paterno', type: 'text' },
+            { id: 'id_apellido_materno', type: 'text' },
+            { id: 'id_email', type: 'email' },
+            { id: 'id_celular', type: 'integer' },
+            { id: 'id_proyecto_investigacion', type: 'file' }
+        ];
+
+        fields.forEach(function (field) {
+            const inputElement = document.getElementById(field.id);
+            const value = inputElement.value.trim();
+
+            // Validación de campo no vacío
+            if (!value || (field.type === 'email' && !value.includes('@'))) {
+                isValid = false;
+                toggleErrorClass(inputElement, false);
+            } else {
+                toggleErrorClass(inputElement, true);
+            }
+        });
+
+        return isValid;
+    }
+
+    document.getElementById("enviarForSweetAlert").addEventListener("click", function () {
+        if (validarFormulario()) {
+            // Si todos los campos están completos, mostramos el SweetAlert
+            Swal.fire({
+                icon: 'info',
+                title: "¿Está seguro de que desea inscribirse?",
+                text: "Le solicitamos que revise cuidadosamente sus datos antes de proceder con la inscripción. Si está seguro de que los datos son correctos, por favor, haga clic en Aceptar para continuar.",
+                showCancelButton: true,
+                confirmButtonText: "Aceptar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire("Inscripción completada", "", "success");
+                    setTimeout(function () {
+                        document.getElementById("enviarForm").submit();
+                    }, 1500);
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Por favor, complete todos los campos. Email debe tener un @',
+            });
+        }
+    });
+
+</script>
 
 </html>

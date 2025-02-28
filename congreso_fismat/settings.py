@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'web', # incluir la app 'web' en la lista de aplicaciones instaladas
     'registro',
+    'administrador',
 ]
 
 MIDDLEWARE = [
@@ -76,18 +77,26 @@ WSGI_APPLICATION = "congreso_fismat.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    },
-    'bdCongreso': {
-        'ENGINE': 'django.db.backends.mysql',  # O el motor de base de datos que estés utilizando
-        'NAME': 'congreso_fismat',  # Nombre de la base de datos externa
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
-    },
+    }
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": BASE_DIR / "db.sqlite3",
+    # },
+    # 'bdCongreso': {
+    #     'ENGINE': 'django.db.backends.mysql',  # O el motor de base de datos que estés utilizando
+    #     'NAME': 'congreso-fismat',  # Nombre de la base de datos externa
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # },
 }
 
 
@@ -125,3 +134,10 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+import os
+
+MEDIA_URL = '/media/'  # URL accesible desde el navegador
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Carpeta en el servidor para almacenar archivos
+
