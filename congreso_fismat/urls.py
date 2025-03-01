@@ -24,9 +24,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    
     path('', include('web.urls')),  
     path('registro/', include('registro.urls')), 
-    path('administrador/', include('administrador.urls')), 
-    
+    path('administrador/', include('administrador.urls')),     
 ]
+
+
+# Servir archivos media durante el desarrollo (DEBO TENERLO EN ADMIN PARA QUE NO PUEDAN INGRESAR XD)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

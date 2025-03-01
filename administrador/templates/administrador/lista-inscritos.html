@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}INSCRIPCIONES{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-semibold p-4">INSCRIPCIONES</h1>
+
+<div class="mt-2 mb-4 mx-4 bg-white rounded-md shadow-md">
+    <p class="py-4 px-6 text-md">Lista de personas inscritas en el XII CIMAC</p>
+    <hr class="mb-4 text-gray-400">
+
+    <div class="mt-6 px-6 pb-6">
+        <table class="w-full text-sm text-left">
+            <thead class="text-sm font-semibold uppercase">
+                <tr class="border-y-1">
+                    <th scope="col" class="px-6 py-3">Nº</th>
+                    <th scope="col" class="px-6 py-3">DNI</th>
+                    <th scope="col" class="px-6 py-3">Apellido paterno</th>
+                    <th scope="col" class="px-6 py-3">Apellido materno</th>
+                    <th scope="col" class="px-6 py-3">Nombres</th>
+                    <th scope="col" class="px-6 py-3">Celular</th>
+                    <th scope="col" class="px-6 py-3">Documento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in inscritos %}
+                <tr class="hover:bg-gray-100 border-y-1 border-gray-400">
+                    <td class="px-6 py-4">{{ forloop.counter }}</td>
+                    <td class="px-6 py-4">{{ registro.dni }}</td>
+                    <td class="px-6 py-4">{{ registro.apellido_paterno }}</td>
+                    <td class="px-6 py-4">{{ registro.apellido_materno }}</td>
+                    <td class="px-6 py-4">{{ registro.nombres }}</td>
+                    <td class="px-6 py-4">{{ registro.celular }}</td>
+                    <td class="px-6 py-4 flex items-center justify-center">
+                        {% if registro.proyecto_investigacion %}
+                        <!-- Botón para abrir el modal con el archivo PDF -->
+                        <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white"
+                            onclick="openModal('{{ registro.proyecto_investigacion.url }}')">
+                            Ver
+                        </button>
+                        {% else %}
+                        <!-- Si no hay archivo, mostramos un mensaje o dejamos el campo vacío -->
+                        <span>No disponible</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal (oculto por defecto) -->
+<div id="myModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg w-3/4 md:w-1/2">
+
+        <div class="flex justify-between items-center border-b-2 pb-1">
+            <h1>Imagen subida</h1>
+            <button onclick="closeModal()" class="font-bold text-xl text-white cursor-pointer bg-red-500 hover:bg-red-600 py-1 px-2 rounded-md">
+                X
+            </button>
+        </div>
+
+        <div class="flex h-100 items-center justify-center">
+            <img id="mostrarImg" class="h-full p-4">
+        </div>
+
+        <div class="w-full text-end mt-4 space-x-2 bg-gray-200 p-2">
+            <button onclick="" class="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-600 cursor-pointer">
+                Validar
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function openModal(url) {
+        const modal = document.getElementById('myModal');
+        const img = document.getElementById('mostrarImg');
+        const fullUrl = window.location.origin + url;  // Convierte la URL en absoluta
+        img.src = fullUrl;
+        img.alt = url;
+        modal.classList.remove('hidden');
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+        const modal = document.getElementById('myModal');
+        const img = document.getElementById('mostrarImg');
+        img.src = '';
+        modal.classList.add('hidden');
+    }
+</script>
+
+
+
+
+{% endblock %}

@@ -141,3 +141,4 @@ import os
 MEDIA_URL = '/media/'  # URL accesible desde el navegador
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Carpeta en el servidor para almacenar archivos
 
+X_FRAME_OPTIONS = 'ALLOWALL'  # Permite que el contenido se cargue en un iframe
