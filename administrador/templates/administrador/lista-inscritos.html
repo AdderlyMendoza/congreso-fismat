@@ -35,10 +35,15 @@
                     <td class="px-6 py-4 flex items-center justify-center">
                         {% if registro.proyecto_investigacion %}
                         <!-- Botón para abrir el modal con el archivo PDF -->
-                        <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white"
-                            onclick="openModal('{{ registro.proyecto_investigacion.url }}')">
-                            Ver
-                        </button>
+                            {% if registro.validado == False %}
+                                <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white" onclick="openModal('{{ registro.proyecto_investigacion.url }}', '{{ registro.id }}', '{{ registro.validado }}')">
+                                    Ver
+                                </button>
+                            {% else %} <!-- validado = verde -->
+                                <button class="font-medium bg-green-500 p-2 rounded-md hover:bg-green-600 text-white" onclick="openModal('{{ registro.proyecto_investigacion.url }}', '{{ registro.id }}', '{{ registro.validado }}')">
+                                    Ver
+                                </button>
+                            {% endif %}                        
                         {% else %}
                         <!-- Si no hay archivo, mostramos un mensaje o dejamos el campo vacío -->
                         <span>No disponible</span>
@@ -50,7 +55,6 @@
         </table>
     </div>
 </div>
-
 
 <!-- Modal (oculto por defecto) -->
 <div id="myModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
@@ -68,21 +72,40 @@
         </div>
 
         <div class="w-full text-end mt-4 space-x-2 bg-gray-200 p-2">
-            <button onclick="" class="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-600 cursor-pointer">
-                Validar
-            </button>
-        </div>
+            <form method="POST" id="validarForm" action="">
+                {% csrf_token %}
+                <!-- Campo oculto para el id del registro -->
+                <input type="hidden" name="id" id="registroId">
 
+                <button id="btnValidar" type="submit" class="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-600 cursor-pointer">
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 
 <script>
-    function openModal(url) {
+    function openModal(url, id, validado) {
+        // console.log(url, id, validado);
         const modal = document.getElementById('myModal');
         const img = document.getElementById('mostrarImg');
         const fullUrl = window.location.origin + url;  // Convierte la URL en absoluta
         img.src = fullUrl;
         img.alt = url;
+
+        const btnValidar = document.getElementById("btnValidar");
+        if (validado == "True") {
+            btnValidar.innerHTML = "Desvalidar";
+        } else {
+            btnValidar.innerHTML = "Validar";
+        }
+
+        // Establece el id del registro en el campo oculto
+        document.getElementById('registroId').value = id;
+
+        // Establece la acción del formulario a la URL correcta
+        document.getElementById('validarForm').action = "/administrador/validar-inscrito/" + id + "/";
+
         modal.classList.remove('hidden');
     }
 
@@ -94,8 +117,5 @@
         modal.classList.add('hidden');
     }
 </script>
-
-
-
 
 {% endblock %}

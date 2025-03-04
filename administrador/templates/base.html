@@ -75,12 +75,20 @@
             <div class="p-4 shadow-md flex items-center justify-end bg-white">
 
                 <div class="flex items-center p-1 space-x-1 hover:bg-gray-500 cursor-pointer rounded-md px-2">
-                    <h1 class="text-xl">NameUser</h1>
+                    <h1 class="text-xl">{{ request.user.username }}</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                     </svg>
                 </div>
+
+                {% comment %} Este form ponerlo que haga click en su user.name y se despliegue esto xd {% endcomment %}
+                <form action="{% url 'logout' %}" method="POST" class="flex items-center space-x-2">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700">
+                        Cerrar Sesión
+                    </button>
+                </form>
 
             </div>
 
