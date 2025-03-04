@@ -1,0 +1,38 @@
+<!-- myapp/templates/register.html -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body>
+
+
+    <section>
+
+
+    </section>
+    <h2>Registro de Usuario</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrar</button>
+    </form>
+
+    {% if messages %}
+    <div style="color: red;">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+</body>
+
+</html>

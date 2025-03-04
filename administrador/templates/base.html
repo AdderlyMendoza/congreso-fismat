@@ -20,7 +20,7 @@
     <main class="flex">
 
         <!-- sidebar -->
-        <section class="p-4 w-100 bg-gray-800 h-100% text-white">
+        <section class="p-4 w-100 h-screen bg-gray-800 h-100% text-white">
 
             <div class="flex items-end space-x-1">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
@@ -74,25 +74,21 @@
 
             <div class="p-4 shadow-md flex items-center justify-end bg-white">
 
-                <div class="flex items-center p-1 space-x-1 hover:bg-gray-500 cursor-pointer rounded-md px-2">
-                    <h1 class="text-xl">{{ request.user.username }}</h1>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </div>
-
-                {% comment %} Este form ponerlo que haga click en su user.name y se despliegue esto xd {% endcomment %}
-                <form action="{% url 'logout' %}" method="POST" class="flex items-center space-x-2">
+                <form action="{% url 'logout' %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700">
-                        Cerrar Sesión
+                    <button type="submit" class="flex hover:bg-gray-200 p-2 cursor-pointer items-center rounded-md">
+                        <h1 class="text-xl">{{ request.user.username }}</h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                        </svg>
                     </button>
                 </form>
 
             </div>
 
-            
+
             {% block content %}
 
 
@@ -103,6 +99,5 @@
     </main>
 
 </body>
-
 
 </html>

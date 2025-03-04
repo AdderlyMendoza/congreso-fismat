@@ -50,7 +50,7 @@ def login_view(request):
             else:
                 messages.error(request, 'Usuario o contraseña incorrectos.')
         else:
-            messages.error(request, 'Por favor, corrige los errores.')
+            messages.error(request, 'Usuario y/o contraseña incorrectos.')
     else:
         form = AuthenticationForm()
 
@@ -68,7 +68,7 @@ def register_view(request):
         if form.is_valid():
             form.save()  # Guarda el nuevo usuario
             messages.success(request, '¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.')
-            return redirect('index-inscritos')  # Redirige al login después de crear la cuenta
+            return redirect('login')  # Redirige al login después de crear la cuenta
         else:
             messages.error(request, 'Por favor, corrige los errores.')
     else:
