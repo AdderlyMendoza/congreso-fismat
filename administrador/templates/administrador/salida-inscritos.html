@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}SALIDA{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-semibold p-4">ASISTENCIA / SALIDA</h1>
+
+            <div class="mt-2 mb-4 mx-4 bg-white rounded-md shadow-md">
+                <p class="py-4 px-6 text-md">Tomar la fecha y hora de salida de los inscritos</p>
+                <hr class="mb-4 text-gray-400">
+
+                <div class="mt-6 px-6 pb-6">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}  <!-- Renderiza los campos del formulario -->
+                        <button type="submit">Registrar Salida</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+{% endblock %}

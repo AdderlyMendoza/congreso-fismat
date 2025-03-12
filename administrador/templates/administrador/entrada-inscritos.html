@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}ENTRADA{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-semibold p-4 text-center text-gray-800">ASISTENCIA / ENTRADA</h1>
+
+<div class="mt-6 mb-6 mx-auto max-w-2xl bg-white rounded-md shadow-lg p-6">
+    <p class="text-md text-gray-700 mb-4">Tomar la fecha y hora de entrada de los inscritos</p>
+    <hr class="mb-4 text-gray-400">
+
+    <div class="mt-6">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Campo DNI -->
+            <div class="mb-4">
+                <label for="dni" class="block text-sm font-medium text-gray-700">DNI</label>
+                <!-- Aquí se mejora el input -->
+                <input type="text" name="dni" id="dni" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                
+                {% if form.dni.errors %}
+                    <p class="bg-red-100 mt-2">{{ form.dni.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Botón de submit -->
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Registrar Entrada
+            </button>
+        </form>
+    </div>
+</div>
+
+{% block scripts %}
+    <script>
+        // Hacer que el campo DNI siempre reciba el foco cuando la página se recarga
+        document.getElementById("dni").focus();
+    </script>
+{% endblock %}
+
+{% endblock %}

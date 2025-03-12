@@ -142,3 +142,9 @@ MEDIA_URL = '/media/'  # URL accesible desde el navegador
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Carpeta en el servidor para almacenar archivos
 
 X_FRAME_OPTIONS = 'ALLOWALL'  # Permite que el contenido se cargue en un iframe
+
+
+
+# CONFIGURAR FECHA Y HORA PERUNAA
+TIME_ZONE = 'America/Lima'  # Asegúrate de elegir la zona horaria correcta
+USE_TZ = True  # Asegura que se utilicen las zonas horarias en Django
