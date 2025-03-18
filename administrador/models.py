@@ -11,4 +11,6 @@ class Asistencia(models.Model):
         unique_together = ('usuario', 'fecha')  # Asegura que solo haya un registro por día
 
     def __str__(self):
-        return f'{self.usuario.dni} - {self.fecha}'
+        # Concatenamos todos los campos en un solo string
+        return f"id: {self.usuario.id}, DNI: {self.usuario.dni}, Nombres: {self.usuario.nombres}, Apellido Paterno: {self.usuario.apellido_paterno}, " \
+               f"Apellido Materno: {self.usuario.apellido_materno}"

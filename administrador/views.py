@@ -70,11 +70,12 @@ def entrada_inscritos(request):
 
                 return redirect('entrada-inscritos')  # Redirige después de registrar
             except Registro.DoesNotExist:
-                form.add_error('dni', 'El usuario con este DNI no existe.')
+                form.add_error('dni', 'DNI no existe.')
     else:
         form = EntradaForm()
 
-    return render(request, 'administrador/entrada-inscritos.html', {'form': form})
+    asistenciaEntrada = Asistencia.objects.all().order_by('-fecha')
+    return render(request, 'administrador/entrada-inscritos.html', {'form': form, 'asistenciaEntrada':asistenciaEntrada})
 
 
 
@@ -89,9 +90,8 @@ def salida_inscritos(request):
 
                 ## LA ENTRADA TIENE QUE ALMACENARSE CON HORA Y LA SALIDA TAMBIEN, LA COLUMNA FECHA QUE SIGA SIENDO SOLO AÑO/MES/DIA
                 asistencia = Asistencia.objects.filter(usuario=usuario, fecha=timezone.localtime(timezone.now()).date()).first()
-                print("registro de salida: ", timezone.localtime(timezone.now()))
+                # print("registro de salida: ", timezone.localtime(timezone.now()))
                 
-
                 if asistencia:
                     if asistencia.entrada is not None and asistencia.salida is None:
                         # Si ya existe un registro de entrada y no tiene salida, actualizamos la salida
@@ -108,11 +108,12 @@ def salida_inscritos(request):
                 return redirect('salida-inscritos')  # Redirige después de registrar
             
             except Registro.DoesNotExist:
-                form.add_error('dni', 'El usuario con este DNI no existe.')
+                form.add_error('dni', 'DNI no existe.')
     else:
         form = SalidaForm()
 
-    return render(request, 'administrador/salida-inscritos.html', {'form': form})
+    asistenciaSalida = Asistencia.objects.all().order_by('-fecha')
+    return render(request, 'administrador/salida-inscritos.html', {'form': form, 'asistenciaSalida':asistenciaSalida})
 
 
 
