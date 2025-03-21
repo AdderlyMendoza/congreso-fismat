@@ -7,7 +7,12 @@
 <h1 class="text-2xl font-semibold p-4">INSCRIPCIONES</h1>
 
 <div class="mt-2 mb-4 mx-4 bg-white rounded-md shadow-md">
-    <p class="py-4 px-6 text-md">Lista de personas inscritas en el XII CIMAC</p>
+    <div class="flex justify-between mx-6">
+        <p class="py-4 text-md">Lista de personas inscritas en el XII CIMAC</p>
+        <form method="get" action="{% url 'excel-inscritos-validados' %}">
+            <button class="border bg-blue-500 text-sm text-white p-2 m-2 rounded-lg cursor-pointer hover:bg-blue-600">EXCEL INSCRITOS VALIDADOS</button>
+        </form>
+    </div>
     <hr class="mb-4 text-gray-400">
 
     <div class="mt-6 px-6 pb-6">

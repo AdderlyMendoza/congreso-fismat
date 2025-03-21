@@ -12,6 +12,8 @@ urlpatterns = [
     
     path('inscritos', login_required(views.lista_inscritos), name='lista-inscritos'),
     path('validar-inscrito/<int:id>/', login_required(views.validar_inscrito), name='validar-inscrito'),
+    path('excel-inscritos-validados', login_required(views.excel_inscritos_validados), name='excel-inscritos-validados'),
+
     
     # ASISTENCIA
     path('entrada', login_required(views.entrada_inscritos), name='entrada-inscritos'),
