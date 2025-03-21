@@ -51,14 +51,15 @@
     <table class="w-full text-sm text-left mt-8">
         <thead class="text-sm font-semibold uppercase">
             <tr class="border-y-1">
-                <th scope="col" class="px-6 py-3">Nº</th>
+                <th scope="col" class="px-6 py-3">Nº =  {{ asistenciaEntrada|length }} </th>
                 <th scope="col" class="px-6 py-3">DNI</th>
                 <th scope="col" class="px-6 py-3">Apellidos y Nombres</th>
             </tr>
         </thead>
         <tbody>
             {% for asistencia in asistenciaEntrada %}
-            <tr class="hover:bg-gray-100 border-y-1 border-gray-400">
+            {% comment %} <tr class="hover:bg-gray-100 border-y-1 border-gray-400"> {% endcomment %}
+            <tr class="hover:bg-gray-100 border-y-1 border-gray-400 {% if forloop.first %}bg-blue-300{% endif %}">
                 <td class="px-6 py-4">{{ forloop.counter }}</td>
                 <td class="px-6 py-4">{{ asistencia.usuario.dni }}</td>
                 <td class="px-6 py-4">{{ asistencia.usuario.apellido_paterno }} {{ asistencia.usuario.apellido_materno }} {{ asistencia.usuario.nombres }} </td>

@@ -33,7 +33,9 @@
             <div class="mt-4">
                 <h1 class="font-semibold">MENU</h1>
                 <ul class="flex flex-col space-y-2 pt-2">
-                    <a href=" {% url 'index-inscritos' %} " class="flex items-center px-4 py-2 hover:bg-gray-500">
+                    {% comment %} <a href=" {% url 'index-inscritos' %} " class="flex items-center px-4 py-2 hover:bg-gray-500"> {% endcomment %}
+                    <a href="{% url 'index-inscritos' %}" class="flex items-center px-4 py-2 hover:bg-blue-600 active:bg-blue-600 {% if request.resolver_match.url_name == 'index-inscritos' %}bg-blue-600{% endif %}">
+
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6 mr-1">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -42,7 +44,7 @@
                         Inicio
                     </a>
 
-                    <a href="{% url 'lista-inscritos' %}" class="flex items-center px-4 py-2 hover:bg-gray-500">
+                    <a href="{% url 'lista-inscritos' %}" class="flex items-center px-4 py-2 hover:bg-gray-500 {% if request.resolver_match.url_name == 'lista-inscritos' %}bg-blue-600{% endif %}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6 mr-1">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -51,7 +53,7 @@
                         Inscripciones
                     </a>
 
-                    <a href="" class="flex items-center px-4 py-2 hover:bg-gray-500">
+                    <a href="" class="flex items-center px-4 py-2 hover:bg-gray-500 ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6 mr-1">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -63,7 +65,7 @@
 
                 <h1 class="font-semibold mt-4">ASISTENCIA</h1>
                 <ul class="flex flex-col space-y-2 pt-2">
-                    <a href="{% url 'entrada-inscritos' %}" class="flex items-center px-4 py-2 hover:bg-gray-500">
+                    <a href="{% url 'entrada-inscritos' %}" class="flex items-center px-4 py-2 hover:bg-gray-500 active:bg-blue-600 {% if request.resolver_match.url_name == 'entrada-inscritos' %}bg-blue-600{% endif %}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6 mr-1">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -72,7 +74,7 @@
                         Entrada
                     </a>
 
-                    <a href="{% url 'salida-inscritos' %}" class="flex items-center px-4 py-2 hover:bg-gray-500">
+                    <a href="{% url 'salida-inscritos' %}" class="flex items-center px-4 py-2 hover:bg-gray-500 {% if request.resolver_match.url_name == 'salida-inscritos' %}bg-blue-600{% endif %}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6 mr-1">
                             <path stroke-linecap="round" stroke-linejoin="round"

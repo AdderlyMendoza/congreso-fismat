@@ -13,7 +13,7 @@ from .forms import EntradaForm, SalidaForm
 
 from datetime import timedelta
 
-
+from django.db import IntegrityError
 
 
 def index(request):
@@ -49,32 +49,41 @@ def entrada_inscritos(request):
 
                 # Verificar si ya existe un registro de asistencia para este usuario y la fecha actual
                 asistencia = Asistencia.objects.filter(usuario=usuario, fecha=timezone.now().date()).first()
-                print("registro de entrada: ", timezone.localtime(timezone.now()))
+                # print("registro de entrada: ", timezone.localtime(timezone.now()))
 
                 if not asistencia:
                     # Si no existe el registro, creamos uno nuevo con la hora de entrada
                     hora_ajustada = timezone.localtime(timezone.now()) - timedelta(hours=5)
                     
-                    asistencia = Asistencia.objects.create(
-                        usuario=usuario,
-                        entrada=hora_ajustada,
-                        fecha=timezone.now().date()
-                    )
-                    form.add_error('dni', 'El usuario registrado.')
-                    
+                    try:
+                        # Intentamos crear el registro
+                        asistencia = Asistencia.objects.create(
+                            usuario=usuario,
+                            entrada=hora_ajustada,
+                            fecha=timezone.now().date()
+                        )
+
+                    except IntegrityError:
+                        # Si ocurre un error de integridad (duplicado), se maneja aquí
+                        form.add_error('dni', 'DNI ya registrado.')
+         
                 else:
                     # Si ya existe el registro, no hacemos nada
-                    form.add_error('dni', 'El usuario con este DNI ya está registrado.')
-                    
+                    form.add_error('dni', 'DNI ya registrado.')
                     pass
 
-                return redirect('entrada-inscritos')  # Redirige después de registrar
+                # return redirect('entrada-inscritos')  # Redirige después de registrar
+                return render(request, 'administrador/entrada-inscritos.html', {'form': form, 'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada')})
+            
             except Registro.DoesNotExist:
                 form.add_error('dni', 'DNI no existe.')
     else:
         form = EntradaForm()
 
-    asistenciaEntrada = Asistencia.objects.all().order_by('-fecha')
+    
+    print("44 ----> ",form.errors)  # Esto te ayudará a verificar si los errores están siendo añadidos
+    
+    asistenciaEntrada = Asistencia.objects.all().order_by('-entrada')
     return render(request, 'administrador/entrada-inscritos.html', {'form': form, 'asistenciaEntrada':asistenciaEntrada})
 
 
@@ -100,19 +109,21 @@ def salida_inscritos(request):
                         asistencia.save()
                     else:
                         # Si no tiene entrada o ya tiene salida, mostramos un error
-                        form.add_error('dni', 'No se puede registrar una salida sin una entrada, o ya se registró una salida.')
+                        form.add_error('dni', 'DNI sin entrada hoy.')
                 else:
                     # Si no existe el registro de asistencia, mostramos un error
-                    form.add_error('dni', 'No existe un registro de entrada para este usuario hoy.')
+                    form.add_error('dni', 'DNI sin entrada hoy.')
 
-                return redirect('salida-inscritos')  # Redirige después de registrar
+                # return redirect('salida-inscritos')  # Redirige después de registrar
+                return render(request, 'administrador/salida-inscritos.html', {'form': form, 'asistenciaSalida': Asistencia.objects.all().order_by('-salida')})
+
             
             except Registro.DoesNotExist:
                 form.add_error('dni', 'DNI no existe.')
     else:
         form = SalidaForm()
 
-    asistenciaSalida = Asistencia.objects.all().order_by('-fecha')
+    asistenciaSalida = Asistencia.objects.all().order_by('-salida')
     return render(request, 'administrador/salida-inscritos.html', {'form': form, 'asistenciaSalida':asistenciaSalida})
 
 
