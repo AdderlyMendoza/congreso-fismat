@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -136,13 +138,10 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-import os
-
 MEDIA_URL = '/media/'  # URL accesible desde el navegador
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Carpeta en el servidor para almacenar archivos
 
 X_FRAME_OPTIONS = 'ALLOWALL'  # Permite que el contenido se cargue en un iframe
-
 
 
 # CONFIGURAR FECHA Y HORA PERUNAA

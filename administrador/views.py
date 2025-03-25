@@ -52,9 +52,8 @@ def index(request):
 
 
 
-
 def lista_inscritos(request):
-    inscritos = Registro.objects.all()
+    inscritos = Registro.objects.all().order_by('-fecha_registro')
     return render(request, 'administrador/lista-inscritos.html', {'inscritos': inscritos})
 
 
@@ -187,18 +186,22 @@ def entrada_inscritos(request):
                     pass
 
                 # return redirect('entrada-inscritos')  # Redirige después de registrar
-                return render(request, 'administrador/entrada-inscritos.html', {'form': form, 'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada')})
-            
+                return render(request, 'administrador/entrada-inscritos.html', {'form': form, 'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada'), 'asistenciaEntradaHoyCount': Asistencia.objects.filter(fecha=timezone.now().date()).count()})            
             except Registro.DoesNotExist:
                 form.add_error('dni', 'DNI no existe.')
     else:
         form = EntradaForm()
 
-    
-    print("44 ----> ",form.errors)  # Esto te ayudará a verificar si los errores están siendo añadidos
-    
+        
     asistenciaEntrada = Asistencia.objects.all().order_by('-entrada')
-    return render(request, 'administrador/entrada-inscritos.html', {'form': form, 'asistenciaEntrada':asistenciaEntrada})
+    asistenciaEntradaHoyCount = Asistencia.objects.filter(fecha=timezone.now().date()).count()
+    
+    return render(request, 'administrador/entrada-inscritos.html', 
+                { 
+                    'form': form, 
+                    'asistenciaEntrada':asistenciaEntrada,
+                    'asistenciaEntradaHoyCount':asistenciaEntradaHoyCount,
+                })
 
 
 
@@ -229,7 +232,7 @@ def salida_inscritos(request):
                     form.add_error('dni', 'DNI sin entrada hoy.')
 
                 # return redirect('salida-inscritos')  # Redirige después de registrar
-                return render(request, 'administrador/salida-inscritos.html', {'form': form, 'asistenciaSalida': Asistencia.objects.all().order_by('-salida')})
+                return render(request, 'administrador/salida-inscritos.html', {'form': form, 'asistenciaSalida': Asistencia.objects.all().order_by('-salida'), 'asistenciaSalidaHoyCount': Asistencia.objects.filter(fecha=timezone.now().date()).count()})
 
             
             except Registro.DoesNotExist:
@@ -238,8 +241,14 @@ def salida_inscritos(request):
         form = SalidaForm()
 
     asistenciaSalida = Asistencia.objects.all().order_by('-salida')
-    return render(request, 'administrador/salida-inscritos.html', {'form': form, 'asistenciaSalida':asistenciaSalida})
-
+    asistenciaSalidaHoyCount = Asistencia.objects.filter(fecha=timezone.now().date()).count()
+    
+    return render(request, 'administrador/salida-inscritos.html', 
+                  {
+                      'form': form, 
+                      'asistenciaSalida':asistenciaSalida,
+                      'asistenciaSalidaHoyCount':asistenciaSalidaHoyCount,
+               })
 
 
 

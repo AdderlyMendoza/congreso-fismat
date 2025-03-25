@@ -19,8 +19,8 @@
 
     <main class="flex">
 
-        <!-- sidebar -->
-        <section class="p-4 w-100 h-screen bg-gray-800 h-100% text-white">
+        <!-- SIDEBAR IZQUIERDO -->
+        <section class="p-4 w-100 min-h-screen bg-gray-800 h-100% text-white ">
 
             <div class="text-center flex flex-col items-center">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
@@ -89,15 +89,15 @@
 
         </section>
 
-        <!-- tabla -->
+        <!-- ENCABEZADO -->
         <section class="w-full bg-gray-200 h-full">
 
             <div class="p-4 shadow-md flex items-center justify-end bg-white">
-
+                <p class="text-lg">Bienvenido, </p>
                 <form action="{% url 'logout' %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="flex hover:bg-gray-200 p-2 cursor-pointer items-center rounded-md">
-                        <h1 class="text-xl">{{ request.user.username }}</h1>
+                        <h1 class="text-lg">{{ request.user.username }}</h1>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -108,11 +108,13 @@
 
             </div>
 
+            <div class="min-h-screen">
 
-            {% block content %}
+                {% block content %}
 
+                {% endblock %}
 
-            {% endblock %}
+            </div>
 
         </section>
 

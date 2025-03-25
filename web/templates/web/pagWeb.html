@@ -7,6 +7,9 @@
     <title>{% block title %}Congreso FISMAT{% endblock %}</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -29,6 +32,7 @@
 
     </header>
 
+
     <main>
 
         <!-- PRINCIPAL -->
@@ -36,12 +40,29 @@
 
 
             <!-- Imagen de fondo -->
-            <div class="absolute inset-0 bg-cover bg-center brightness-40"
+            <!-- <div class="absolute inset-0 bg-cover bg-center brightness-40"
                 style="background-image: url('https://mentor.pe/wp-content/uploads/2023/09/una-puno-frontis.jpg');">
+            </div> -->
+
+            <!-- <div class="absolute inset-0 w-full h-full">
+                <iframe class="w-full h-full object-cover" 
+                        src="https://www.youtube.com/embed/_ERODpDkDgU?autoplay=1&mute=1&loop=1&playlist=_ERODpDkDgU&controls=0&showinfo=0&modestbranding=1" 
+                        frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
+                </iframe>
+            </div>
+             -->
+
+
+            <div class="absolute inset-0 bg-cover bg-center brightness-40">
+                <video autoplay muted loop class="w-full h-full object-cover">
+                    <source src="/media/assets/puno-peru.mp4" type="video/mp4">
+                    Tu navegador no soporta el formato de video.
+                </video>
             </div>
 
+
             <!-- Contenido encima del fondo -->
-            <div class="z-10">
+            <div class="z-10" data-aos="zoom-in">
 
                 <div class="flex flex-col sm:flex-row items-center justify-center sm:space-y-2 sm:space-x-2">
 
@@ -69,10 +90,8 @@
 
             </div>
 
-
-
-
-            <div class="absolute top-1/2 mt-40 sm:mt-20 w-full flex justify-center">
+            <!-- Botón de inscripción -->
+            <div class="absolute top-1/2 mt-40 sm:mt-20 w-full flex justify-center" data-aos="zoom-in">
 
                 <button
                     class="px-4 py-2 text-white text-lg bg-red-500 mt-15 font-semibold z-10 rounded-2xl cursor-pointer hover:bg-red-600 font-semibold">
@@ -84,13 +103,43 @@
         </section>
 
 
-        <!-- ENVIO DE TRABAJOS -->
+        <!-- PRESENTACION -->
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">ENVÍO DE TRABAJOS</h1>
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PRESENTACIÓN</h1>
 
-            <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10">
+            <div class="sm:mt-20 mt-10 m-20 px-20" data-aos="fade-up">
+
+                <blockquote class="text-center text-2xl text-gray-900 italic">
+                    La Sociedad Peruana de Matemática Aplicada y Computacional <span
+                        class="font-semibold">(SPMAC)</span> y la Universidad Nacional del
+                    Altiplano de Puno <span class="font-semibold">(UNAP)</span> dan la bienvenida a todos los
+                    participantes al XII Congreso Internacional de Matemática Aplicada y Computacional
+                    <span
+                        class="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-sky-800 m-2">
+                        <span class="relative text-white">
+                            (XII-CIMAC)
+                        </span>
+                    </span>
+                    que se llevará a cabo durante los días <span class="font-semibold">11 al 15 de Agosto del 2025 en
+                        Puno-Perú</span>, el cual se
+                    desarrollará en forma Presencial, con algunas sesiones en forma Virtual.
+                </blockquote>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ENVIO DE TRABAJOS -->
+        <!-- <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">COSTOS DE INSCRIPCIÓN</h1>
+
+            <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10" data-aos="fade-up">
 
                 <div class="relative cursor-pointer">
                     <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg bg-blue-600"></span>
@@ -135,18 +184,18 @@
             </div>
 
 
-        </section>
+        </section> -->
 
 
         <!-- CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE -->
         <section>
 
-            <div class="flex items-center justify-center sm:mt-20 mt-10 px-4">
+            <div class="flex items-center justify-center sm:mt-20 mt-10 px-4" data-aos="fade-up">
                 <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE
                 </h1>
             </div>
 
-            <div class="flex flex-col items-center justify-center sm:mt-5 bg-amber-400">
+            <div class="flex flex-col items-center justify-center bg-amber-400 mt-20" data-aos="fade-up">
 
                 <div class="sm:flex">
 
@@ -314,16 +363,17 @@
         </section>
 
 
-        <!-- SOBRE EL EVENTO -->
+        <!-- PROGRAMA -->
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">SOBRE EL EVENTO</h1>
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PROGRAMA</h1>
 
-            <div class="sm:flex sm:flex-col sm:mt-20 mt-10 max-auto">
+            <div class="sm:flex sm:flex-col sm:mt-20 mt-10 max-auto" data-aos="fade-up">
 
                 <div class="flex [&>button]:px-2 [&>button]:pt-2 [&>button]:cursor-pointer z-10">
-                    <button id="btn1" onclick="changeSection(1)">DIA 1</button>
+                    <button id="btn1" onclick="changeSection(1)"
+                        class="border-l border-t border-r border-b-4 border-b-white">DIA 1</button>
                     <button id="btn2" onclick="changeSection(2)">DIA 2</button>
                     <button id="btn3" onclick="changeSection(3)">DIA 3</button>
                 </div>
@@ -469,16 +519,107 @@
         </section>
 
 
+        <!-- PONENTES -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PONENTES</h1>
+
+            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
+
+                <div class="flex flex-wrap justify-center items-center p-4 mx-20">
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
         <!-- HOTELES -->
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">HOTELES</h1>
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">HOTELES</h1>
 
-            <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4">
+            <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4" data-aos="fade-up">
 
                 <!-- card 1 -->
-                <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <div
+                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
                         src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/db/81/a3/ghl-hotel-lago-titicaca.jpg?w=500&h=500&s=1"
                         alt="Sunset in the mountains">
@@ -496,7 +637,8 @@
                 </div>
 
                 <!-- card 2 -->
-                <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <div
+                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
                         src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/0e/64/7f/casa-andina-premium-puno.jpg?w=1400&h=800&s=1"
                         alt="Sunset in the mountains">
@@ -514,7 +656,8 @@
                 </div>
 
                 <!-- card 3 -->
-                <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <div
+                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
                         src="https://d2l4159s3q6ni.cloudfront.net/resize/850x550/filters:max_age(2604800):quality(65)/s3/dam/photos/3f/fc/62/85/e8dab38530d2f3beadb0386b04b9d09fa48b1dcf4cc9b74954159407.jpg"
                         alt="Sunset in the mountains">
@@ -537,8 +680,69 @@
         </section>
 
 
-    </main>
+        <!-- ORGANIZADORES -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">ORGANIZADORES</h1>
+
+            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
+
+                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
+
+                    <img class="w-40 h-40 object-cover object-center mx-10 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-10 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AUSPICIADORES -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">AUSPICIADORES</h1>
+
+            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
+
+                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
 
 
     <footer class="mt-10 text-center p-4 text-gray-700 mx-10">
@@ -579,11 +783,16 @@
 <script>
 
     function changeSection(sectionNumber) {
+
         // Primero, ocultamos todas las secciones
         const sections = document.querySelectorAll('.section');
         sections.forEach(section => {
             section.classList.add('hidden');
         });
+
+
+        // QUE btn1 ESTE SELECCIONADO AL INICIO DE LA PAGINA
+
 
         // Luego, mostramos la sección correspondiente
         const selectedSection = document.getElementById('section' + sectionNumber);
@@ -598,14 +807,16 @@
         const btn = document.getElementById('btn' + sectionNumber);
         btn.classList.add('border-l', 'border-t', 'border-r', 'border-b-4', 'border-b-white');
 
-        // Enmarcar el div de contenido
-        // const content = document.getElementById('content');
-        // content.classList.add('border-x', 'border-y', 'border-black');
     }
 
 </script>
 
 
+<!-- Añadir el script de AOS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init();  // Inicializa AOS
+</script>
 
 </html>
 
