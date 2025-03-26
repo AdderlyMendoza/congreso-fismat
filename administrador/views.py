@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from .models import Asistencia
 from django.utils import timezone
 
+from openpyxl import Workbook
 
 from .forms import EntradaForm, SalidaForm
 
@@ -18,11 +19,8 @@ from django.db import IntegrityError
 from django.utils.timezone import make_naive
 
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
-import openpyxl
 
 
-
-import pandas as pd
 from django.http import HttpResponse
 from django.utils import timezone
 
@@ -68,88 +66,160 @@ def validar_inscrito(request, id):
     return redirect('lista-inscritos')
 
 
+# def excel_inscritos_validados(request):
+#     # Filtra los registros validados
+#     inscritos = Registro.objects.filter(validado=1)
+
+#     # Organiza los datos en un diccionario
+#     data = {
+#         'DNI': [inscrito.dni for inscrito in inscritos],
+#         'Nombre': [inscrito.nombres for inscrito in inscritos],
+#         'Apellido Paterno': [inscrito.apellido_paterno for inscrito in inscritos],
+#         'Apellido Materno': [inscrito.apellido_materno for inscrito in inscritos],
+#         'Email': [inscrito.email for inscrito in inscritos],
+#         'Celular': [inscrito.celular for inscrito in inscritos],
+#         'Fecha de registro': [
+#             # Accede a los atributos correctamente usando la notación de puntos
+#             make_naive(inscrito.fecha_registro).strftime('%Y-%m-%d %H:%M:%S') if inscrito.fecha_registro else None
+#             for inscrito in inscritos
+#         ],
+#         # 'Validado': [inscrito.validado for inscrito in inscritos],
+#     }
+
+#     # Crea un DataFrame de pandas
+#     df = pd.DataFrame(data)
+
+#     # Crea la respuesta HTTP con el tipo de contenido adecuado
+#     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+#     response['Content-Disposition'] = 'attachment; filename=inscritos_validados.xlsx'
+
+#     # df.to_excel(response, index=False)
+
+#     with pd.ExcelWriter(response, engine='openpyxl') as writer:
+
+#         df.to_excel(writer, index=False, sheet_name='Inscritos', startrow=4)  # Iniciar en 4
+
+#         worksheet = writer.sheets['Inscritos']
+        
+#         worksheet.merge_cells('A1:G1')         
+
+#         worksheet['A2'] = 'CONGRESO CIMAC 2025'
+#         worksheet['A3'] = 'LISTA DE PERSONAS INSCRITAS'
+        
+     
+     
+#         worksheet['A2'].font = Font(bold=True, size=16, color="000000")  
+#         worksheet['A2'].fill = PatternFill(start_color="FFFFFF", end_color="FFFFFF", fill_type="solid") 
+        
+#         worksheet.merge_cells('A2:G2')
+#         worksheet.row_dimensions[2].height = 30
+#         worksheet['A2'].alignment = Alignment(horizontal='center', vertical='center')
+        
+        
+#         worksheet['A3'].font = Font(bold=True, size=14, color="000000") 
+#         worksheet['A3'].fill = PatternFill(start_color="FFFFFF", end_color="FFFFFF", fill_type="solid") 
+        
+#         worksheet.merge_cells('A3:G3') 
+#         worksheet.row_dimensions[3].height = 20
+#         worksheet['A3'].alignment = Alignment(horizontal='center', vertical='center')
+        
+#         worksheet.merge_cells('A4:G4')         
+                
+#         def ajustar_ancho_columnas(worksheet, dataframe):
+            
+#             border = Border(
+#                 left=Side(border_style="thin", color="000000"),
+#                 right=Side(border_style="thin", color="000000"),
+#                 top=Side(border_style="thin", color="000000"),
+#                 bottom=Side(border_style="thin", color="000000")
+#             )
+            
+#             for i, col in enumerate(dataframe.columns, 1):
+#                 max_len = max(dataframe[col].astype(str).map(len).max(), len(col))  # Considera el largo del encabezado
+#                 worksheet.column_dimensions[openpyxl.utils.get_column_letter(i)].width = max_len + 2  # Añadir un margen
+                
+#             # Agregar bordes a todas las celdas
+#             for row in worksheet.iter_rows(min_row=6, min_col=1, max_row=worksheet.max_row, max_col=len(dataframe.columns)):
+#                 for cell in row:
+#                     cell.border = border
+
+#         # Ajustar ancho de columnas
+#         ajustar_ancho_columnas(worksheet, df)
+
+#     return response
+
+
 def excel_inscritos_validados(request):
-    # Filtra los registros validados
-    inscritos = Registro.objects.filter(validado=1)
+    inscritos = Registro.objects.filter(validado=1).values_list(
+        'dni', 'nombres', 'apellido_paterno', 'apellido_materno', 
+        'email', 'celular', 'fecha_registro'
+    )
 
-    # Organiza los datos en un diccionario
-    data = {
-        'DNI': [inscrito.dni for inscrito in inscritos],
-        'Nombre': [inscrito.nombres for inscrito in inscritos],
-        'Apellido Paterno': [inscrito.apellido_paterno for inscrito in inscritos],
-        'Apellido Materno': [inscrito.apellido_materno for inscrito in inscritos],
-        'Email': [inscrito.email for inscrito in inscritos],
-        'Celular': [inscrito.celular for inscrito in inscritos],
-        'Fecha de registro': [
-            # Accede a los atributos correctamente usando la notación de puntos
-            make_naive(inscrito.fecha_registro).strftime('%Y-%m-%d %H:%M:%S') if inscrito.fecha_registro else None
-            for inscrito in inscritos
-        ],
-        # 'Validado': [inscrito.validado for inscrito in inscritos],
-    }
-
-    # Crea un DataFrame de pandas
-    df = pd.DataFrame(data)
-
-    # Crea la respuesta HTTP con el tipo de contenido adecuado
+    # Crear el libro de Excel directamente con OpenPyXL
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename=inscritos_validados.xlsx'
 
-    # df.to_excel(response, index=False)
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Inscritos"
 
-    with pd.ExcelWriter(response, engine='openpyxl') as writer:
+    # Estilos reutilizables
+    header_font = Font(bold=True, size=12)
+    title_font = Font(bold=True, size=16)
+    subtitle_font = Font(bold=True, size=14)
+    center_alignment = Alignment(horizontal='center', vertical='center')
+    thin_border = Border(
+        left=Side(border_style="thin"), 
+        right=Side(border_style="thin"),
+        top=Side(border_style="thin"), 
+        bottom=Side(border_style="thin")
+    )
 
-        df.to_excel(writer, index=False, sheet_name='Inscritos', startrow=4)  # Iniciar en 4
+    # Cabeceras y títulos
+    ws.merge_cells('A1:G1')
+    ws['A2'] = 'CONGRESO CIMAC 2025'
+    ws['A3'] = 'LISTA DE PERSONAS INSCRITAS'
+    
+    # Aplicar estilos a los títulos
+    for row in [2, 3]:
+        ws.merge_cells(f'A{row}:G{row}')
+        ws.row_dimensions[row].height = 30 if row == 2 else 20
+        cell = ws[f'A{row}']
+        cell.font = title_font if row == 2 else subtitle_font
+        cell.alignment = center_alignment
 
-        worksheet = writer.sheets['Inscritos']
-        
-        worksheet.merge_cells('A1:G1')         
+    # Encabezados de columna
+    columns = [
+        'DNI', 'Nombre', 'Apellido Paterno', 
+        'Apellido Materno', 'Email', 'Celular', 'Fecha de registro'
+    ]
+    
+    for col_num, column_title in enumerate(columns, 1):
+        cell = ws.cell(row=5, column=col_num, value=column_title)
+        cell.font = header_font
 
-        worksheet['A2'] = 'CONGRESO CIMAC 2025'
-        worksheet['A3'] = 'LISTA DE PERSONAS INSCRITAS'
-        
-     
-     
-        worksheet['A2'].font = Font(bold=True, size=16, color="000000")  
-        worksheet['A2'].fill = PatternFill(start_color="FFFFFF", end_color="FFFFFF", fill_type="solid") 
-        
-        worksheet.merge_cells('A2:G2')
-        worksheet.row_dimensions[2].height = 30
-        worksheet['A2'].alignment = Alignment(horizontal='center', vertical='center')
-        
-        
-        worksheet['A3'].font = Font(bold=True, size=14, color="000000") 
-        worksheet['A3'].fill = PatternFill(start_color="FFFFFF", end_color="FFFFFF", fill_type="solid") 
-        
-        worksheet.merge_cells('A3:G3') 
-        worksheet.row_dimensions[3].height = 20
-        worksheet['A3'].alignment = Alignment(horizontal='center', vertical='center')
-        
-        worksheet.merge_cells('A4:G4')         
-                
-        def ajustar_ancho_columnas(worksheet, dataframe):
-            
-            border = Border(
-                left=Side(border_style="thin", color="000000"),
-                right=Side(border_style="thin", color="000000"),
-                top=Side(border_style="thin", color="000000"),
-                bottom=Side(border_style="thin", color="000000")
-            )
-            
-            for i, col in enumerate(dataframe.columns, 1):
-                max_len = max(dataframe[col].astype(str).map(len).max(), len(col))  # Considera el largo del encabezado
-                worksheet.column_dimensions[openpyxl.utils.get_column_letter(i)].width = max_len + 2  # Añadir un margen
-                
-            # Agregar bordes a todas las celdas
-            for row in worksheet.iter_rows(min_row=6, min_col=1, max_row=worksheet.max_row, max_col=len(dataframe.columns)):
-                for cell in row:
-                    cell.border = border
+    # Datos
+    for row_num, inscrito in enumerate(inscritos, 6):
+        for col_num, cell_value in enumerate(inscrito, 1):
+            if col_num == 7 and cell_value:  # Fecha de registro
+                cell_value = make_naive(cell_value).strftime('%Y-%m-%d %H:%M:%S')
+            ws.cell(row=row_num, column=col_num, value=cell_value).border = thin_border
 
-        # Ajustar ancho de columnas
-        ajustar_ancho_columnas(worksheet, df)
+    # Ajustar ancho de columnas
+    for col in ws.columns:
+        max_length = 0
+        column = col[0].column_letter
+        for cell in col:
+            try:
+                if len(str(cell.value)) > max_length:
+                    max_length = len(str(cell.value))
+            except:
+                pass
+        adjusted_width = (max_length + 2)
+        ws.column_dimensions[column].width = adjusted_width
 
+    wb.save(response)
     return response
-
 
 def entrada_inscritos(request):
     if request.method == 'POST':
