@@ -136,31 +136,38 @@ USE_I18N = True
 USE_TZ = True
 
 
+
+
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Directorio con archivos estáticos fuente
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Ruta absoluta para collectstatic
 
 
-STATIC_URL = "static/"
+# Configuración para producción
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    
+    # Configuración de seguridad para producción
+    SECURE_HSTS_SECONDS = 31536000  # 1 año
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# Configuración de Media Files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# if not DEBUG: # - P
-#     # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
-#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-#     # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
-#     # and renames the files with unique names for each version to support long-term caching
-#     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
-if DEBUG:
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-else:
-    # Configuración para producción (S3)
+if not DEBUG:
+    # Configuración para S3 en producción
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
+    AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'us-east-1')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
     
@@ -172,12 +179,12 @@ else:
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-MEDIA_URL = '/media/'  # URL accesible desde el navegador
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Carpeta en el servidor para almacenar archivos
-
 X_FRAME_OPTIONS = 'ALLOWALL'  # Permite que el contenido se cargue en un iframe
 
 
 # CONFIGURAR FECHA Y HORA PERUNAA
 TIME_ZONE = 'America/Lima'  # Asegúrate de elegir la zona horaria correcta
 USE_TZ = True  # Asegura que se utilicen las zonas horarias en Django
+
+
+LOGIN_URL = '/administrador/login/'
