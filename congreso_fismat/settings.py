@@ -91,23 +91,24 @@ WSGI_APPLICATION = "congreso_fismat.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": dj_database_url.config( # - P
-            default='postgresql://postgres:postgres@localhost/postgres',        
-            conn_max_age=600    
-    )
-    
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
-    #     'USER': 'root',
-    #     'PASSWORD': '',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306',
-    # }
-    
-},
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# },
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
+        conn_max_age=600
+    )
+}
 
 
 # Password validation
