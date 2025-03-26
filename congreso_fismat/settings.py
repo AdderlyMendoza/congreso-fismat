@@ -10,8 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+
+# https://youtu.be/e6PkGDH4wWA?t=10077
+
 from pathlib import Path
 import os
+import dj_database_url # - P
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,12 +26,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-zunfrdph2p%m(+t299r)w(^(*jmke$z6h4$vh7%+rjs)pi$_td"
+# SECRET_KEY = "django-insecure-zunfrdph2p%m(+t299r)w(^(*jmke$z6h4$vh7%+rjs)pi$_td"
+SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-zunfrdph2p%m(+t299r)w(^(*jmke$z6h4$vh7%+rjs)pi$_td') # - P
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True # Cambiar a False en producción
+DEBUG = 'RENDER' not in os.environ # - P
+
 
 ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME') # Obtener el nombre de host externo de Render - P
+if RENDER_EXTERNAL_HOSTNAME:    
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -52,6 +64,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware', # - P
 ]
 
 ROOT_URLCONF = "congreso_fismat.urls"
@@ -79,27 +92,22 @@ WSGI_APPLICATION = "congreso_fismat.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # },
-    # 'bdCongreso': {
-    #     'ENGINE': 'django.db.backends.mysql',  # O el motor de base de datos que estés utilizando
-    #     'NAME': 'congreso-fismat',  # Nombre de la base de datos externa
+    "default": dj_database_url.config( # - P
+            default='postgresql://postgres:postgres@localhost/postgres',        
+            conn_max_age=600    
+    )
+    
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
     #     'USER': 'root',
     #     'PASSWORD': '',
     #     'HOST': 'localhost',
     #     'PORT': '3306',
-    # },
-}
+    # }
+    
+},
+
 
 
 # Password validation
@@ -130,7 +138,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+
 STATIC_URL = "static/"
+
+
+if not DEBUG: # - P
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    
+    
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
