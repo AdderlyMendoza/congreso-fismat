@@ -92,6 +92,7 @@ WSGI_APPLICATION = "congreso_fismat.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
+# DESARROLLO
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -104,6 +105,7 @@ WSGI_APPLICATION = "congreso_fismat.wsgi.application"
 # }
 
 
+# PRODUCCION
 DATABASES = {
     'default': dj_database_url.config(
         default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
