@@ -8,7 +8,7 @@ class Registro(models.Model):
     email = models.EmailField()
     celular = models.CharField(max_length=15, blank=True, null=False)
     # proyecto_investigacion = models.FileField(upload_to='pdfs/')  # Esta carpeta almacenará los archivos PDF
-    proyecto_investigacion = models.FileField(upload_to='pdfs/', blank=False, null=False)  # Hacerlo opcional
+    proyecto_investigacion = models.FileField(upload_to='pdfs/', blank=True, null=True)  # Hacerlo opcional
     validado = models.BooleanField(default=False)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 

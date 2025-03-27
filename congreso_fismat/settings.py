@@ -101,7 +101,7 @@ WSGI_APPLICATION = "congreso_fismat.wsgi.application"
 #         'HOST': 'localhost',
 #         'PORT': '3306',
 #     }
-# },
+# }
 
 DATABASES = {
     'default': dj_database_url.config(
