@@ -49,7 +49,6 @@ def index(request):
 
 
 
-
 def lista_inscritos(request):
     inscritos = Registro.objects.all().order_by('-fecha_registro')
     return render(request, 'administrador/lista-inscritos.html', {'inscritos': inscritos})
@@ -221,7 +220,13 @@ def excel_inscritos_validados(request):
     wb.save(response)
     return response
 
+
+
 def entrada_inscritos(request):
+    
+    inicio_dia = timezone.make_aware(timezone.datetime.combine(timezone.now().date(), timezone.datetime.min.time()))
+    fin_dia = inicio_dia + timedelta(days=1) - timedelta(seconds=1)
+    
     if request.method == 'POST':
         form = EntradaForm(request.POST)
         if form.is_valid():
@@ -256,7 +261,7 @@ def entrada_inscritos(request):
                     pass
 
                 # return redirect('entrada-inscritos')  # Redirige después de registrar
-                return render(request, 'administrador/entrada-inscritos.html', {'form': form, 'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada'), 'asistenciaEntradaHoyCount': Asistencia.objects.filter(fecha=timezone.now().date()).count()})            
+                return render(request, 'administrador/entrada-inscritos.html', {'form': form, 'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada'), 'asistenciaEntradaHoyCount': Asistencia.objects.filter(entrada__gte=inicio_dia, entrada__lt=fin_dia).count()})            
             except Registro.DoesNotExist:
                 form.add_error('dni', 'DNI no existe.')
     else:
@@ -264,7 +269,9 @@ def entrada_inscritos(request):
 
         
     asistenciaEntrada = Asistencia.objects.all().order_by('-entrada')
-    asistenciaEntradaHoyCount = Asistencia.objects.filter(fecha=timezone.now().date()).count()
+    asistenciaEntradaHoyCount = Asistencia.objects.filter(entrada__gte=inicio_dia, entrada__lt=fin_dia).count()
+
+
     
     return render(request, 'administrador/entrada-inscritos.html', 
                 { 
@@ -276,6 +283,10 @@ def entrada_inscritos(request):
 
 
 def salida_inscritos(request):
+    
+    inicio_dia = timezone.make_aware(timezone.datetime.combine(timezone.now().date(), timezone.datetime.min.time()))
+    fin_dia = inicio_dia + timedelta(days=1) - timedelta(seconds=1)
+    
     if request.method == 'POST':
         form = SalidaForm(request.POST)
         if form.is_valid():
@@ -302,7 +313,7 @@ def salida_inscritos(request):
                     form.add_error('dni', 'DNI sin entrada hoy.')
 
                 # return redirect('salida-inscritos')  # Redirige después de registrar
-                return render(request, 'administrador/salida-inscritos.html', {'form': form, 'asistenciaSalida': Asistencia.objects.all().order_by('-salida'), 'asistenciaSalidaHoyCount': Asistencia.objects.filter(fecha=timezone.now().date()).count()})
+                return render(request, 'administrador/salida-inscritos.html', {'form': form, 'asistenciaSalida': Asistencia.objects.all().order_by('-salida'), 'asistenciaSalidaHoyCount': Asistencia.objects.filter(salida__gte=inicio_dia, entrada__lt=fin_dia).count()})
 
             
             except Registro.DoesNotExist:
@@ -311,7 +322,7 @@ def salida_inscritos(request):
         form = SalidaForm()
 
     asistenciaSalida = Asistencia.objects.all().order_by('-salida')
-    asistenciaSalidaHoyCount = Asistencia.objects.filter(fecha=timezone.now().date()).count()
+    asistenciaSalidaHoyCount = Asistencia.objects.filter(salida__gte=inicio_dia, entrada__lt=fin_dia).count()
     
     return render(request, 'administrador/salida-inscritos.html', 
                   {
@@ -319,7 +330,6 @@ def salida_inscritos(request):
                       'asistenciaSalida':asistenciaSalida,
                       'asistenciaSalidaHoyCount':asistenciaSalidaHoyCount,
                })
-
 
 
 

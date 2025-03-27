@@ -1,10 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
 
     <!-- tailwindcss -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
@@ -36,12 +41,18 @@
     <main class="h-full items-center justify-center flex">
         <div class="relative md:-rotate-188 sm:bg-blue-600 h-181 w-110 my-40 rounded-2xl"></div>
 
-        <form method="POST" enctype="multipart/form-data" class="absolute bg-white p-8 rounded-2xl shadow-md my-40 "
-            id="enviarForm">
+        <form id="registroForm" method="POST" enctype="multipart/form-data" class="absolute bg-white p-8 rounded-2xl shadow-md my-40 ">
             {% csrf_token %}
             <div class="mb-2">
                 <label for="dni" class="text-gray-700 font-semibold">DNI:</label>
                 {{ form.dni }}
+                {% if form.dni.errors %}
+                    <div class="text-red-500 mt-1">
+                        {% for error in form.dni.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="mb-2">
@@ -62,11 +73,25 @@
             <div class="mb-2">
                 <label for="email" class="text-gray-700 font-semibold">EMAIL:</label>
                 {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="text-red-500 mt-1">
+                        {% for error in form.email.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="mb-2">
                 <label for="celular" class="text-gray-700 font-semibold">CELULAR:</label>
                 {{ form.celular }}
+                {% if form.celular.errors %}
+                    <div class="text-red-500 mt-1">
+                        {% for error in form.celular.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="mb-2">
@@ -82,10 +107,12 @@
             </button>
 
         </form>
+
     </main>
 
 </body>
 
+{% comment %} 
 <script>
     // Función para agregar o quitar el borde rojo en caso de error
     function toggleErrorClass(field, isValid) {
@@ -152,4 +179,173 @@
 
 </script>
 
-</html>
+</html> {% endcomment %}
+
+
+
+<script>
+    // Función para agregar o quitar el borde rojo en caso de error
+    function toggleErrorClass(field, isValid) {
+        if (isValid) {
+            field.classList.remove('border-red-500');
+        } else {
+            field.classList.add('border-red-500');
+        }
+    }
+
+    // Función para validar todos los campos del formulario
+    function validarFormulario() {
+        let isValid = true;
+        let errorMessages = [];
+        const fields = [
+            { id: 'id_dni', type: 'integer', name: 'DNI' },
+            { id: 'id_nombres', type: 'text', name: 'Nombres' },
+            { id: 'id_apellido_paterno', type: 'text', name: 'Apellido Paterno' },
+            { id: 'id_apellido_materno', type: 'text', name: 'Apellido Materno' },
+            { id: 'id_email', type: 'email', name: 'Email' },
+            { id: 'id_celular', type: 'integer', name: 'Celular' },
+            // { id: 'id_proyecto_investigacion', type: 'file', name: 'Voucher de pago' }
+        ];
+
+        fields.forEach(function (field) {
+            const inputElement = document.getElementById(field.id);
+            const value = inputElement.value.trim();
+
+            // Validación de campo no vacío
+            if (!value) {
+                isValid = false;
+                errorMessages.push(`${field.name} no puede estar vacío`);
+                toggleErrorClass(inputElement, false);
+            }
+            // Validación de email
+            else if (field.type === 'email' && !value.includes('@')) {
+                isValid = false;
+                errorMessages.push(`El formato del ${field.name} es incorrecto`);
+                toggleErrorClass(inputElement, false);
+            }
+            // Validación de números (celular o dni)
+            else if (field.type === 'integer' && isNaN(value)) {
+                isValid = false;
+                errorMessages.push(`${field.name} debe ser un número válido`);
+                toggleErrorClass(inputElement, false);
+            } else {
+                toggleErrorClass(inputElement, true);
+            }
+        });
+
+        return { isValid, errorMessages };
+    }
+
+    {% comment %} document.getElementById("enviarForSweetAlert").addEventListener("click", function () {
+        const { isValid, errorMessages } = validarFormulario();
+
+        if (isValid) {
+            // Si todos los campos están completos, mostramos el SweetAlert de confirmación
+            Swal.fire({
+                icon: 'info',
+                title: "¿Está seguro de que desea inscribirse?",
+                text: "Le solicitamos que revise cuidadosamente sus datos antes de proceder con la inscripción. Si está seguro de que los datos son correctos, por favor, haga clic en Aceptar para continuar.",
+                showCancelButton: true,
+                confirmButtonText: "Aceptar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire("Inscripción completada", "", "success");
+                    setTimeout(function () {
+                        document.getElementById("enviarForm").submit();
+                    }, 1500);
+                }
+            });
+        } else {
+            // Si hay errores, mostrar SweetAlert con los mensajes de error
+            Swal.fire({
+                icon: 'error',
+                title: 'Por favor, corrija los siguientes errores:',
+                html: `<ul style="list-style-type: none; padding-left: 0;">` +
+                      errorMessages.map(msg => `<li>${msg}</li>`).join('') +
+                      `</ul>`,
+                confirmButtonText: "Aceptar"
+            });
+        }
+    }); {% endcomment %}
+
+    document.getElementById("enviarForSweetAlert").addEventListener("click", function () {
+        // Primero, validamos los campos
+        const { isValid, errorMessages } = validarFormulario();
+    
+        // Si los campos son válidos, verificamos duplicados en el backend
+        if (isValid) {
+            const dni = document.getElementById('id_dni').value.trim();
+            const email = document.getElementById('id_email').value.trim();
+            const celular = document.getElementById('id_celular').value.trim();
+    
+            // Codificar correctamente los parámetros para evitar problemas de caracteres especiales
+            const url = `/registro/validar-duplicados/?dni=${encodeURIComponent(dni)}&email=${encodeURIComponent(email)}&celular=${encodeURIComponent(celular)}`;
+
+            // Enviar una solicitud AJAX para verificar duplicados
+            fetch(url, {  // Aquí la URL es la correcta
+                method: 'GET',  // Asegúrate de que el método sea GET
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Si todos los campos están completos, mostramos el SweetAlert de confirmación
+                    Swal.fire({
+                        icon: 'info',
+                        title: "¿Está seguro de que desea inscribirse?",
+                        text: "Le solicitamos que revise cuidadosamente sus datos antes de proceder con la inscripción. Si está seguro de que los datos son correctos, por favor, haga clic en Aceptar para continuar.",
+                        showCancelButton: true,
+                        confirmButtonText: "Aceptar",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire("Inscripción completada", "", "success");
+                            setTimeout(function () {
+                                document.getElementById("registroForm").submit();
+                            }, 1500);
+                        }
+                    });
+                } else {
+                    // Si hay duplicados, mostramos los errores
+                    let duplicateErrors = '';
+                    if (data.dni) {
+                        duplicateErrors += `<b>DNI:</b> ${data.dni}<br>`;
+                    }
+                    if (data.email) {
+                        duplicateErrors += `<b>Correo:</b> ${data.email}<br>`;
+                    }
+                    if (data.celular) {
+                        duplicateErrors += `<b>Celular:</b> ${data.celular}<br>`;
+                    }
+    
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error de duplicados',
+                        html: duplicateErrors,
+                        confirmButtonText: "Aceptar"
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al verificar los datos',
+                    text: 'Hubo un problema al verificar los datos. Intenta nuevamente.',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+        } else {
+            // Si los campos no son válidos, mostrar el error de validación
+            Swal.fire({
+                icon: 'error',
+                title: 'Por favor, corrija los siguientes errores:',
+                html: `<ul style="list-style-type: none; padding-left: 0;">` +
+                    errorMessages.map(msg => `<li>${msg}</li>`).join('') +
+                    `</ul>`,
+                confirmButtonText: "Aceptar"
+            });
+        }
+    });
+    
+
+
+
+</script>

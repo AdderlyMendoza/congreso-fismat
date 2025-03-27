@@ -1,12 +1,15 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Congreso FISMAT{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
+
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
