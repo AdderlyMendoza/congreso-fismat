@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -55,7 +57,7 @@
 
             <div class="absolute inset-0 bg-cover bg-center brightness-40">
                 <video autoplay muted loop class="w-full h-full object-cover">
-                    <source src="/media/assets/puno-peru.mp4" type="video/mp4">
+                    <source src="{% static 'video/puno-peru.mp4' %}" type="video/mp4">
                     Tu navegador no soporta el formato de video.
                 </video>
             </div>

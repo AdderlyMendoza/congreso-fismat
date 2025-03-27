@@ -103,6 +103,7 @@ WSGI_APPLICATION = "congreso_fismat.wsgi.application"
 #     }
 # }
 
+
 DATABASES = {
     'default': dj_database_url.config(
         default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
