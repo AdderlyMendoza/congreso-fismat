@@ -1,19 +1,37 @@
 from django.db import models
+from django_countries.fields import CountryField
+
+SELECCIONE = 'Seleccione'
+ESTUDIANTE = 'estudiante (solo pregrado)'
+PARTICIPANTE = 'participante'
+
+TIPO_PARTICIPANTE_CHOICES = [
+    ('', '(Seleccione)'),
+    (ESTUDIANTE, 'Estudiante (solo pregrado)'),
+    (PARTICIPANTE, 'Participante'),
+]
 
 class Registro(models.Model):
-    dni = models.CharField(max_length=8, blank=False, null=False, unique=True)  # DNI único
+    pais = CountryField(blank_label='(Seleccione el país)')
+    entidad_procedencia = models.CharField(max_length=100, blank=False, null=False)  # Entidad de procedencia
+    tipo_participante = models.CharField(
+        max_length=50, 
+        choices=TIPO_PARTICIPANTE_CHOICES, 
+        default=SELECCIONE,
+        blank=False, 
+        null=False
+    )
+    doc_acreditivo = models.FileField(max_length=100, blank=True, null=True)  # Documento si es estudiante
+    
+    dni = models.CharField(max_length=15, blank=False, null=False, unique=True) # o carnet de extranjeria
     nombres = models.CharField(max_length=100)
     apellido_paterno = models.CharField(max_length=100)
     apellido_materno = models.CharField(max_length=100)
     email = models.EmailField(unique=True)  # Correo electrónico único
     celular = models.CharField(max_length=15, blank=True, null=False, unique=True)  # Celular único
-    proyecto_investigacion = models.FileField(upload_to='pdfs/', blank=True, null=True)  # Hacerlo opcional prueba para PRODUCCION
+    voucher_pago = models.FileField(upload_to='pdfs/', blank=True, null=True)  # Hacerlo opcional prueba para PRODUCCION
     validado = models.BooleanField(default=False)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"id: {self.id}, DNI: {self.dni}, Nombres: {self.nombres}, Apellido Paterno: {self.apellido_paterno}, " \
-               f"Apellido Materno: {self.apellido_materno}, Email: {self.email}, Celular: {self.celular}, " \
-               f"Proyecto: {self.proyecto_investigacion}, Fecha de Registro: {self.fecha_registro}, Validado: {self.validado}"
-
-
+        return f"id: {self.id}, Entidad de Procedencia: {self.entidad_procedencia}, Tipo de Participante: {self. tipo_participante}, Documento de Estudiante {self.doc_acreditivo} DNI: {self.dni}, Nombres: {self.nombres}, Apellido Paterno: {self.apellido_paterno}, " f"Apellido Materno: {self.apellido_materno}, Email: {self.email}, Celular: {self.celular}, " f"Voucher de Pago: {self.voucher_pago}, Fecha de Registro: {self.fecha_registro}, Validado: {self.validado}"

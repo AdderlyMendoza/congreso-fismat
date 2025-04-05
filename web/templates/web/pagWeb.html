@@ -23,12 +23,14 @@
         class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-50 text-white px-4 py-4 ">
         <div class="flex items-end space-x-1 justify-center ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
-                alt="" class="w-15">
-            <h1 class="border-l pl-2 md:text-md sm:text-sm">
+                alt="logo unap" class="w-15">
+            {% comment %} <h1 class="border-l pl-2 md:text-md sm:text-sm">
                 Universidad <br>
                 Nacional del<br>
                 Altiplano de Puno
-            </h1>
+            </h1> {% endcomment %}
+            <img src="{% static 'images/logo-cimac.png' %}" alt="logo cimac" class="w-16 h-16 ml-2">
+
         </div>
 
         <nav class="flex items-center md:text-md sm:text-sm">
@@ -58,9 +60,9 @@
              -->
 
 
-            <div class="absolute inset-0 bg-cover bg-center brightness-40">
+            <div class="absolute inset-0 bg-cover bg-center brightness-25">
                 <video autoplay muted loop class="w-full h-full object-cover">
-                    <source src="{% static 'video/puno-peru.mp4' %}" type="video/mp4">
+                    <source src="{% static 'video/puno-peru-2.mp4' %}" type="video/mp4">
                     Tu navegador no soporta el formato de video.
                 </video>
             </div>
@@ -73,7 +75,7 @@
 
                     <!-- Sección izquierda (Texto "XII" y "CIMAC") -->
                     <div class="text-center sm:text-left">
-                        <h1 class="text-6xl sm:text-8xl font-black text-red-500">XII</h1>
+                        <h1 class="text-6xl sm:text-8xl font-black text-blue-800">XII</h1>
                         <div class="bg-sky-800 flex items-center justify-center sm:justify-start p-2">
                             <h1 class="text-3xl sm:text-4xl font-black text-white">CIMAC</h1>
                         </div>
@@ -81,7 +83,7 @@
 
                     <!-- Sección derecha (Texto del Congreso) -->
                     <div class="font-black text-white sm:py-2 mt-2 space-y-2 text-center sm:text-left">
-                        <h2 class="text-2xl sm:text-3xl text-red-500 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
+                        <h2 class="text-2xl sm:text-3xl text-blue-800 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
                         <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
                         <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">COMPUTACIONAL</h2>
                     </div>
@@ -109,10 +111,10 @@
 
 
         <!-- PRESENTACION -->
-        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+        <!-- <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PRESENTACIÓN</h1>
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">PRESENTACIÓN</h1>
 
             <div class="sm:mt-20 mt-10 m-20 px-20" data-aos="fade-up">
 
@@ -134,6 +136,33 @@
 
             </div>
 
+
+        </section> -->
+
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10 px-4">
+
+            <h1 class="border-b-4 pb-2 text-3xl sm:text-4xl text-amber-400 font-black" data-aos="fade-up">PRESENTACIÓN
+            </h1>
+
+            <div class="sm:mt-20 mt-10 w-full sm:w-3/4 m-4 sm:m-20 px-4 sm:px-20" data-aos="fade-up">
+
+                <blockquote class="text-center text-xl sm:text-2xl text-gray-900 italic">
+                    La Sociedad Peruana de Matemática Aplicada y Computacional <span
+                        class="font-semibold">(SPMAC)</span> y la Universidad Nacional del
+                    Altiplano de Puno <span class="font-semibold">(UNAP)</span> dan la bienvenida a todos los
+                    participantes al XII Congreso Internacional de Matemática Aplicada y Computacional
+                    <span
+                        class="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-sky-800 m-2">
+                        <span class="relative text-white">
+                            (XII-CIMAC)
+                        </span>
+                    </span>
+                    que se llevará a cabo durante los días <span class="font-semibold">11 al 15 de Agosto del 2025 en
+                        Puno-Perú</span>, el cual se
+                    desarrollará en forma Presencial, con algunas sesiones en forma Virtual.
+                </blockquote>
+
+            </div>
 
         </section>
 
@@ -196,7 +225,7 @@
         <section>
 
             <div class="flex items-center justify-center sm:mt-20 mt-10 px-4" data-aos="fade-up">
-                <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE
+                <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black">CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE
                 </h1>
             </div>
 
@@ -205,13 +234,13 @@
                 <div class="sm:flex">
 
                     <div class="flex-1">
-                        <img src="https://cartujacenter.com/wp-content/uploads/2020/01/EVENTOS-REUNIONES-2-1-1880x1254.jpg"
-                            alt="">
+                        <img src="{% static 'images/docentes-fismat.webp' %}" alt="Ciencias Físico Matemáticas"
+                            class="w-full h-full object-contain">
                     </div>
 
                     <div class="flex flex-1 items-center justify-center p-4">
                         <div class="flex-1">
-                            <ul class="text-sm">
+                            <ul class="text-md">
                                 <li class="flex items-center">
                                     <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -294,7 +323,7 @@
                         </div>
 
                         <div class="flex-1">
-                            <ul class="text-sm">
+                            <ul class="text-md">
                                 <li class="flex items-center">
                                     <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -369,7 +398,7 @@
 
 
         <!-- PROGRAMA -->
-        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+        {% comment %} <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
             <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PROGRAMA</h1>
@@ -521,11 +550,11 @@
 
             </div>
 
-        </section>
+        </section> {% endcomment %}
 
 
         <!-- PONENTES -->
-        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+        {% comment %} <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
             <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PONENTES</h1>
@@ -611,37 +640,34 @@
             </div>
 
 
-        </section>
+        </section> {% endcomment %}
 
 
         <!-- HOTELES -->
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">HOTELES</h1>
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">HOTELES</h1>
 
             <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4" data-aos="fade-up">
 
-                <!-- card 1 -->
-                <div
-                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                <!-- Royal Inn Puno -->
+                <div class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/db/81/a3/ghl-hotel-lago-titicaca.jpg?w=500&h=500&s=1"
+                        src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/190171179.jpg?k=2239276d979a48bcf7b314f8ad8c6b0ec7cede8d5c51d4f7beedf3d58f599095&o="
                         alt="Sunset in the mountains">
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <div class="font-bold text-xl mb-2">Royal Inn Puno</div>
                         <p class="text-gray-700 text-base">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
-                            et perferendis eaque, exercitationem praesentium nihil.
+                            El Royal Inn, ubicado en el centro de Puno, a 1 manzana de la plaza de Armas, ofrece alegres suites con conexión inalámbrica a internet gratuita.
                         </p>
                     </div>
                     <div class="px-6 pt-4 mb-6">
-                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
-                            información</a>
+                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más información</a>
                     </div>
                 </div>
 
-                <!-- card 2 -->
+                <!-- hotel 2 -->
                 <div
                     class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
@@ -660,7 +686,7 @@
                     </div>
                 </div>
 
-                <!-- card 3 -->
+                <!-- hotel 3 -->
                 <div
                     class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
@@ -686,58 +712,106 @@
 
 
         <!-- ORGANIZADORES -->
-        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+        <!-- <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">ORGANIZADORES</h1>
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">ORGANIZADORES</h1>
 
             <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
 
                 <div class="flex flex-wrap justify-center items-center p-4 mx-60">
 
-                    <img class="w-40 h-40 object-cover object-center mx-10 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                    <img class="h-40 object-cover object-center mx-10 my-4" src="{% static 'images/logo-cimac.png' %}"
                         alt="Sunset in the mountains">
 
                     <img class="w-40 h-40 object-cover object-center mx-10 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
+                        src="{% static 'images/logo-unap.png' %}" alt="Sunset in the mountains">
 
                 </div>
+
+            </div>
+
+        </section> -->
+
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">ORGANIZADORES</h1>
+
+            <div class="flex justify-center items-center p-4 my-10 space-x-1 md:space-x-2 lg:space-x-4"
+                data-aos="fade-up">
+
+                <img class="object-cover object-center h-30 md:h-40 lg:h-40 " src="{% static 'images/logo-cimac.png' %}"
+                    alt="Logo CIMAC">
+
+                <!-- <img class="object-cover object-center sm:mx-4 lg:mx-10 my-4 sm:w-40 sm:h-40 lg:w-48 lg:h-48"
+                    src="{% static 'images/logo-unap.png' %}" alt="Logo UNAP"> -->
+
+                <img class="object-cover object-center h-35 md:h-45 lg:h-45" src="{% static 'images/logo-unap.png' %}"
+                    alt="Logo UNAP">
 
             </div>
 
         </section>
 
 
+
         <!-- AUSPICIADORES -->
-        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+        <!-- <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">AUSPICIADORES</h1>
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">AUSPICIADORES</h1>
 
             <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
 
                 <div class="flex flex-wrap justify-center items-center p-4 mx-60">
 
                     <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        src="{% static 'images/logo-unap.png' %}" alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-mate.png' %}" alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4" src="{% static 'images/logo-vri.png' %}"
+                        alt="Sunset in the mountains">
+
+                </div>
+
+                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
+
+                    <img class="w-50 h-50 object-cover object-center mx-4 my-4" src="{% static 'images/logo-vra.png' %}"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4" src="{% static 'images/logo-dad.png' %}"
                         alt="Sunset in the mountains">
 
                     <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
+                        src="{% static 'images/logo-comap.png' %}" alt="Sunset in the mountains">
 
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
+                </div>
 
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
+            </div>
 
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+        </section> -->
+
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">AUSPICIADORES</h1>
+
+            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
+
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1 p-4  sm:mx-10">
+
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-unap.png' %}" 
+                        alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-mate.png' %}" 
+                        alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-vra.png' %}"
+                        alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-vri.png' %}"
+                        alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-dad.png' %}"
+                        alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-comap.png' %}" 
                         alt="Sunset in the mountains">
 
                 </div>
@@ -750,12 +824,70 @@
     </main>
 
 
-    <footer class="mt-10 text-center p-4 text-gray-700 mx-10">
-        <hr class="border-t-2 border-gray-700 mb-4">
-        <h1>Universidad Nacional del Altiplano - Puno</h1>
-        <h1>Escuela Profesional de Ciencias Físico Matemáticas</h1>
-        <h1>© Adderly.M</h1>
+
+
+
+    <footer class="bg-gray-900 mt-10">
+        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0">
+                    <a href="" class="flex items-center">
+                        <img src="{% static 'images/logo-mate.png' %}" class="h-30" alt="FlowBite Logo" />
+                        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">CS. FÍSICO
+                            MATEMÁTICAS</span>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-1">
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Contactos</h2>
+                        <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                            <li class="mb-4 flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                </svg>
+                                <a href="mailto:jizavaleta@unap.edu.pe"
+                                    class="hover:underline">jizavaleta@unap.edu.pe</a>
+                            </li>
+                            <li class="mb-4 flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+                                </svg>
+                                <a href="https://www.spmac.org/xii-cimac/"
+                                    class="hover:underline">www.spmac.org/xii-cimac</a>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                                </svg> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" width="26px" height="26px"
+                                    viewBox="0 0 256 256">
+                                    <path
+                                        d="M128.00049,28A100.02594,100.02594,0,0,0,41.11475,177.53908l-9.0044,31.51661a11.99971,11.99971,0,0,0,14.835,14.834l31.5166-9.00391A100.00677,100.00677,0,1,0,128.00049,28Zm0,192a91.87082,91.87082,0,0,1-46.95264-12.86719,3.99494,3.99494,0,0,0-3.14355-.4082l-33.15723,9.47363a3.99979,3.99979,0,0,1-4.94434-4.94531l9.47266-33.15625a4.00111,4.00111,0,0,0-.4082-3.14355A92.01077,92.01077,0,1,1,128.00049,220Zm50.51123-73.457-20.45947-11.69141a12.01054,12.01054,0,0,0-12.12745.12891l-13.80664,8.28418a44.04183,44.04183,0,0,1-19.38232-19.38281l8.28369-13.80664a12.0108,12.0108,0,0,0,.12891-12.127l-11.69092-20.46A10.91584,10.91584,0,0,0,100,72a32.00811,32.00811,0,0,0-32,31.88086A84.001,84.001,0,0,0,151.999,188h.12012A32.00842,32.00842,0,0,0,184,156,10.913,10.913,0,0,0,178.51172,146.543ZM152.10791,180h-.1084A75.99972,75.99972,0,0,1,76,103.8926,23.997,23.997,0,0,1,100,80a2.89975,2.89975,0,0,1,2.51172,1.457L114.20264,101.918a4.00418,4.00418,0,0,1-.043,4.042l-9.38916,15.64844a3.9987,3.9987,0,0,0-.21826,3.69824,52.04112,52.04112,0,0,0,26.1416,26.1416,3.99707,3.99707,0,0,0,3.69873-.21875L150.04,141.84084a4.006,4.006,0,0,1,4.043-.04394l20.46045,11.69238A2.89712,2.89712,0,0,1,176,156,23.99725,23.99725,0,0,1,152.10791,180Z" />
+                                </svg>
+
+                                <a href="https://wa.me/51976120007" class="hover:underline">(+51) 976 120 007</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 CS. FISICO MATEMÁTICAS |
+                    </a>Todos los derechos reservados
+                </span>
+            </div>
+        </div>
     </footer>
+
+
+
 
 
 </body>
@@ -784,7 +916,7 @@
 </script>
 
 
-<!-- sobre el evento -->
+<!-- CRONOGRAMA -->
 <script>
 
     function changeSection(sectionNumber) {

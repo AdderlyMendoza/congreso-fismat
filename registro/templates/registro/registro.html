@@ -38,11 +38,32 @@
         </nav>
     </header>
 
-    <main class="h-full items-center justify-center flex">
-        <div class="relative md:-rotate-188 sm:bg-blue-600 h-181 w-110 my-40 rounded-2xl"></div>
+    <main class="items-center justify-center flex">
+        {% comment %} <div class="relative md:-rotate-188 sm:bg-blue-600 h-181 w-110 my-40 rounded-2xl"></div> {% endcomment %}
 
-        <form id="registroForm" method="POST" enctype="multipart/form-data" class="absolute bg-white p-8 rounded-2xl shadow-md my-40 ">
+        <form id="registroForm" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-2xl shadow-md my-40">
             {% csrf_token %}
+
+            <div class="mb-2">
+                <label for="pais" class="text-gray-700 font-semibold">PAIS:</label>
+                {{ form.pais }}
+            </div>
+
+            <div class="mb-2">
+                <label for="entidad_procedencia" class="text-gray-700 font-semibold">ENTIDAD DE PROCEDENCIA:</label>
+                {{ form.entidad_procedencia }}
+            </div>
+
+            <div class="mb-2">
+                <label for="tipo_participante" class="text-gray-700 font-semibold">TIPO DE PARTICIPANTE</label>
+                {{ form.tipo_participante }}
+            </div>
+
+            <div class="mb-2">
+                <label for="doc_acreditivo" class="text-gray-700 font-semibold">CARNET DE ESTUDIANTE Y/O SIMILAR  </label>
+                {{ form.doc_acreditivo }}
+            </div>
+
             <div class="mb-2">
                 <label for="dni" class="text-gray-700 font-semibold">DNI:</label>
                 {{ form.dni }}
@@ -95,9 +116,9 @@
             </div>
 
             <div class="mb-2">
-                <label for="proyecto_investigacion" class="flex-1 text-gray-700 font-semibold">VOUCHER DE PAGO:</label>
+                <label for="voucher_pago" class="flex-1 text-gray-700 font-semibold">VOUCHER DE PAGO:</label>
                 <div class="flex">
-                    {{ form.proyecto_investigacion }}
+                    {{ form.voucher_pago }}
                 </div>
             </div>
 
@@ -109,6 +130,9 @@
         </form>
 
     </main>
+
+
+
 
 </body>
 
@@ -182,7 +206,31 @@
 </html> {% endcomment %}
 
 
+{% comment %} MANEJAR EL FORM DE TIPO DE POSTULANTE {% endcomment %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tipoParticipanteSelect = document.querySelector('select[name="tipo_participante"]');
+        const docAcreditivoField = document.querySelector('input[name="doc_acreditivo"]').closest('.mb-2'); // Se obtiene el contenedor del input para ocultarlo.
 
+        // Función para actualizar la visibilidad del campo doc_acreditivo
+        function toggleDocAcreditivoField() {
+            if (tipoParticipanteSelect.value === 'estudiante') {
+                docAcreditivoField.style.display = 'block'; // Muestra el campo si es estudiante
+            } else {
+                docAcreditivoField.style.display = 'none'; // Oculta el campo si no es estudiante
+            }
+        }
+
+        // Inicializar visibilidad según el valor actual del select
+        toggleDocAcreditivoField();
+        
+        // Escuchar el cambio en el select para actualizar la visibilidad
+        tipoParticipanteSelect.addEventListener('change', toggleDocAcreditivoField);
+    });
+</script>
+
+
+{% comment %} VALIDACION DEL FORMULARIO {% endcomment %}
 <script>
     // Función para agregar o quitar el borde rojo en caso de error
     function toggleErrorClass(field, isValid) {
@@ -204,7 +252,11 @@
             { id: 'id_apellido_materno', type: 'text', name: 'Apellido Materno' },
             { id: 'id_email', type: 'email', name: 'Email' },
             { id: 'id_celular', type: 'integer', name: 'Celular' },
-            // { id: 'id_proyecto_investigacion', type: 'file', name: 'Voucher de pago' }
+            // { id: 'id_voucher_pago', type: 'file', name: 'Voucher de pago' }
+            { id: 'id_pais', type: 'text', name: 'Pais' },
+            { id: 'id_entidad_procedencia', type: 'text', name: 'Entidad de Procedencia' },
+            { id: 'id_tipo_participante', type: 'text', name: 'Tipo de Participante' },
+
         ];
 
         fields.forEach(function (field) {
