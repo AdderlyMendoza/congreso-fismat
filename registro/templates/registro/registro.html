@@ -33,7 +33,8 @@
     style="background-image: url('https://i.pinimg.com/736x/6b/dc/e5/6bdce53334253b7f0d9d5e58b16491bb.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
     <header
-        class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 text-white px-4 py-4 backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60">
+        class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 text-white px-4 py-4 backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60"
+        id="headerContainer">
         <div class="flex items-end space-x-1 justify-center ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
                 alt="logo unap" class="h-17">
@@ -44,7 +45,7 @@
         </nav>
     </header>
 
-    <main class="h-screen items-center justify-center flex flex-col">
+    <main class="min-h-screen items-center justify-center flex flex-col" id="mainContainer">
 
         <!-- FORMULARIO DE INSCRIPCION -->
         <form id="registroForm" method="POST" enctype="multipart/form-data"
@@ -87,6 +88,8 @@
             <div class="step" id="step2">
                 <h1 class="text-center text-2xl font-bold mb-4">INSCRIPCION</h1>
 
+                <p class="italic w-full text-center mb-4">Información de procedencia</p>
+
                 <div class="mb-2">
                     <label for="pais" class="text-gray-700 font-semibold">PAIS:</label>
                     {{ form.pais }}
@@ -102,10 +105,26 @@
                     {{ form.tipo_participante }}
                 </div>
 
-                <button type="button" id="nextStep2"
-                    class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-                    Siguiente
-                </button>
+                <div class="mb-2" id="div_doc_acreditivo">
+                    <label for="doc_acreditivo" class="text-gray-700 font-semibold">CARNET DE ESTUDIANTE Y/O SIMILAR
+                    </label>
+                    {{ form.doc_acreditivo }}
+                </div>
+
+                <div class="flex justify-between mt-4 space-x-2">
+
+                    <button type="button" onclick="paso2to1()"
+                        class="mt-4 w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 cursor-pointer">
+                        Anterior
+                    </button>
+
+                    <button type="button" id="nextStep2"
+                        class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer">
+                        Siguiente
+                    </button>
+
+                </div>
+
 
             </div>
 
@@ -113,8 +132,10 @@
             <div class="step" id="step3">
                 <h1 class="text-center text-2xl font-bold mb-4">INSCRIPCION</h1>
 
+                <p class="italic w-full text-center mb-4">Información personal</p>
+
                 <div class="mb-2">
-                    <label for="dni" class="text-gray-700 font-semibold">DNI:</label>
+                    <label for="dni" class="text-gray-700 font-semibold">Documento de Identificación:</label>
                     {{ form.dni }}
                 </div>
 
@@ -143,15 +164,29 @@
                     {{ form.celular }}
                 </div>
 
-                <button type="button" id="nextStep3"
-                    class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-                    Siguiente
-                </button>
+                <div class="flex justify-between mt-4 space-x-2">
+
+                    <button type="button" onclick="paso3to2()"
+                        class="mt-4 w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 cursor-pointer">
+                        Anterior
+                    </button>
+
+                    <button type="button" id="nextStep3"
+                        class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer">
+                        Siguiente
+                    </button>
+
+                </div>
+
+
             </div>
 
             <!-- PASO 4: Información de pago -->
             <div class="step" id="step4">
                 <h1 class="text-center text-2xl font-bold mb-4">INSCRIPCION</h1>
+
+                <p class="italic w-full text-center mb-4">Información del pago</p>
+
 
                 <h1 class="text-lg">MONTO A PAGAR:</h1>
                 <div class="form-control mt-1 w-full border p-3 rounded-md bg-gray-100 mb-2" id="monto_pago">
@@ -165,9 +200,19 @@
                     </div>
                 </div>
 
-                <button type="submit" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-                    Inscribirme
-                </button>
+                <div class="flex justify-between mt-4 space-x-2">
+
+                    <button type="button" onclick="paso4to3()"
+                        class="mt-4 w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 cursor-pointer">
+                        Anterior
+                    </button>
+
+                    <button type="submit" id="nextStep4"
+                        class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer">
+                        Inscribirme
+                    </button>
+
+                </div>
 
             </div>
 
@@ -175,8 +220,12 @@
 
     </main>
 
+    <div class="h-10 hidden" id="divAlterno">
+    </div>
+
 </body>
 
+<!-- Manejo del formulario por pasos -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
 
@@ -192,11 +241,12 @@
         const step4 = document.getElementById("step4");
         const step5 = document.getElementById("step5");
 
-        // PASO 1
+
+        // PASO 1: monto y fechas
         nextStep1Btn.addEventListener("click", function () {
             Swal.fire({
                 icon: 'info',
-                title: 'Por favor, asegurese de tener la imagen del pago',
+                title: 'Por favor, asegúrese de adjuntar la imagen del pago y completar correctamente todos los datos.',
                 confirmButtonText: 'Aceptar',
             })
                 .then((result) => {
@@ -207,39 +257,40 @@
                 });
         });
 
-        // PASO 2
+        // PASO 2: informacion de procedencia
         nextStep2Btn.addEventListener("click", function () {
-            const { isValid } = validarFormularioStep2();
+
+            const { isValid, errorMessages } = validarFormularioStep2();
 
             if (isValid) {
+                document.getElementById("headerContainer").classList.remove("fixed");
+                document.getElementById("divAlterno").classList.remove("hidden");
+                
                 step2.classList.remove("active");
                 step3.classList.add("active");
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Por favor, corrija los errores antes de continuar',
-                    confirmButtonText: 'Aceptar',
-                });
+                mostrarSweetAlertErrorValidacion(errorMessages);
             }
         });
 
-        // PASO 3
+        // PASO 3: informacion personal
         nextStep3Btn.addEventListener("click", function () {
-            const { isValid } = validarFormularioStep3();
 
-            if (isValid) {
-                step3.classList.remove("active");
-                step4.classList.add("active");
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Por favor, corrija los errores antes de continuar',
-                    confirmButtonText: 'Aceptar',
-                });
-            }
+            validarFormularioStep3().then(({ isValid, errorMessages }) => {
+                if (isValid) {
+                    document.getElementById("headerContainer").classList.add("fixed");
+                document.getElementById("divAlterno").classList.add("hidden");
+
+
+                    step3.classList.remove("active");
+                    step4.classList.add("active");
+                } else {
+                    mostrarSweetAlertErrorValidacion(errorMessages || []); // Asegúrate de que errorMessages sea un array
+                }
+            });
         });
 
-        // PASO 4
+        // PASO 4: informacion de pago
         nextStep4Btn.addEventListener("click", function () {
             const { isValid } = validarFormularioStep4();
 
@@ -254,12 +305,41 @@
 
     });
 
+
+    function paso2to1() {
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+
+        step2.classList.remove("active");
+        step1.classList.add("active");
+    }
+
+    function paso3to2() {
+        const step2 = document.getElementById("step2");
+        const step3 = document.getElementById("step3");
+
+        step3.classList.remove("active");
+        step2.classList.add("active");
+    }
+
+    function paso4to3() {
+        const step3 = document.getElementById("step3");
+        const step4 = document.getElementById("step4");
+
+        step4.classList.remove("active");
+        step3.classList.add("active");
+    }
+
     function validarFormularioStep2() {
+
         let isValid = true;
+        let errorMessages = [];
+
         const fields = [
             { id: 'id_pais', type: 'text', name: 'Pais' },
             { id: 'id_entidad_procedencia', type: 'text', name: 'Entidad de Procedencia' },
             { id: 'id_tipo_participante', type: 'text', name: 'Tipo de Participante' },
+            // { id: 'id_doc_acreditivo', type: 'text', name: 'Documento Acreditivo' },
         ];
 
         fields.forEach(function (field) {
@@ -269,14 +349,21 @@
             // Validación de campo no vacío
             if (!value) {
                 isValid = false;
+                errorMessages.push(`${field.name} no puede estar vacío`);
+                toggleErrorClass(inputElement, false);
+            } else {
+                toggleErrorClass(inputElement, true);
             }
         });
 
-        return { isValid };
+        return { isValid, errorMessages };
     }
 
-    function validarFormularioStep3() {
+    async function validarFormularioStep3() {
+
         let isValid = true;
+        let errorMessages = [];
+
         const fields = [
             { id: 'id_dni', type: 'integer', name: 'DNI' },
             { id: 'id_nombres', type: 'text', name: 'Nombres' },
@@ -286,17 +373,79 @@
             { id: 'id_celular', type: 'integer', name: 'Celular' }
         ];
 
+        // Primero validamos todos los campos básicos
         fields.forEach(function (field) {
+
             const inputElement = document.getElementById(field.id);
             const value = inputElement.value.trim();
 
-            // Validación de campo no vacío
             if (!value) {
                 isValid = false;
+                errorMessages.push(`${field.name} no puede estar vacío`);
+                toggleErrorClass(inputElement, false);
+            } else if (field.type === 'email' && !value.includes('@')) {
+                isValid = false;
+                errorMessages.push(`El formato del ${field.name} es incorrecto`);
+                toggleErrorClass(inputElement, false);
+            } else if (field.type === 'integer' && isNaN(value)) {
+                isValid = false;
+                errorMessages.push(`${field.name} debe ser un número válido`);
+                toggleErrorClass(inputElement, false);
+            } else {
+                toggleErrorClass(inputElement, true);
             }
         });
 
-        return { isValid };
+        // Si hay errores básicos, no continuamos con la validación de duplicados
+        if (!isValid) {
+            return { isValid, errorMessages };
+        }
+
+        // Validación de duplicados (solo si los campos básicos están bien)
+        const dni = document.getElementById('id_dni').value.trim();
+        const email = document.getElementById('id_email').value.trim();
+        const celular = document.getElementById('id_celular').value.trim();
+
+        // Hacemos la llamada AJAX para verificar duplicados
+        return new Promise((resolve) => {
+            const url = `/registro/validar-duplicados/?dni=${encodeURIComponent(dni)}&email=${encodeURIComponent(email)}&celular=${encodeURIComponent(celular)}`;
+
+            fetch(url, { method: 'GET' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        resolve({ isValid: true, errorMessages: [] });
+                    } else {
+                        let duplicateErrors = [];
+                        if (data.dni) duplicateErrors.push(`DNI: ${data.dni}`);
+                        if (data.email) duplicateErrors.push(`Correo: ${data.email}`);
+                        if (data.celular) duplicateErrors.push(`Celular: ${data.celular}`);
+
+                        // Mostrar todos los errores de duplicados juntos
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error de duplicados',
+                            html: duplicateErrors.join('<br>'),
+                            confirmButtonText: "Aceptar",
+                        });
+
+                        // Marcar los campos con error
+                        if (data.dni) toggleErrorClass(document.getElementById('id_dni'), false);
+                        if (data.email) toggleErrorClass(document.getElementById('id_email'), false);
+                        if (data.celular) toggleErrorClass(document.getElementById('id_celular'), false);
+
+                        resolve({ isValid: false, errorMessages: duplicateErrors });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al verificar los datos',
+                        confirmButtonText: "Aceptar",
+                    });
+                    resolve({ isValid: false, errorMessages: ['Error al verificar duplicados'] });
+                });
+        });
     }
 
     function validarFormularioStep4(event) {
@@ -333,8 +482,113 @@
         return isValid;
     }
 
+    function mostrarSweetAlertErrorValidacion(errorMessages) {
+        // Si errorMessages es undefined o null, lo convertimos en un array vacío
+        if (!errorMessages || !Array.isArray(errorMessages)) {
+            errorMessages = [];
+        }
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Por favor, corrija los siguientes errores:',
+            html: `<ul style="list-style-type: none; padding-left: 0;">` +
+                errorMessages.map(msg => `<li>${msg}</li>`).join('') +
+                `</ul>`,
+            confirmButtonText: "Aceptar",
+        });
+    }
+
+    function toggleErrorClass(field, isValid) {
+        if (isValid) {
+            field.classList.remove('border-red-500');
+        } else {
+            field.classList.add('border-red-500');
+        }
+    }
+
+</script>
 
 
+<!-- Manejo de documento acreditivo según el tipo de participante -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tipoParticipanteSelect = document.querySelector('select[name="tipo_participante"]');
+        const docAcreditivoField = document.querySelector('div#div_doc_acreditivo'); // Se obtiene el contenedor del input.
+
+        // Función para actualizar la visibilidad del campo doc_acreditivo
+        function toggleDocAcreditivoField() {
+            if (tipoParticipanteSelect.value === 'estudiante (solo pregrado)') {
+                docAcreditivoField.classList.remove('hidden'); // Muestra el campo si es estudiante
+            } else {
+                docAcreditivoField.classList.add('hidden'); // Oculta el campo si no es estudiante
+            }
+        }
+
+        // Inicializar visibilidad según el valor actual del select
+        toggleDocAcreditivoField();
+
+        // Escuchar el cambio en el select para actualizar la visibilidad
+        tipoParticipanteSelect.addEventListener('change', toggleDocAcreditivoField);
+    });
+
+</script>
+
+
+<!-- Manejo del monto -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtenemos la fecha actual
+        const hoy = new Date();
+        const mes = hoy.getMonth() + 1; // getMonth() devuelve 0-11, por lo que sumamos 1
+        const año = hoy.getFullYear();
+
+        // Obtenemos el tipo de participante seleccionado del formulario
+        const tipoUsuarioSelect = document.getElementById("id_tipo_participante");
+        const tipoUsuario = tipoUsuarioSelect ? tipoUsuarioSelect.value : "";  // Obtenemos el valor seleccionado
+
+        // Calculamos el monto a pagar según la lógica del mes y tipo de usuario
+        let monto = 0;
+        if (año === 2025 && [4, 5].includes(mes)) { // Abril y Mayo de 2025
+            if (tipoUsuario === 'estudiante (solo pregrado)') {
+                monto = 50;
+            } else if (tipoUsuario === 'participante') {
+                monto = 100;
+            }
+        } else if (año >= 2025 && mes >= 6) { // Junio en adelante de 2025
+            if (tipoUsuario === 'estudiante (solo pregrado)') {
+                monto = 80;
+            } else if (tipoUsuario === 'participante') {
+                monto = 150;
+            }
+        }
+
+        // Actualizamos el valor del campo de monto a pagar
+        const montoPagoDiv = document.getElementById('monto_pago');
+        montoPagoDiv.textContent = 'S/. ' + monto;
+
+        // Si el tipo de participante cambia, volvemos a actualizar el monto a pagar
+        tipoUsuarioSelect.addEventListener("change", function () {
+            const tipoUsuarioSeleccionado = tipoUsuarioSelect.value;
+            let nuevoMonto = 0;
+
+            if (año === 2025 && [4, 5].includes(mes)) { // Abril y Mayo de 2025
+                if (tipoUsuarioSeleccionado === 'estudiante (solo pregrado)') {
+                    nuevoMonto = 50;
+                } else if (tipoUsuarioSeleccionado === 'participante') {
+                    nuevoMonto = 100;
+                }
+            } else if (año >= 2025 && mes >= 6) { // Junio en adelante de 2025
+                if (tipoUsuarioSeleccionado === 'estudiante (solo pregrado)') {
+                    nuevoMonto = 80;
+                } else if (tipoUsuarioSeleccionado === 'participante') {
+                    nuevoMonto = 150;
+                }
+            }
+
+            // Actualizamos el valor de monto en el div
+            montoPagoDiv.textContent = 'S/. ' + nuevoMonto;
+        });
+    });
 </script>
 
 </html>

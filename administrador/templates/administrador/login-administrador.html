@@ -1,5 +1,7 @@
 <!-- myapp/templates/login.html -->
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="es">
 
 <head>
@@ -10,22 +12,19 @@
 
 </head>
 
-<body>
+<body class="backdrop-filter backdrop-blur-md h-screen"
+    style="background-image: url('https://i.pinimg.com/736x/6b/dc/e5/6bdce53334253b7f0d9d5e58b16491bb.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
     <header
-        class="flex items-center justify-between w-full text-black md:px-20 md:py-4 z-10 text-white px-4 py-4 backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60 ">
+        class="flex items-center justify-between w-full text-black md:px-20 md:py-4 text-white px-4 py-4 backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60"
+        id="headerContainer">
         <div class="flex items-end space-x-1 justify-center ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
-                alt="" class="w-15">
-            <h1 class="border-l pl-2 md:text-md sm:text-sm">
-                Universidad <br>
-                Nacional del<br>
-                Altiplano de Puno
-            </h1>
+                alt="logo unap" class="h-17">
+            <img src="{% static 'images/logo-cimac.png' %}" alt="logo cimac" class="h-17 ml-2">
         </div>
-
         <nav class="flex items-center md:text-md sm:text-sm">
-            <a href="/" class="p-2 hover:bg-black/50 cursor-pointer">INICIO</a>
+            <a href="/" class="p-2 hover:bg-black/50 cursor-pointer">Regresar</a>
         </nav>
     </header>
 
