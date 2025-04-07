@@ -21,11 +21,11 @@
                 <tr class="border-y-1">
                     <th scope="col" class="px-6 py-3">Nº</th>
                     <th scope="col" class="px-6 py-3">DNI</th>
-                    <th scope="col" class="px-6 py-3">Apellido paterno</th>
-                    <th scope="col" class="px-6 py-3">Apellido materno</th>
-                    <th scope="col" class="px-6 py-3">Nombres</th>
+                    <th scope="col" class="px-6 py-3">Apellidos y Nombres</th>
                     <th scope="col" class="px-6 py-3">Celular</th>
-                    <th scope="col" class="px-6 py-3">Documento</th>
+                    <th scope="col" class="px-6 py-3">Participante</th>
+                    <th scope="col" class="px-6 py-3">Doc. Acreditivo</th>
+                    <th scope="col" class="px-6 py-3">Voucher de Pago</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,20 +33,32 @@
                 <tr class="hover:bg-gray-100 border-y-1 border-gray-400">
                     <td class="px-6 py-4">{{ forloop.counter }}</td>
                     <td class="px-6 py-4">{{ registro.dni }}</td>
-                    <td class="px-6 py-4">{{ registro.apellido_paterno }}</td>
-                    <td class="px-6 py-4">{{ registro.apellido_materno }}</td>
-                    <td class="px-6 py-4">{{ registro.nombres }}</td>
+                    <td class="px-6 py-4">{{ registro.apellido_paterno }} {{ registro.apellido_materno }}, {{ registro.nombres }}</td>
                     <td class="px-6 py-4">{{ registro.celular }}</td>
+                    <td class="px-6 py-4">{{ registro.tipo_participante }}</td>
+
+                    <td class="px-6 py-4 text-center">
+                        {% if registro.doc_acreditivo %}
+                        <!-- Botón para abrir el modal con el archivo PDF -->
+                            <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white cursor-pointer" onclick="openModalDocAcreditivo('{{ registro.doc_acreditivo.url }}')">
+                                Ver Doc
+                            </button>
+                        {% else %}
+                        <!-- Si no hay archivo, mostramos un mensaje o dejamos el campo vacío -->
+                        <span>No disponible</span>
+                        {% endif %}
+                    </td>
+
                     <td class="px-6 py-4 flex items-center justify-center">
-                        {% if registro.proyecto_investigacion %}
+                        {% if registro.voucher_pago %}
                         <!-- Botón para abrir el modal con el archivo PDF -->
                             {% if registro.validado == False %}
-                                <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white" onclick="openModal('{{ registro.proyecto_investigacion.url }}', '{{ registro.id }}', '{{ registro.validado }}')">
-                                    Ver
+                                <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white" onclick="openModal('{{ registro.voucher_pago.url }}', '{{ registro.id }}', '{{ registro.validado }}')">
+                                    Ver Voucher
                                 </button>
                             {% else %} <!-- validado = verde -->
-                                <button class="font-medium bg-green-500 p-2 rounded-md hover:bg-green-600 text-white" onclick="openModal('{{ registro.proyecto_investigacion.url }}', '{{ registro.id }}', '{{ registro.validado }}')">
-                                    Ver
+                                <button class="font-medium bg-green-500 p-2 rounded-md hover:bg-green-600 text-white" onclick="openModal('{{ registro.voucher_pago.url }}', '{{ registro.id }}', '{{ registro.validado }}')">
+                                    Ver Voucher
                                 </button>
                             {% endif %}                        
                         {% else %}
@@ -89,7 +101,44 @@
     </div>
 </div>
 
+<div id="myModalDocAcreditivo" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg w-3/4 md:w-1/2">
+
+        <div class="flex justify-between items-center border-b-2 pb-1">
+            <h1>Imagen subida</h1>
+            <button onclick="closeModalDocAcreditivo()" class="font-bold text-xl text-white cursor-pointer bg-red-500 hover:bg-red-600 py-1 px-2 rounded-md">
+                X
+            </button>
+        </div>
+
+        <div class="flex h-100 items-center justify-center">
+            <img id="mostrarImgDocAcreditivo" class="h-full p-4">
+        </div>
+    </div>
+</div>
+
 <script>
+
+    // Función para abrir el modal y mostrar la imagen de Voucher
+    function openModalDocAcreditivo(url) {
+        // console.log(url, id, validado);
+        const modal = document.getElementById('myModalDocAcreditivo');
+        const img = document.getElementById('mostrarImgDocAcreditivo');
+        const fullUrl = window.location.origin + url;  // Convierte la URL en absoluta
+        img.src = fullUrl;
+        img.alt = url;
+
+        modal.classList.remove('hidden');
+    }
+
+    function closeModalDocAcreditivo() {
+        const modal = document.getElementById('myModalDocAcreditivo');
+        const img = document.getElementById('mostrarImgDocAcreditivo');
+        img.src = '';
+        modal.classList.add('hidden');
+    }
+
+    // Función para abrir el modal y mostrar la imagen de Voucher
     function openModal(url, id, validado) {
         // console.log(url, id, validado);
         const modal = document.getElementById('myModal');

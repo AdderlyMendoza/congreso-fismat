@@ -23,6 +23,8 @@ class Registro(models.Model):
     )
     doc_acreditivo = models.FileField(max_length=100, blank=True, null=True)  # Documento si es estudiante
     
+    monto = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False, default=0.00)
+    
     dni = models.CharField(max_length=15, blank=False, null=False, unique=True) # o carnet de extranjeria
     nombres = models.CharField(max_length=100)
     apellido_paterno = models.CharField(max_length=100)

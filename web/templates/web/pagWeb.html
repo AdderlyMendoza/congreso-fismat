@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Congreso FISMAT{% endblock %}</title>
+    <title>{% block title %}XII-CIMAC Puno{% endblock %}</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
@@ -75,7 +75,7 @@
 
                     <!-- Sección izquierda (Texto "XII" y "CIMAC") -->
                     <div class="text-center sm:text-left">
-                        <h1 class="text-6xl sm:text-8xl font-black text-blue-800">XII</h1>
+                        <h1 class="text-6xl sm:text-8xl font-black text-amber-400">XII</h1>
                         <div class="bg-sky-800 flex items-center justify-center sm:justify-start p-2">
                             <h1 class="text-3xl sm:text-4xl font-black text-white">CIMAC</h1>
                         </div>
@@ -83,9 +83,9 @@
 
                     <!-- Sección derecha (Texto del Congreso) -->
                     <div class="font-black text-white sm:py-2 mt-2 space-y-2 text-center sm:text-left">
-                        <h2 class="text-2xl sm:text-3xl text-blue-800 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
-                        <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
-                        <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">COMPUTACIONAL</h2>
+                        <h2 class="text-2xl sm:text-3xl text-amber-400 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
+                        <h2 class="text-2xl sm:text-3xl text-sky-700 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
+                        <h2 class="text-2xl sm:text-3xl text-sky-700 drop-shadow-lg">COMPUTACIONAL</h2>
                     </div>
 
                 </div>
@@ -647,63 +647,127 @@
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
-            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">HOTELES</h1>
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black sm:m-10" data-aos="fade-up">HOTELES</h1>
 
-            <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4" data-aos="fade-up">
+            <!-- <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4" data-aos="fade-up"> -->
+            <div class="sm:mt-20 mt-10 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-1 p-4 sm:mx-10 space-x-2 space-y-4 md:space-y-2" data-aos="fade-up">
 
                 <!-- Royal Inn Puno -->
-                <div class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                <div class="max-w-sm max-h-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/190171179.jpg?k=2239276d979a48bcf7b314f8ad8c6b0ec7cede8d5c51d4f7beedf3d58f599095&o="
-                        alt="Sunset in the mountains">
+                        src="https://media-cdn.tripadvisor.com/media/photo-s/0a/fb/3a/cb/royal-inn-hotel.jpg"
+                        alt="Hotel Royal Inn">
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">Royal Inn Puno</div>
                         <p class="text-gray-700 text-base">
-                            El Royal Inn, ubicado en el centro de Puno, a 1 manzana de la plaza de Armas, ofrece alegres suites con conexión inalámbrica a internet gratuita.
+                            El Royal Inn, ubicado en el centro de Puno, a 1 manzana de la plaza de Armas, ofrece alegres
+                            suites con conexión inalámbrica a internet gratuita.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 994 277 164</p>
+                        <p class="text-gray-700 text-base">Teléfono: (51) 364574 | (51) 365822</p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:reservas@royalinnhoteles.com" class="text-gray-700 text-base cursor-pointer">reservas@royalinnhoteles.com</a>
                         </p>
                     </div>
                     <div class="px-6 pt-4 mb-6">
-                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más información</a>
-                    </div>
-                </div>
-
-                <!-- hotel 2 -->
-                <div
-                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
-                    <img class="w-100 h-100 object-cover object-center"
-                        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/0e/64/7f/casa-andina-premium-puno.jpg?w=1400&h=800&s=1"
-                        alt="Sunset in the mountains">
-                    <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                        <p class="text-gray-700 text-base">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
-                            et perferendis eaque, exercitationem praesentium nihil.
-                        </p>
-                    </div>
-                    <div class="px-6 pt-4 mb-6">
-                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                        <a href="https://www.royalinnhoteles.com"
+                            class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
                             información</a>
                     </div>
                 </div>
 
-                <!-- hotel 3 -->
-                <div
-                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                <!-- Sol Plaza hotel -->
+                <div class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://d2l4159s3q6ni.cloudfront.net/resize/850x550/filters:max_age(2604800):quality(65)/s3/dam/photos/3f/fc/62/85/e8dab38530d2f3beadb0386b04b9d09fa48b1dcf4cc9b74954159407.jpg"
-                        alt="Sunset in the mountains">
+                        src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/512520650.jpg?k=b400e1db5074bd457682027837c24f072eb3dead8eecf05eb25b087ae0c495e7&o=&hp=1"
+                        alt="Sol Plaza Hotel">
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <div class="font-bold text-xl mb-2">Sol Plaza Hotel</div>
                         <p class="text-gray-700 text-base">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
-                            et perferendis eaque, exercitationem praesentium nihil.
+                            Nuestra moderna infraestructura le brindará comodidad, elegancia, confort y hará que su estadía en la ciudad de Puno sea placentera e inolvidable.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 956 132 412</p>
+                        <p class="text-gray-700 text-base">Teléfono: 051 - 352658</p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:reservas@solplazahotel.com" class="text-gray-700 text-base cursor-pointer">reservas@solplazahotel.com</a>
                         </p>
                     </div>
                     <div class="px-6 pt-4 mb-6">
-                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                        <a href="https://solplazahotel.com" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
                             información</a>
                     </div>
                 </div>
+
+                <!-- Hotel Qalasaya -->
+                <div class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    <img class="w-100 h-100 object-cover object-center"
+                        src="https://y.cdrst.com/foto/hotel-sf/1e60f/granderesp/hotel-qalasaya-general-ca2f6d9.jpg"
+                        alt="Sol Plaza Hotel">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">Hotel Qalasaya</div>
+                        <p class="text-gray-700 text-base">
+                            Situado en el corazón de Puno, y ofrece habitaciones con vistas a la ciudad. El hotel atrae a los huéspedes con un aparcamiento privado gratuito en el lugar.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 951 303 312</p>
+                        <p class="text-gray-700 text-base">Teléfono: 051 - 203052 </p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:reservas.qalasaya@gmail.com" class="text-gray-700 text-base cursor-pointer">reservas.qalasaya@gmail.com</a>
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 mb-6">
+                        <a href="https://qalasaya.puno-hotels.net/es/" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                            información</a>
+                    </div>
+                </div>
+
+                <!-- Hotel Tierra Viva -->
+                <div class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    <img class="w-100 h-100 object-cover object-center"
+                        src="https://tierravivahoteles.com/wp-content/uploads/2023/03/TVP-3-Fachada-1.jpg"
+                        alt="Sol Plaza Hotel">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">Hotel Tierra Viva</div>
+                        <p class="text-gray-700 text-base">
+                            Cuenta con 30 habitaciones, 3 son suites donde se pueden acomodar hasta 4 personas. Dentro de sus servicios encontrarás: desayuno buffet, internet y estación de bebidas.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 943 753 626</p>
+                        <p class="text-gray-700 text-base">Teléfono: 051 - 368005 | 051 - 368007 </p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:corporativo@tierravivahoteles.com" class="text-gray-700 text-base cursor-pointer">corporativo@tierravivahoteles.com</a>
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 mb-6">
+                        <a href="https://tierravivahoteles.com/tierra-viva-puno-plaza/" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más información</a>
+                    </div>
+                </div>
+
+                <!-- Amaru tours -->
+                <div class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    <img class="w-100 h-100 object-cover object-center"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvm6lOtL9WFPr1Gu10neKs77Ie218qmyX6-Q&s"
+                        alt="Amaru Tours">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">Amaru Tours</div>
+                        <p class="text-gray-700 text-base">
+                            +30 años en el mercado como Tour Operador en la Región de Puno. Somos un equipo profesional en el desarrollo de experiencias inolvidables con los visitantes de Puno.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 951 751 084</p>
+                        <p class="text-gray-700 text-base">Teléfono: (51) 353112</p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:reservas@amarutours.com" class="text-gray-700 text-base cursor-pointer">reservas@amarutours.com</a>
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 mb-6">
+                        <a href="https://www.amarutours.com" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                            información</a>
+                    </div>
+                </div>
+
 
 
             </div>
@@ -712,32 +776,12 @@
 
 
         <!-- ORGANIZADORES -->
-        <!-- <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
-
-
-            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">ORGANIZADORES</h1>
-
-            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
-
-                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
-
-                    <img class="h-40 object-cover object-center mx-10 my-4" src="{% static 'images/logo-cimac.png' %}"
-                        alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-10 my-4"
-                        src="{% static 'images/logo-unap.png' %}" alt="Sunset in the mountains">
-
-                </div>
-
-            </div>
-
-        </section> -->
 
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
-            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">ORGANIZADORES</h1>
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black sm:m-10" data-aos="fade-up">ORGANIZADORES</h1>
 
-            <div class="flex justify-center items-center p-4 my-10 space-x-1 md:space-x-2 lg:space-x-4"
+            <div class="sm:mt-20 mt-10 flex justify-center items-center p-4 my-10 space-x-1 md:space-x-2 lg:space-x-4"
                 data-aos="fade-up">
 
                 <img class="object-cover object-center h-30 md:h-40 lg:h-40 " src="{% static 'images/logo-cimac.png' %}"
@@ -756,63 +800,27 @@
 
 
         <!-- AUSPICIADORES -->
-        <!-- <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
-
-
-            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">AUSPICIADORES</h1>
-
-            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
-
-                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
-
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="{% static 'images/logo-unap.png' %}" alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="{% static 'images/logo-mate.png' %}" alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4" src="{% static 'images/logo-vri.png' %}"
-                        alt="Sunset in the mountains">
-
-                </div>
-
-                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
-
-                    <img class="w-50 h-50 object-cover object-center mx-4 my-4" src="{% static 'images/logo-vra.png' %}"
-                        alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4" src="{% static 'images/logo-dad.png' %}"
-                        alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="{% static 'images/logo-comap.png' %}" alt="Sunset in the mountains">
-
-                </div>
-
-            </div>
-
-        </section> -->
 
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
-            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black" data-aos="fade-up">AUSPICIADORES</h1>
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black sm:m-10" data-aos="fade-up">AUSPICIADORES</h1>
 
             <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
 
                 <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1 p-4  sm:mx-10">
 
-                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-unap.png' %}" 
-                        alt="Sunset in the mountains">
-                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-mate.png' %}" 
-                        alt="Sunset in the mountains">
-                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-vra.png' %}"
-                        alt="Sunset in the mountains">
-                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-vri.png' %}"
-                        alt="Sunset in the mountains">
-                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-dad.png' %}"
-                        alt="Sunset in the mountains">
-                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4" src="{% static 'images/logo-comap.png' %}" 
-                        alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-unap.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-mate.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-vra.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-vri.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-dad.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-comap.png' %}" alt="Sunset in the mountains">
 
                 </div>
 
@@ -820,27 +828,23 @@
 
         </section>
 
-
     </main>
 
 
-
-
-
-    <footer class="bg-gray-900 mt-10">
+    <footer class="bg-gray-900 mt-30">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <a href="" class="flex items-center">
                         <img src="{% static 'images/logo-mate.png' %}" class="h-30" alt="FlowBite Logo" />
-                        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">CS. FÍSICO
+                        <span class="self-center text-xl font-semibold whitespace-nowrap text-white">CS. FÍSICO
                             MATEMÁTICAS</span>
                     </a>
                 </div>
                 <div class="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-1">
                     <div>
-                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Contactos</h2>
-                        <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase text-white">Contactos</h2>
+                        <ul class="text-gray-400 font-medium">
                             <li class="mb-4 flex items-center space-x-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -860,11 +864,6 @@
                                     class="hover:underline">www.spmac.org/xii-cimac</a>
                             </li>
                             <li class="flex items-center space-x-2">
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-                                </svg> -->
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" width="26px" height="26px"
                                     viewBox="0 0 256 256">
                                     <path
@@ -877,17 +876,13 @@
                     </div>
                 </div>
             </div>
-            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-            <div class="sm:flex sm:items-center sm:justify-between">
-                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 CS. FISICO MATEMÁTICAS |
-                    </a>Todos los derechos reservados
-                </span>
+            <hr class="my-6 border-gray-200 sm:mx-auto border-gray-700 lg:my-8" />
+            <div class="flex flex-col items-center justify-center space-y-1">
+                <span class="text-sm text-gray-300 text-center">© 2025 CS. FÍSICO MATEMÁTICAS</span>
+                <span class="text-sm text-gray-400 text-center">Todos los derechos reservados</span>
             </div>
         </div>
     </footer>
-
-
-
 
 
 </body>
@@ -916,7 +911,7 @@
 </script>
 
 
-<!-- CRONOGRAMA -->
+<!-- Cronograma -->
 <script>
 
     function changeSection(sectionNumber) {

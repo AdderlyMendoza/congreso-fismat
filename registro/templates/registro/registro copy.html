@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
+
+    <!-- tailwindcss -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+
+<body class="backdrop-filter backdrop-blur-md"
+    style="background-image: url('https://i.pinimg.com/736x/6b/dc/e5/6bdce53334253b7f0d9d5e58b16491bb.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+
+    <header
+        class="flex items-center justify-between w-full text-black md:px-20 md:py-4 text-white px-4 py-4  backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60 ">
+        <div class="flex items-end space-x-1 justify-center ">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
+                alt="logo unap" class="h-17">
+            {% comment %} <h1 class="border-l pl-2 md:text-md sm:text-sm">
+                Universidad <br>
+                Nacional del<br>
+                Altiplano de Puno
+            </h1> {% endcomment %}
+            <img src="{% static 'images/logo-cimac.png' %}" alt="logo cimac" class="h-17 ml-2">
+
+        </div>
+
+        <nav class="flex items-center md:text-md sm:text-sm">
+            <a href="/" class="p-2 hover:bg-black/50 cursor-pointer">Regresar</a>
+        </nav>
+
+    </header>
+
+    <main class="items-center justify-center flex flex-col">
+
+        <!-- CUENTAS -->
+        <div class="bg-white p-8 rounded-2xl shadow-md mt-20 max-w-lg w-full">
+            <h1 class="text-center text-2xl font-bold mb-4">CUENTAS</h1>
+
+            <span class="text-lg font-bold">BCP:</span>
+            <span class="text-lg text-gray-700 ml-1">945-05966479-0-23</span>
+            <br>
+            <span class="text-lg font-bold">CCI:</span>
+            <span class="text-lg text-gray-700 ml-2">002 49510596647902300</span>
+        </div>
+
+        <!-- MONTOS -->
+        <div class="bg-white p-8 rounded-2xl shadow-md mt-4 max-w-lg w-full">
+            <h1 class="text-center text-2xl font-bold mb-4">MONTOS</h1>
+            <h1 class="text-lg font-bold">PARTICIPANTE</h1>
+            <h2>S/. 100 (abril a mayo)</h2>
+            <h2>S/. 150 (junio en adelante)</h2>
+
+            <h1 class="text-lg font-bold mt-4">ESTUDIANTE (pregrado)</h1>
+            <h2>S/. 50 (abril a mayo)</h2>
+            <h2>S/. 80 (junio en adelante)</h2>
+        </div>
+
+        <!-- FORMULARIO DE INSCRIPCION -->
+        <form id="registroForm" method="POST" enctype="multipart/form-data"
+            class="bg-white p-8 rounded-2xl shadow-md my-10 max-w-lg w-full">
+            {% csrf_token %}
+
+            <h1 class="text-center text-2xl font-bold mb-4">INSCRIPCION</h1>
+
+
+            <div class="mb-2">
+                <label for="pais" class="text-gray-700 font-semibold">PAIS:</label>
+                {{ form.pais }}
+            </div>
+
+            <div class="mb-2">
+                <label for="entidad_procedencia" class="text-gray-700 font-semibold">ENTIDAD DE PROCEDENCIA:</label>
+                {{ form.entidad_procedencia }}
+            </div>
+
+            <div class="mb-2">
+                <label for="tipo_participante" class="text-gray-700 font-semibold">TIPO DE PARTICIPANTE</label>
+                {{ form.tipo_participante }}
+            </div>
+
+            <div class="mb-2" id="div_doc_acreditivo">
+                <label for="doc_acreditivo" class="text-gray-700 font-semibold">CARNET DE ESTUDIANTE Y/O SIMILAR
+                </label>
+                {{ form.doc_acreditivo }}
+            </div>
+
+            <div class="mb-2">
+                <label for="dni" class="text-gray-700 font-semibold">DNI:</label>
+                {{ form.dni }}
+                {% if form.dni.errors %}
+                <div class="text-red-500 mt-1">
+                    {% for error in form.dni.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-2">
+                <label for="nombres" class="text-gray-700 font-semibold">NOMBRES:</label>
+                {{ form.nombres }}
+            </div>
+
+            <div class="mb-2">
+                <label for="apellido_paterno" class="text-gray-700 font-semibold">APELLIDO PATERNO:</label>
+                {{ form.apellido_paterno }}
+            </div>
+
+            <div class="mb-2">
+                <label for="apellido_materno" class="text-gray-700 font-semibold">APELLIDO MATERNO:</label>
+                {{ form.apellido_materno }}
+            </div>
+
+            <div class="mb-2">
+                <label for="email" class="text-gray-700 font-semibold">EMAIL:</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="text-red-500 mt-1">
+                    {% for error in form.email.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-2">
+                <label for="celular" class="text-gray-700 font-semibold">CELULAR:</label>
+                {{ form.celular }}
+                {% if form.celular.errors %}
+                <div class="text-red-500 mt-1">
+                    {% for error in form.celular.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-2">
+                <label for="monto_pago" class="text-gray-700 font-semibold">MONTO A PAGAR:</label>
+                <div class="form-control mt-1 w-full border p-3 rounded-md bg-gray-100" id="monto_pago">
+                    S/. 100 <!-- Este es el valor por defecto -->
+                </div>
+            </div>
+
+            <div class="mb-2">
+                <label for="voucher_pago" class="flex-1 text-gray-700 font-semibold">VOUCHER DE PAGO:</label>
+                <div class="flex">
+                    {{ form.voucher_pago }}
+                </div>
+            </div>
+
+            <button id="enviarForSweetAlert" type="button"
+                class="mt-4 w-full cursor-pointer bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                Inscribirme
+            </button>
+
+        </form>
+
+    </main>
+
+    <footer>
+        <a href="{% url 'generar_pdf' 1 %}" target="_blank">Generar PDF</a>
+    </footer>
+
+</body>
+
+
+<!-- MANEJO DE MONTO -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtenemos la fecha actual
+        const hoy = new Date();
+        const mes = hoy.getMonth() + 1; // getMonth() devuelve 0-11, por lo que sumamos 1
+        const año = hoy.getFullYear();
+
+        // Obtenemos el tipo de participante seleccionado del formulario
+        const tipoUsuarioSelect = document.getElementById("id_tipo_participante");
+        const tipoUsuario = tipoUsuarioSelect ? tipoUsuarioSelect.value : "";  // Obtenemos el valor seleccionado
+
+        // Calculamos el monto a pagar según la lógica del mes y tipo de usuario
+        let monto = 0;
+        if (año === 2025 && [4, 5].includes(mes)) { // Abril y Mayo de 2025
+            if (tipoUsuario === 'estudiante (solo pregrado)') {
+                monto = 50;
+            } else if (tipoUsuario === 'participante') {
+                monto = 100;
+            }
+        } else if (año >= 2025 && mes >= 6) { // Junio en adelante de 2025
+            if (tipoUsuario === 'estudiante (solo pregrado)') {
+                monto = 80;
+            } else if (tipoUsuario === 'participante') {
+                monto = 150;
+            }
+        }
+
+        // Actualizamos el valor del campo de monto a pagar
+        const montoPagoDiv = document.getElementById('monto_pago');
+        montoPagoDiv.textContent = 'S/. ' + monto;
+
+        // Si el tipo de participante cambia, volvemos a actualizar el monto a pagar
+        tipoUsuarioSelect.addEventListener("change", function () {
+            const tipoUsuarioSeleccionado = tipoUsuarioSelect.value;
+            let nuevoMonto = 0;
+
+            if (año === 2025 && [4, 5].includes(mes)) { // Abril y Mayo de 2025
+                if (tipoUsuarioSeleccionado === 'estudiante (solo pregrado)') {
+                    nuevoMonto = 50;
+                } else if (tipoUsuarioSeleccionado === 'participante') {
+                    nuevoMonto = 100;
+                }
+            } else if (año >= 2025 && mes >= 6) { // Junio en adelante de 2025
+                if (tipoUsuarioSeleccionado === 'estudiante (solo pregrado)') {
+                    nuevoMonto = 80;
+                } else if (tipoUsuarioSeleccionado === 'participante') {
+                    nuevoMonto = 150;
+                }
+            }
+
+            // Actualizamos el valor de monto en el div
+            montoPagoDiv.textContent = 'S/. ' + nuevoMonto;
+        });
+    });
+</script>
+
+<!-- MANEJAR TIPO DE POSTULANTE -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tipoParticipanteSelect = document.querySelector('select[name="tipo_participante"]');
+        const docAcreditivoField = document.querySelector('div#div_doc_acreditivo'); // Se obtiene el contenedor del input.
+
+        // Función para actualizar la visibilidad del campo doc_acreditivo
+        function toggleDocAcreditivoField() {
+            if (tipoParticipanteSelect.value === 'estudiante (solo pregrado)') {
+                docAcreditivoField.classList.remove('hidden'); // Muestra el campo si es estudiante
+            } else {
+                docAcreditivoField.classList.add('hidden'); // Oculta el campo si no es estudiante
+            }
+        }
+
+        // Inicializar visibilidad según el valor actual del select
+        toggleDocAcreditivoField();
+
+        // Escuchar el cambio en el select para actualizar la visibilidad
+        tipoParticipanteSelect.addEventListener('change', toggleDocAcreditivoField);
+    });
+
+</script>
+
+
+<!-- VALIDACION Y ENVIO DEL FORMULARIO -->
+<script>
+
+    // Función para agregar o quitar el borde rojo en caso de error
+    function toggleErrorClass(field, isValid) {
+        if (isValid) {
+            field.classList.remove('border-red-500');
+        } else {
+            field.classList.add('border-red-500');
+        }
+    }
+
+    // Función para validar todos los campos del formulario
+    function validarFormulario() {
+        let isValid = true;
+        let errorMessages = [];
+        const fields = [
+            { id: 'id_pais', type: 'text', name: 'Pais' },
+            { id: 'id_entidad_procedencia', type: 'text', name: 'Entidad de Procedencia' },
+            { id: 'id_tipo_participante', type: 'text', name: 'Tipo de Participante' },
+            // { id: 'id_doc_acreditivo', type: 'text', name: 'Tipo de Participante' },
+            { id: 'id_dni', type: 'integer', name: 'DNI' },
+            { id: 'id_nombres', type: 'text', name: 'Nombres' },
+            { id: 'id_apellido_paterno', type: 'text', name: 'Apellido Paterno' },
+            { id: 'id_apellido_materno', type: 'text', name: 'Apellido Materno' },
+            { id: 'id_email', type: 'email', name: 'Email' },
+            { id: 'id_celular', type: 'integer', name: 'Celular' },
+            // { id: 'id_voucher_pago', type: 'file', name: 'Voucher de pago' }
+
+        ];
+
+        fields.forEach(function (field) {
+            const inputElement = document.getElementById(field.id);
+            const value = inputElement.value.trim();
+
+            // Validación de campo no vacío
+            if (!value) {
+                isValid = false;
+                errorMessages.push(`${field.name} no puede estar vacío`);
+                toggleErrorClass(inputElement, false);
+            }
+            // Validación de email
+            else if (field.type === 'email' && !value.includes('@')) {
+                isValid = false;
+                errorMessages.push(`El formato del ${field.name} es incorrecto`);
+                toggleErrorClass(inputElement, false);
+            }
+            // Validación de números (celular o dni)
+            else if (field.type === 'integer' && isNaN(value)) {
+                isValid = false;
+                errorMessages.push(`${field.name} debe ser un número válido`);
+                toggleErrorClass(inputElement, false);
+            } else {
+                toggleErrorClass(inputElement, true);
+            }
+        });
+
+        return { isValid, errorMessages };
+    }
+
+
+    // MANEJO DEL FORMULARIO
+    document.getElementById("enviarForSweetAlert").addEventListener("click", function () {
+        // Primero, validamos los campos
+        const { isValid, errorMessages } = validarFormulario();
+
+        // Si los campos son válidos, verificamos duplicados en el backend
+        if (isValid) {
+            const dni = document.getElementById('id_dni').value.trim();
+            const email = document.getElementById('id_email').value.trim();
+            const celular = document.getElementById('id_celular').value.trim();
+
+            // Codificar correctamente los parámetros para evitar problemas de caracteres especiales
+            const url = `/registro/validar-duplicados/?dni=${encodeURIComponent(dni)}&email=${encodeURIComponent(email)}&celular=${encodeURIComponent(celular)}`;
+
+            // Enviar una solicitud AJAX para verificar duplicados
+            fetch(url, { method: 'GET' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Si no hay duplicados, mostrar el SweetAlert de confirmación
+                        mostrarSweetAlertConfirmacion(dni);
+                    } else {
+                        // Si hay duplicados, mostrar los errores
+                        mostrarSweetAlertErrorDuplicados(data);
+                    }
+                })
+                .catch(error => {
+                    mostrarSweetAlertError('Error al verificar los datos', 'Hubo un problema al verificar los datos. Intenta nuevamente.');
+                });
+        } else {
+            // Si los campos no son válidos, mostrar el error de validación
+            mostrarSweetAlertErrorValidacion(errorMessages);
+        }
+    });
+
+    // Función para mostrar el SweetAlert de confirmación
+    function mostrarSweetAlertConfirmacion(dni, event) {
+        
+        event.preventDefault();  // Prevenir el envío estándar del formulario
+
+
+        Swal.fire({
+            icon: 'info',
+            title: "¿Está seguro de que desea inscribirse?",
+            text: "Le solicitamos que revise cuidadosamente sus datos antes de proceder con la inscripción. Si está seguro de que los datos son correctos, por favor, haga clic en Aceptar para continuar.",
+            showCancelButton: true,
+            confirmButtonText: "Aceptar",
+            preConfirm: () => {
+                // Enviar el formulario al servidor
+                enviarFormulario(dni);
+            },
+            didOpen: () => {
+                ajustarPosicionModal();
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                mostrarSweetAlertExito(dni);
+            }
+        });
+    }
+
+    // Función para enviar el formulario con Fetch
+    function enviarFormulario(dni, event) {
+        const form = document.getElementById('registroForm');
+
+        // Crear un objeto FormData para enviar los datos del formulario
+        const formData = new FormData(form);
+
+        // Agregar el DNI al FormData (si no está en el formulario)
+        formData.append('dni', dni);
+
+        // Usamos fetch para enviar el formulario de forma asíncrona
+        fetch(form.action, {  // Usamos la URL del formulario (action)
+            method: form.method,  // Usamos el método del formulario (POST o GET)
+            body: formData  // Enviamos los datos del formulario como FormData
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('Error al enviar el formulario');
+            })
+            .then(data => {
+                // Si el formulario se envió correctamente, generar el PDF
+                generarPDF(dni);
+            })
+            .catch(error => {
+                mostrarSweetAlertError('Error al enviar el formulario', 'Hubo un problema al enviar el formulario. Intenta nuevamente.');
+            });
+    }
+
+    // Función para generar el PDF
+    function generarPDF(dni) {
+        fetch(`/generar-pdf/${dni}/`, { method: 'GET' })
+            .then(response => {
+                if (!response.ok) throw new Error('No se pudo generar el PDF');
+                return response.blob();
+            })
+            .then(blob => {
+                // Crear un enlace de descarga para el PDF
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'inscripcion.pdf';
+                a.click();
+                URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                mostrarSweetAlertError('Error al generar el PDF', 'Hubo un problema al generar el PDF. Por favor, inténtalo de nuevo.');
+            });
+    }
+
+
+    // Función para mostrar el SweetAlert de éxito
+    function mostrarSweetAlertExito(dni) {
+        Swal.fire({
+            icon: "success",
+            title: "Inscripción completada",
+            text: "Tu inscripción fue exitosa. El PDF de tu inscripción se descargará automáticamente.",
+            didOpen: () => {
+                ajustarPosicionModal();
+            }
+        });
+    }
+
+    // Función para mostrar el SweetAlert con errores de duplicados
+    function mostrarSweetAlertErrorDuplicados(data) {
+        let duplicateErrors = '';
+        if (data.dni) duplicateErrors += `<b>DNI:</b> ${data.dni}<br>`;
+        if (data.email) duplicateErrors += `<b>Correo:</b> ${data.email}<br>`;
+        if (data.celular) duplicateErrors += `<b>Celular:</b> ${data.celular}<br>`;
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de duplicados',
+            html: duplicateErrors,
+            confirmButtonText: "Aceptar",
+            didOpen: () => {
+                ajustarPosicionModal();
+            }
+        });
+    }
+
+    // Función para mostrar el SweetAlert de error
+    function mostrarSweetAlertError(title, text) {
+        Swal.fire({
+            icon: 'error',
+            title: title,
+            text: text,
+            confirmButtonText: 'Aceptar',
+            didOpen: () => {
+                ajustarPosicionModal();
+            }
+        });
+    }
+
+    // Función para mostrar el SweetAlert con errores de validación
+    function mostrarSweetAlertErrorValidacion(errorMessages) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Por favor, corrija los siguientes errores:',
+            html: `<ul style="list-style-type: none; padding-left: 0;">` +
+                errorMessages.map(msg => `<li>${msg}</li>`).join('') +
+                `</ul>`,
+            confirmButtonText: "Aceptar",
+            didOpen: () => {
+                ajustarPosicionModal();
+            }
+        });
+    }
+
+    // Función para ajustar la posición del modal
+    function ajustarPosicionModal() {
+        const swalModal = document.querySelector('.swal2-popup');
+        const button = document.getElementById("enviarForSweetAlert");
+        const rect = button.getBoundingClientRect();
+
+        // Ajustar la posición para que el modal esté encima del botón
+        swalModal.style.position = 'absolute';
+        swalModal.style.top = `${rect.top + window.scrollY - swalModal.offsetHeight - 600}px`; // Restamos la altura del modal
+        swalModal.style.left = `${rect.left - 42}px`;
+        swalModal.style.zIndex = '9999';  // Aseguramos que esté encima de otros elementos
+    }
+
+
+</script>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
+
+    <!-- tailwindcss -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body class="backdrop-filter backdrop-blur-md"
+    style="background-image: url('https://i.pinimg.com/736x/6b/dc/e5/6bdce53334253b7f0d9d5e58b16491bb.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+
+    <header class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 text-white px-4 py-4 backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60">
+        <div class="flex items-end space-x-1 justify-center ">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
+                alt="logo unap" class="h-17">
+            <img src="{% static 'images/logo-cimac.png' %}" alt="logo cimac" class="h-17 ml-2">
+        </div>
+        <nav class="flex items-center md:text-md sm:text-sm">
+            <a href="/" class="p-2 hover:bg-black/50 cursor-pointer">Regresar</a>
+        </nav>
+    </header>
+
+    <main class="h-screen flex items-center justify-center">
+
+        <!-- FORMULARIO DE INSCRIPCION -->
+        <div class="bg-white p-8 rounded-2xl shadow-md my-10 max-w-lg w-full">
+
+            <div class="w-full flex flex-col items-center justify-center">
+                <h1 class="text-center text-2xl font-bold mb-4">INSCRIPCION COMPLETADA</h1>
+
+                <!-- <p>Por favor descargue su constancia ante cualquier inconveniente</p> -->
+                <!-- <br> -->
+
+                <a href="{% url 'generar_pdf' dni %}" class="bg-blue-600 px-4 py-2 rounded-md text-white" target="_blank">Constancia de inscripción</a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

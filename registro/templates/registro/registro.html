@@ -16,247 +16,250 @@
 
     <!-- sweet alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* Estilos adicionales para ocultar y mostrar pasos */
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+    </style>
 </head>
 
-{% comment %} <body class="bg-gradient-to-r from-red-400 to-blue-400"> {% endcomment %}
-<body >
+<body class="backdrop-filter backdrop-blur-md"
+    style="background-image: url('https://i.pinimg.com/736x/6b/dc/e5/6bdce53334253b7f0d9d5e58b16491bb.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
     <header
-        class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-10 text-white px-4 py-4 backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60 ">
+        class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 text-white px-4 py-4 backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60">
         <div class="flex items-end space-x-1 justify-center ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
-                alt="" class="w-15">
-            <h1 class="border-l pl-2 md:text-md sm:text-sm">
-                Universidad <br>
-                Nacional del<br>
-                Altiplano de Puno
-            </h1>
+                alt="logo unap" class="h-17">
+            <img src="{% static 'images/logo-cimac.png' %}" alt="logo cimac" class="h-17 ml-2">
         </div>
-
         <nav class="flex items-center md:text-md sm:text-sm">
-            <a href="/" class="p-2 hover:bg-black/50 cursor-pointer">INICIO</a>
+            <a href="/" class="p-2 hover:bg-black/50 cursor-pointer">Regresar</a>
         </nav>
     </header>
 
-    <main class="items-center justify-center flex">
-        {% comment %} <div class="relative md:-rotate-188 sm:bg-blue-600 h-181 w-110 my-40 rounded-2xl"></div> {% endcomment %}
+    <main class="h-screen items-center justify-center flex flex-col">
 
-        <form id="registroForm" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-2xl shadow-md my-40">
+        <!-- FORMULARIO DE INSCRIPCION -->
+        <form id="registroForm" method="POST" enctype="multipart/form-data"
+            class="bg-white p-8 rounded-2xl shadow-md mt-20 max-w-lg w-full">
             {% csrf_token %}
 
-            <div class="mb-2">
-                <label for="pais" class="text-gray-700 font-semibold">PAIS:</label>
-                {{ form.pais }}
-            </div>
+            <!-- PASO 1: Información de montos y fechas -->
+            <div class="step active" id="step1">
+                <!-- CUENTAS -->
+                <div class="px-8 mt-4 max-w-lg w-full">
+                    <h1 class="text-center text-2xl font-bold mb-4">CUENTAS</h1>
 
-            <div class="mb-2">
-                <label for="entidad_procedencia" class="text-gray-700 font-semibold">ENTIDAD DE PROCEDENCIA:</label>
-                {{ form.entidad_procedencia }}
-            </div>
-
-            <div class="mb-2">
-                <label for="tipo_participante" class="text-gray-700 font-semibold">TIPO DE PARTICIPANTE</label>
-                {{ form.tipo_participante }}
-            </div>
-
-            <div class="mb-2">
-                <label for="doc_acreditivo" class="text-gray-700 font-semibold">CARNET DE ESTUDIANTE Y/O SIMILAR  </label>
-                {{ form.doc_acreditivo }}
-            </div>
-
-            <div class="mb-2">
-                <label for="dni" class="text-gray-700 font-semibold">DNI:</label>
-                {{ form.dni }}
-                {% if form.dni.errors %}
-                    <div class="text-red-500 mt-1">
-                        {% for error in form.dni.errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-
-            <div class="mb-2">
-                <label for="nombres" class="text-gray-700 font-semibold">NOMBRES:</label>
-                {{ form.nombres }}
-            </div>
-
-            <div class="mb-2">
-                <label for="apellido_paterno" class="text-gray-700 font-semibold">APELLIDO PATERNO:</label>
-                {{ form.apellido_paterno }}
-            </div>
-
-            <div class="mb-2">
-                <label for="apellido_materno" class="text-gray-700 font-semibold">APELLIDO MATERNO:</label>
-                {{ form.apellido_materno }}
-            </div>
-
-            <div class="mb-2">
-                <label for="email" class="text-gray-700 font-semibold">EMAIL:</label>
-                {{ form.email }}
-                {% if form.email.errors %}
-                    <div class="text-red-500 mt-1">
-                        {% for error in form.email.errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-
-            <div class="mb-2">
-                <label for="celular" class="text-gray-700 font-semibold">CELULAR:</label>
-                {{ form.celular }}
-                {% if form.celular.errors %}
-                    <div class="text-red-500 mt-1">
-                        {% for error in form.celular.errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-
-            <div class="mb-2">
-                <label for="voucher_pago" class="flex-1 text-gray-700 font-semibold">VOUCHER DE PAGO:</label>
-                <div class="flex">
-                    {{ form.voucher_pago }}
+                    <span class="text-lg font-bold">BCP:</span>
+                    <span class="text-lg text-gray-700 ml-1">945-05966479-0-23</span>
+                    <br>
+                    <span class="text-lg font-bold">CCI:</span>
+                    <span class="text-lg text-gray-700 ml-2">002 49510596647902300</span>
                 </div>
+
+                <!-- MONTOS -->
+                <div class="p-8 mt-4 max-w-lg w-full">
+                    <h1 class="text-center text-2xl font-bold mb-4">MONTOS</h1>
+                    <h1 class="text-lg font-bold">PARTICIPANTE</h1>
+                    <h2>S/. 100 (abril a mayo)</h2>
+                    <h2>S/. 150 (junio en adelante)</h2>
+
+                    <h1 class="text-lg font-bold mt-4">ESTUDIANTE (pregrado)</h1>
+                    <h2>S/. 50 (abril a mayo)</h2>
+                    <h2>S/. 80 (junio en adelante)</h2>
+                </div>
+
+                <button type="button" id="nextStep1"
+                    class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                    Siguiente
+                </button>
+
             </div>
 
-            <button id="enviarForSweetAlert" type="button"
-                class="mt-4 w-full cursor-pointer bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-                Inscribirme
-            </button>
+            <!-- PASO 2: Información de procedencia -->
+            <div class="step" id="step2">
+                <h1 class="text-center text-2xl font-bold mb-4">INSCRIPCION</h1>
+
+                <div class="mb-2">
+                    <label for="pais" class="text-gray-700 font-semibold">PAIS:</label>
+                    {{ form.pais }}
+                </div>
+
+                <div class="mb-2">
+                    <label for="entidad_procedencia" class="text-gray-700 font-semibold">ENTIDAD DE PROCEDENCIA:</label>
+                    {{ form.entidad_procedencia }}
+                </div>
+
+                <div class="mb-2">
+                    <label for="tipo_participante" class="text-gray-700 font-semibold">TIPO DE PARTICIPANTE</label>
+                    {{ form.tipo_participante }}
+                </div>
+
+                <button type="button" id="nextStep2"
+                    class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                    Siguiente
+                </button>
+
+            </div>
+
+            <!-- PASO 3: Información personal -->
+            <div class="step" id="step3">
+                <h1 class="text-center text-2xl font-bold mb-4">INSCRIPCION</h1>
+
+                <div class="mb-2">
+                    <label for="dni" class="text-gray-700 font-semibold">DNI:</label>
+                    {{ form.dni }}
+                </div>
+
+                <div class="mb-2">
+                    <label for="nombres" class="text-gray-700 font-semibold">NOMBRES:</label>
+                    {{ form.nombres }}
+                </div>
+
+                <div class="mb-2">
+                    <label for="apellido_paterno" class="text-gray-700 font-semibold">APELLIDO PATERNO:</label>
+                    {{ form.apellido_paterno }}
+                </div>
+
+                <div class="mb-2">
+                    <label for="apellido_materno" class="text-gray-700 font-semibold">APELLIDO MATERNO:</label>
+                    {{ form.apellido_materno }}
+                </div>
+
+                <div class="mb-2">
+                    <label for="email" class="text-gray-700 font-semibold">EMAIL:</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="mb-2">
+                    <label for="celular" class="text-gray-700 font-semibold">CELULAR:</label>
+                    {{ form.celular }}
+                </div>
+
+                <button type="button" id="nextStep3"
+                    class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                    Siguiente
+                </button>
+            </div>
+
+            <!-- PASO 4: Información de pago -->
+            <div class="step" id="step4">
+                <h1 class="text-center text-2xl font-bold mb-4">INSCRIPCION</h1>
+
+                <h1 class="text-lg">MONTO A PAGAR:</h1>
+                <div class="form-control mt-1 w-full border p-3 rounded-md bg-gray-100 mb-2" id="monto_pago">
+                    S/. 100
+                </div>
+
+                <div class="mb-2">
+                    <label for="voucher_pago" class="flex-1 text-gray-700 font-semibold">VOUCHER DE PAGO:</label>
+                    <div class="flex">
+                        {{ form.voucher_pago }}
+                    </div>
+                </div>
+
+                <button type="submit" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                    Inscribirme
+                </button>
+
+            </div>
 
         </form>
 
     </main>
 
-
-
-
 </body>
 
-{% comment %} 
 <script>
-    // Función para agregar o quitar el borde rojo en caso de error
-    function toggleErrorClass(field, isValid) {
-        if (isValid) {
-            field.classList.remove('border-red-500');
-        } else {
-            field.classList.add('border-red-500');
-        }
-    }
+    document.addEventListener("DOMContentLoaded", function () {
 
-    // Función para validar todos los campos del formulario
-    function validarFormulario() {
-        let isValid = true;
-        const fields = [
-            { id: 'id_dni', type: 'integer' },
-            { id: 'id_nombres', type: 'text' },
-            { id: 'id_apellido_paterno', type: 'text' },
-            { id: 'id_apellido_materno', type: 'text' },
-            { id: 'id_email', type: 'email' },
-            { id: 'id_celular', type: 'integer' },
-            // { id: 'id_proyecto_investigacion', type: 'file' }
-        ];
+        const nextStep1Btn = document.getElementById("nextStep1");
+        const nextStep2Btn = document.getElementById("nextStep2");
+        const nextStep3Btn = document.getElementById("nextStep3");
+        const nextStep4Btn = document.getElementById("nextStep4");
+        const nextStep5Btn = document.getElementById("nextStep5");
 
-        fields.forEach(function (field) {
-            const inputElement = document.getElementById(field.id);
-            const value = inputElement.value.trim();
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+        const step3 = document.getElementById("step3");
+        const step4 = document.getElementById("step4");
+        const step5 = document.getElementById("step5");
 
-            // Validación de campo no vacío
-            if (!value || (field.type === 'email' && !value.includes('@'))) {
-                isValid = false;
-                toggleErrorClass(inputElement, false);
+        // PASO 1
+        nextStep1Btn.addEventListener("click", function () {
+            Swal.fire({
+                icon: 'info',
+                title: 'Por favor, asegurese de tener la imagen del pago',
+                confirmButtonText: 'Aceptar',
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        step1.classList.remove("active");
+                        step2.classList.add("active");
+                    }
+                });
+        });
+
+        // PASO 2
+        nextStep2Btn.addEventListener("click", function () {
+            const { isValid } = validarFormularioStep2();
+
+            if (isValid) {
+                step2.classList.remove("active");
+                step3.classList.add("active");
             } else {
-                toggleErrorClass(inputElement, true);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Por favor, corrija los errores antes de continuar',
+                    confirmButtonText: 'Aceptar',
+                });
             }
         });
 
-        return isValid;
-    }
+        // PASO 3
+        nextStep3Btn.addEventListener("click", function () {
+            const { isValid } = validarFormularioStep3();
 
-    document.getElementById("enviarForSweetAlert").addEventListener("click", function () {
-        if (validarFormulario()) {
-            // Si todos los campos están completos, mostramos el SweetAlert
-            Swal.fire({
-                icon: 'info',
-                title: "¿Está seguro de que desea inscribirse?",
-                text: "Le solicitamos que revise cuidadosamente sus datos antes de proceder con la inscripción. Si está seguro de que los datos son correctos, por favor, haga clic en Aceptar para continuar.",
-                showCancelButton: true,
-                confirmButtonText: "Aceptar",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire("Inscripción completada", "", "success");
-                    setTimeout(function () {
-                        document.getElementById("enviarForm").submit();
-                    }, 1500);
-                }
-            });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Por favor, complete todos los campos. Email debe tener un @',
-            });
-        }
-    });
-
-</script>
-
-</html> {% endcomment %}
-
-
-{% comment %} MANEJAR EL FORM DE TIPO DE POSTULANTE {% endcomment %}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tipoParticipanteSelect = document.querySelector('select[name="tipo_participante"]');
-        const docAcreditivoField = document.querySelector('input[name="doc_acreditivo"]').closest('.mb-2'); // Se obtiene el contenedor del input para ocultarlo.
-
-        // Función para actualizar la visibilidad del campo doc_acreditivo
-        function toggleDocAcreditivoField() {
-            if (tipoParticipanteSelect.value === 'estudiante') {
-                docAcreditivoField.style.display = 'block'; // Muestra el campo si es estudiante
+            if (isValid) {
+                step3.classList.remove("active");
+                step4.classList.add("active");
             } else {
-                docAcreditivoField.style.display = 'none'; // Oculta el campo si no es estudiante
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Por favor, corrija los errores antes de continuar',
+                    confirmButtonText: 'Aceptar',
+                });
             }
-        }
+        });
 
-        // Inicializar visibilidad según el valor actual del select
-        toggleDocAcreditivoField();
-        
-        // Escuchar el cambio en el select para actualizar la visibilidad
-        tipoParticipanteSelect.addEventListener('change', toggleDocAcreditivoField);
+        // PASO 4
+        nextStep4Btn.addEventListener("click", function () {
+            const { isValid } = validarFormularioStep4();
+
+            if (!isValid) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Por favor, corrija los errores antes de continuar',
+                    confirmButtonText: 'Aceptar',
+                });
+            }
+        });
+
     });
-</script>
 
-
-{% comment %} VALIDACION DEL FORMULARIO {% endcomment %}
-<script>
-    // Función para agregar o quitar el borde rojo en caso de error
-    function toggleErrorClass(field, isValid) {
-        if (isValid) {
-            field.classList.remove('border-red-500');
-        } else {
-            field.classList.add('border-red-500');
-        }
-    }
-
-    // Función para validar todos los campos del formulario
-    function validarFormulario() {
+    function validarFormularioStep2() {
         let isValid = true;
-        let errorMessages = [];
         const fields = [
-            { id: 'id_dni', type: 'integer', name: 'DNI' },
-            { id: 'id_nombres', type: 'text', name: 'Nombres' },
-            { id: 'id_apellido_paterno', type: 'text', name: 'Apellido Paterno' },
-            { id: 'id_apellido_materno', type: 'text', name: 'Apellido Materno' },
-            { id: 'id_email', type: 'email', name: 'Email' },
-            { id: 'id_celular', type: 'integer', name: 'Celular' },
-            // { id: 'id_voucher_pago', type: 'file', name: 'Voucher de pago' }
             { id: 'id_pais', type: 'text', name: 'Pais' },
             { id: 'id_entidad_procedencia', type: 'text', name: 'Entidad de Procedencia' },
             { id: 'id_tipo_participante', type: 'text', name: 'Tipo de Participante' },
-
         ];
 
         fields.forEach(function (field) {
@@ -266,138 +269,72 @@
             // Validación de campo no vacío
             if (!value) {
                 isValid = false;
-                errorMessages.push(`${field.name} no puede estar vacío`);
-                toggleErrorClass(inputElement, false);
-            }
-            // Validación de email
-            else if (field.type === 'email' && !value.includes('@')) {
-                isValid = false;
-                errorMessages.push(`El formato del ${field.name} es incorrecto`);
-                toggleErrorClass(inputElement, false);
-            }
-            // Validación de números (celular o dni)
-            else if (field.type === 'integer' && isNaN(value)) {
-                isValid = false;
-                errorMessages.push(`${field.name} debe ser un número válido`);
-                toggleErrorClass(inputElement, false);
-            } else {
-                toggleErrorClass(inputElement, true);
             }
         });
 
-        return { isValid, errorMessages };
+        return { isValid };
     }
 
-    {% comment %} document.getElementById("enviarForSweetAlert").addEventListener("click", function () {
-        const { isValid, errorMessages } = validarFormulario();
+    function validarFormularioStep3() {
+        let isValid = true;
+        const fields = [
+            { id: 'id_dni', type: 'integer', name: 'DNI' },
+            { id: 'id_nombres', type: 'text', name: 'Nombres' },
+            { id: 'id_apellido_paterno', type: 'text', name: 'Apellido Paterno' },
+            { id: 'id_apellido_materno', type: 'text', name: 'Apellido Materno' },
+            { id: 'id_email', type: 'email', name: 'Email' },
+            { id: 'id_celular', type: 'integer', name: 'Celular' }
+        ];
 
-        if (isValid) {
-            // Si todos los campos están completos, mostramos el SweetAlert de confirmación
-            Swal.fire({
-                icon: 'info',
-                title: "¿Está seguro de que desea inscribirse?",
-                text: "Le solicitamos que revise cuidadosamente sus datos antes de proceder con la inscripción. Si está seguro de que los datos son correctos, por favor, haga clic en Aceptar para continuar.",
-                showCancelButton: true,
-                confirmButtonText: "Aceptar",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire("Inscripción completada", "", "success");
-                    setTimeout(function () {
-                        document.getElementById("enviarForm").submit();
-                    }, 1500);
-                }
-            });
-        } else {
-            // Si hay errores, mostrar SweetAlert con los mensajes de error
-            Swal.fire({
-                icon: 'error',
-                title: 'Por favor, corrija los siguientes errores:',
-                html: `<ul style="list-style-type: none; padding-left: 0;">` +
-                      errorMessages.map(msg => `<li>${msg}</li>`).join('') +
-                      `</ul>`,
-                confirmButtonText: "Aceptar"
-            });
+        fields.forEach(function (field) {
+            const inputElement = document.getElementById(field.id);
+            const value = inputElement.value.trim();
+
+            // Validación de campo no vacío
+            if (!value) {
+                isValid = false;
+            }
+        });
+
+        return { isValid };
+    }
+
+    function validarFormularioStep4(event) {
+        let isValid = true;
+
+        // Campos a validar
+        const fields = [
+            { id: 'id_voucher_pago', type: 'file', name: 'VOUCHER DE PAGO' },
+        ];
+
+        fields.forEach(function (field) {
+            const inputElement = document.getElementById(field.id);
+            let value;
+
+            // Validación para campos de tipo file
+            if (field.type === 'file') {
+                value = inputElement.files.length; // Verificar si se seleccionó un archivo
+            } else {
+                value = inputElement.value.trim();
+            }
+
+            // Validación de campo no vacío
+            if (!value) {
+                isValid = false;
+                alert(`Por favor, ingresa el campo: ${field.name}`);
+            }
+        });
+
+        // Si es válido, enviar el formulario
+        if (!isValid) {
+            event.preventDefault();  // Evitar el envío del formulario si hay un error
         }
-    }); {% endcomment %}
 
-    document.getElementById("enviarForSweetAlert").addEventListener("click", function () {
-        // Primero, validamos los campos
-        const { isValid, errorMessages } = validarFormulario();
-    
-        // Si los campos son válidos, verificamos duplicados en el backend
-        if (isValid) {
-            const dni = document.getElementById('id_dni').value.trim();
-            const email = document.getElementById('id_email').value.trim();
-            const celular = document.getElementById('id_celular').value.trim();
-    
-            // Codificar correctamente los parámetros para evitar problemas de caracteres especiales
-            const url = `/registro/validar-duplicados/?dni=${encodeURIComponent(dni)}&email=${encodeURIComponent(email)}&celular=${encodeURIComponent(celular)}`;
-
-            // Enviar una solicitud AJAX para verificar duplicados
-            fetch(url, {  // Aquí la URL es la correcta
-                method: 'GET',  // Asegúrate de que el método sea GET
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Si todos los campos están completos, mostramos el SweetAlert de confirmación
-                    Swal.fire({
-                        icon: 'info',
-                        title: "¿Está seguro de que desea inscribirse?",
-                        text: "Le solicitamos que revise cuidadosamente sus datos antes de proceder con la inscripción. Si está seguro de que los datos son correctos, por favor, haga clic en Aceptar para continuar.",
-                        showCancelButton: true,
-                        confirmButtonText: "Aceptar",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire("Inscripción completada", "", "success");
-                            setTimeout(function () {
-                                document.getElementById("registroForm").submit();
-                            }, 1500);
-                        }
-                    });
-                } else {
-                    // Si hay duplicados, mostramos los errores
-                    let duplicateErrors = '';
-                    if (data.dni) {
-                        duplicateErrors += `<b>DNI:</b> ${data.dni}<br>`;
-                    }
-                    if (data.email) {
-                        duplicateErrors += `<b>Correo:</b> ${data.email}<br>`;
-                    }
-                    if (data.celular) {
-                        duplicateErrors += `<b>Celular:</b> ${data.celular}<br>`;
-                    }
-    
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error de duplicados',
-                        html: duplicateErrors,
-                        confirmButtonText: "Aceptar"
-                    });
-                }
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error al verificar los datos',
-                    text: 'Hubo un problema al verificar los datos. Intenta nuevamente.',
-                    confirmButtonText: 'Aceptar'
-                });
-            });
-        } else {
-            // Si los campos no son válidos, mostrar el error de validación
-            Swal.fire({
-                icon: 'error',
-                title: 'Por favor, corrija los siguientes errores:',
-                html: `<ul style="list-style-type: none; padding-left: 0;">` +
-                    errorMessages.map(msg => `<li>${msg}</li>`).join('') +
-                    `</ul>`,
-                confirmButtonText: "Aceptar"
-            });
-        }
-    });
-    
+        return isValid;
+    }
 
 
 
 </script>
+
+</html>
