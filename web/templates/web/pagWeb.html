@@ -19,26 +19,22 @@
 
 <body>
 
+    {% comment %} Creo que ya no w-full sino w-screen {% endcomment %}
+    {% comment %} el footer tambien esta pequeño {% endcomment %}
     <header
         class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-50 text-white px-4 py-4 ">
         <div class="flex items-end space-x-1 justify-center ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
                 alt="logo unap" class="w-15">
-            {% comment %} <h1 class="border-l pl-2 md:text-md sm:text-sm">
-                Universidad <br>
-                Nacional del<br>
-                Altiplano de Puno
-            </h1> {% endcomment %}
             <img src="{% static 'images/logo-cimac.png' %}" alt="logo cimac" class="w-16 h-16 ml-2">
 
         </div>
 
         <nav class="flex items-center md:text-md sm:text-sm">
-            <a href="/administrador/login" class="p-2 hover:bg-black/50 cursor-pointer">Iniciar Sesión</a>
+            <a href="/administrador/login" class="p-2 hover:bg-black/50 cursor-pointer">Log In</a>
         </nav>
 
     </header>
-
 
     <main>
 
