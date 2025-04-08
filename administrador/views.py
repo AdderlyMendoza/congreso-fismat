@@ -25,6 +25,8 @@ from django.http import HttpResponse
 from django.utils import timezone
 
 from django.db.models import Count, Q
+from django.core.paginator import Paginator, EmptyPage
+
 
 
 def index(request):
@@ -49,9 +51,26 @@ def index(request):
 
 
 
+# def lista_inscritos(request):
+#     inscritos = Registro.objects.all().order_by('-fecha_registro')
+#     return render(request, 'administrador/lista-inscritos.html', {'inscritos': inscritos})
+
 def lista_inscritos(request):
+    # Obtén todos los registros de inscritos ordenados por fecha
     inscritos = Registro.objects.all().order_by('-fecha_registro')
-    return render(request, 'administrador/lista-inscritos.html', {'inscritos': inscritos})
+
+    # Paginación
+    paginator = Paginator(inscritos, 5)  # Muestra 10 inscritos por página
+    page_number = request.GET.get('page')  # Obtén el número de página desde la URL
+
+    try:
+        page_obj = paginator.page(page_number)  # Obtén los registros correspondientes a esa página
+    except EmptyPage:
+        page_obj = paginator.page(1)  # Si la página no existe o es vacía, muestra la primera página
+    except:
+        page_obj = paginator.page(paginator.num_pages)  # Si la página no existe, muestra la última página
+
+    return render(request, 'administrador/lista-inscritos.html', {'page_obj': page_obj})
 
 
 

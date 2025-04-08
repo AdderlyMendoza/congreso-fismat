@@ -16,6 +16,8 @@
     <hr class="mb-4 text-gray-400">
 
     <div class="mt-6 px-6 pb-6">
+
+        {% comment %} TABLA DE REGISTROS {% endcomment %}
         <table class="w-full text-sm text-left">
             <thead class="text-sm font-semibold uppercase">
                 <tr class="border-y-1">
@@ -28,19 +30,22 @@
                     <th scope="col" class="px-6 py-3">Voucher de Pago</th>
                 </tr>
             </thead>
+
             <tbody>
-                {% for registro in inscritos %}
+                {% for registro in page_obj %}
                 <tr class="hover:bg-gray-100 border-y-1 border-gray-400">
-                    <td class="px-6 py-4">{{ forloop.counter }}</td>
+                    {% comment %} <td class="px-6 py-4">{{ forloop.counter }}</td> {% endcomment %}
+                    <td class="px-6 py-4">{{ page_obj.start_index|add:forloop.counter0 }}</td>
                     <td class="px-6 py-4">{{ registro.dni }}</td>
                     <td class="px-6 py-4">{{ registro.apellido_paterno }} {{ registro.apellido_materno }}, {{ registro.nombres }}</td>
                     <td class="px-6 py-4">{{ registro.celular }}</td>
                     <td class="px-6 py-4">{{ registro.tipo_participante }}</td>
-
+            
                     <td class="px-6 py-4 text-center">
                         {% if registro.doc_acreditivo %}
-                        <!-- Botón para abrir el modal con el archivo PDF -->
-                            <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white cursor-pointer" onclick="openModalDocAcreditivo('{{ registro.doc_acreditivo.url }}')">
+                        <!-- Botón para abrir el modal con el archivo (PDF o imagen) -->
+                            <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white cursor-pointer" 
+                            onclick="openModalDocAcreditivo('{{ registro.doc_acreditivo.url }}', '{{ registro.apellido_paterno }} {{ registro.apellido_materno }} {{ registro.nombres }}')">
                                 Ver Doc
                             </button>
                         {% else %}
@@ -48,7 +53,7 @@
                         <span>No disponible</span>
                         {% endif %}
                     </td>
-
+            
                     <td class="px-6 py-4 flex items-center justify-center">
                         {% if registro.voucher_pago %}
                         <!-- Botón para abrir el modal con el archivo PDF -->
@@ -69,11 +74,49 @@
                 </tr>
                 {% endfor %}
             </tbody>
+
         </table>
+
+        {% comment %} PAGINACION {% endcomment %}
+        <div class="pagination flex justify-between items-center space-x-4 mt-4">
+
+            <span class="text-sm text-gray-700">
+                Mostrando <b>{{ page_obj.start_index }}</b> a <b>{{ page_obj.end_index }}</b> de <b>{{ page_obj.paginator.count }}</b> registros.
+            </span>
+
+            <span class="step-links flex items-center space-x-2">
+
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                          </svg>                          
+                    </a>
+                {% endif %}
+                
+                <!-- Numeración de páginas -->
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md">{{ num }}</span>
+                    {% else %}
+                        <a href="?page={{ num }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                          </svg>                          
+                    </a>
+                {% endif %}
+            </span>
+        </div>
+        
     </div>
 </div>
 
-<!-- Modal (oculto por defecto) -->
+{% comment %} MODAL VOUCHER DE PAGO (oculto por defecto) {% endcomment %}
 <div id="myModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded-lg w-3/4 md:w-1/2">
 
@@ -101,40 +144,114 @@
     </div>
 </div>
 
-<div id="myModalDocAcreditivo" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
-    <div class="bg-white p-6 rounded-lg w-3/4 md:w-1/2">
 
-        <div class="flex justify-between items-center border-b-2 pb-1">
-            <h1>Imagen subida</h1>
+{% comment %} MODAL DOC ACREDITIVO (oculto por defecto) {% endcomment %}
+<div id="myModalDocAcreditivo" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+    <div class="flex flex-col bg-white p-6 rounded-lg w-full max-w-4xl h-screen max-h-[90vh]">
+        <!-- Encabezado del modal -->
+        <div class="flex justify-between items-center border-b-2 pb-2 mb-4">
+            <h1 class="text-xl font-semibold">Documento Subido por: <span id="id_name" class="text-gray-500"></span></h1>
             <button onclick="closeModalDocAcreditivo()" class="font-bold text-xl text-white cursor-pointer bg-red-500 hover:bg-red-600 py-1 px-2 rounded-md">
                 X
             </button>
         </div>
 
-        <div class="flex h-100 items-center justify-center">
-            <img id="mostrarImgDocAcreditivo" class="h-full p-4">
+        <!-- Contenedor para el PDF -->
+        <div class="flex-1 overflow-auto">
+            <canvas id="pdfCanvas" class="max-w-full"></canvas>
         </div>
+
+        <!-- Contenedor para las imágenes -->
+        <div id="imageContainer" class="max-w-full flex items-center justify-center"></div>
     </div>
 </div>
 
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+
+
 <script>
 
-    // Función para abrir el modal y mostrar la imagen de Voucher
-    function openModalDocAcreditivo(url) {
-        // console.log(url, id, validado);
-        const modal = document.getElementById('myModalDocAcreditivo');
-        const img = document.getElementById('mostrarImgDocAcreditivo');
-        const fullUrl = window.location.origin + url;  // Convierte la URL en absoluta
-        img.src = fullUrl;
-        img.alt = url;
+    // Función para abrir el modal y mostrar la imagen del Doc Acreditivo
+    function openModalDocAcreditivo(url, nombres_completos) {
 
-        modal.classList.remove('hidden');
+        var modal = document.getElementById('myModalDocAcreditivo');
+        var pdfCanvas = document.getElementById('pdfCanvas');
+        var imgContainer = document.getElementById('imageContainer'); // Contenedor para imágenes
+        var idName = document.getElementById('id_name');
+    
+        // Limpiamos el canvas y el contenedor de imágenes antes de usarlo
+        pdfCanvas.width = 0;
+        pdfCanvas.height = 0;
+        imgContainer.innerHTML = ''; // Limpiamos imágenes
+    
+        // Mostrar nombre completo
+        idName.innerHTML = nombres_completos;
+    
+        // Verificar la extensión del archivo
+        var extension = url.split('.').pop().toLowerCase(); // Extraemos la extensión del archivo
+    
+        modal.classList.remove('hidden'); // Abrimos el modal
+    
+        if (extension === 'pdf') {
+
+            pdfCanvas.classList.remove('hidden');
+            imgContainer.classList.add('hidden');
+
+            showPDF(url, pdfCanvas);
+
+        } else if (['jpg', 'jpeg', 'png'].includes(extension)) {
+
+            imgContainer.classList.remove('hidden');
+            pdfCanvas.classList.add('hidden');
+
+            // Si el archivo es una imagen (JPG, PNG), la mostramos en una etiqueta <img>
+            showImage(url);
+        } else {
+            // Si no es ni PDF ni imagen, mostramos un mensaje
+            imgContainer.innerHTML = '<p>Archivo no compatible</p>';
+        }
     }
-
+    
+    // Función para mostrar un PDF en el canvas
+    function showPDF(url, pdfCanvas) {
+        pdfjsLib.getDocument(url).promise.then(function(pdf) {
+            // Renderizamos la primera página del PDF
+            pdf.getPage(1).then(function(page) {
+                var scale = 1.5; // Escala de la página para ajustarla al contenedor
+                var viewport = page.getViewport({ scale: scale });
+    
+                var context = pdfCanvas.getContext('2d');
+                pdfCanvas.height = viewport.height;
+                pdfCanvas.width = viewport.width;
+    
+                page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                });
+            });
+        }, function(error) {
+            console.error('Error al cargar el PDF: ', error);
+        });
+    }
+    
+    // Función para mostrar una imagen en el contenedor
+    function showImage(url) {
+        var imgContainer = document.getElementById('imageContainer');
+        var img = new Image();
+        img.src = url;
+        img.alt = 'Documento Imagen';
+        img.style.maxWidth = '100%';  // Ajusta el tamaño de la imagen al contenedor
+        img.style.marginBottom = '20px'; // Un pequeño margen
+    
+        imgContainer.appendChild(img);
+    }
+    
     function closeModalDocAcreditivo() {
-        const modal = document.getElementById('myModalDocAcreditivo');
-        const img = document.getElementById('mostrarImgDocAcreditivo');
-        img.src = '';
+        var modal = document.getElementById('myModalDocAcreditivo');
         modal.classList.add('hidden');
     }
 
@@ -170,6 +287,7 @@
         img.src = '';
         modal.classList.add('hidden');
     }
+    
 </script>
 
 {% endblock %}
