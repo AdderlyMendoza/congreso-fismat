@@ -26,6 +26,10 @@ from django.utils import timezone
 
 from django.db.models import Count, Q
 from django.core.paginator import Paginator, EmptyPage
+from django.http import HttpResponseRedirect
+from django.http import JsonResponse
+
+
 
 
 
@@ -74,14 +78,33 @@ def lista_inscritos(request):
 
 
 
+# def validar_inscrito(request, id):
+#     if request.method == 'POST':
+#         id = request.POST.get('id', id)  # Usamos el id del formulario si está presente, o el id de la URL por defecto
+    
+#     inscrito = Registro.objects.get(id=id)
+#     inscrito.validado = 0 if inscrito.validado == 1 else 1
+#     inscrito.save()
+#     return redirect('lista-inscritos')
+
 def validar_inscrito(request, id):
     if request.method == 'POST':
-        id = request.POST.get('id', id)  # Usamos el id del formulario si está presente, o el id de la URL por defecto
-    
-    inscrito = Registro.objects.get(id=id)
-    inscrito.validado = 0 if inscrito.validado == 1 else 1
-    inscrito.save()
-    return redirect('lista-inscritos')
+        try:
+            inscrito = Registro.objects.get(id=id)
+            inscrito.validado = not inscrito.validado
+            inscrito.save()
+            
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'status': 'success',
+                    'new_state': inscrito.validado
+                })
+                
+            referer = request.META.get('HTTP_REFERER')
+            return HttpResponseRedirect(referer if referer else 'lista-inscritos')
+            
+        except Registro.DoesNotExist:
+            return JsonResponse({'status': 'error'}, status=404)
 
 
 # def excel_inscritos_validados(request):

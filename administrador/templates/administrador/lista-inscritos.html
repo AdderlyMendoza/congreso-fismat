@@ -19,6 +19,7 @@
 
         {% comment %} TABLA DE REGISTROS {% endcomment %}
         <table class="w-full text-sm text-left">
+
             <thead class="text-sm font-semibold uppercase">
                 <tr class="border-y-1">
                     <th scope="col" class="px-6 py-3">Nº</th>
@@ -27,6 +28,7 @@
                     <th scope="col" class="px-6 py-3">Celular</th>
                     <th scope="col" class="px-6 py-3">Participante</th>
                     <th scope="col" class="px-6 py-3">Doc. Acreditivo</th>
+                    <th scope="col" class="px-6 py-3">Monto</th>
                     <th scope="col" class="px-6 py-3">Voucher de Pago</th>
                 </tr>
             </thead>
@@ -53,16 +55,19 @@
                         <span>No disponible</span>
                         {% endif %}
                     </td>
+
+                    <td class="px-6 py-4">S/. {{ registro.monto }}</td>
+
             
                     <td class="px-6 py-4 flex items-center justify-center">
                         {% if registro.voucher_pago %}
                         <!-- Botón para abrir el modal con el archivo PDF -->
                             {% if registro.validado == False %}
-                                <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white" onclick="openModal('{{ registro.voucher_pago.url }}', '{{ registro.id }}', '{{ registro.validado }}')">
+                                <button class="font-medium bg-blue-500 p-2 rounded-md hover:bg-blue-600 text-white" onclick="openModalVoucherPago('{{ registro.voucher_pago.url }}', '{{ registro.id }}', '{{ registro.validado }}', '{{ registro.apellido_paterno }} {{ registro.apellido_materno }} {{ registro.nombres }}')">
                                     Ver Voucher
                                 </button>
                             {% else %} <!-- validado = verde -->
-                                <button class="font-medium bg-green-500 p-2 rounded-md hover:bg-green-600 text-white" onclick="openModal('{{ registro.voucher_pago.url }}', '{{ registro.id }}', '{{ registro.validado }}')">
+                                <button class="font-medium bg-green-500 p-2 rounded-md hover:bg-green-600 text-white" onclick="openModalVoucherPago('{{ registro.voucher_pago.url }}', '{{ registro.id }}', '{{ registro.validado }}', '{{ registro.apellido_paterno }} {{ registro.apellido_materno }} {{ registro.nombres }}')">
                                     Ver Voucher
                                 </button>
                             {% endif %}                        
@@ -117,37 +122,44 @@
 </div>
 
 {% comment %} MODAL VOUCHER DE PAGO (oculto por defecto) {% endcomment %}
-<div id="myModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+<div id="myModalVoucherPago" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded-lg w-3/4 md:w-1/2">
 
-        <div class="flex justify-between items-center border-b-2 pb-1">
-            <h1>Imagen subida</h1>
-            <button onclick="closeModal()" class="font-bold text-xl text-white cursor-pointer bg-red-500 hover:bg-red-600 py-1 px-2 rounded-md">
+        <div class="flex justify-between items-center border-b-2 pb-2 mb-4">
+            <h1 class="text-xl font-semibold">Voucher Subido por: <span id="id_nameVoucher" class="text-gray-500"></span></h1>
+            <button onclick="closeModalVoucherPago()" class="font-bold text-xl text-white cursor-pointer bg-red-500 hover:bg-red-600 py-1 px-2 rounded-md">
                 X
             </button>
         </div>
 
-        <div class="flex h-100 items-center justify-center">
-            <img id="mostrarImg" class="h-full p-4">
+        <!-- Contenedor para el PDF -->
+        <div class="flex-1 overflow-auto p-4">
+            {% comment %} <canvas id="pdfCanvasVoucher" class="mx-auto max-w-full max-h-[70vh] border"></canvas> {% endcomment %}
+            <div id="pdfContainerVoucher" class="flex-1 overflow-auto p-4 space-y-4 max-h-[60vh]">
+                <!-- Las páginas del PDF se insertarán aquí -->
+            </div>
+            <div id="imageContainerVoucher" class="max-w-full max-h-[70vh] mx-auto flex items-center justify-center"></div>
         </div>
 
+        {% comment %} Boton de validar o no validar {% endcomment %}
         <div class="w-full text-end mt-4 space-x-2 bg-gray-200 p-2">
             <form method="POST" id="validarForm" action="">
                 {% csrf_token %}
                 <!-- Campo oculto para el id del registro -->
                 <input type="hidden" name="id" id="registroId">
 
-                <button id="btnValidar" type="submit" class="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-600 cursor-pointer">
+                <button id="btnValidar" type="submit" class="p-2 rounded-md text-white cursor-pointer">
                 </button>
             </form>
         </div>
+
     </div>
 </div>
 
 
 {% comment %} MODAL DOC ACREDITIVO (oculto por defecto) {% endcomment %}
 <div id="myModalDocAcreditivo" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
-    <div class="flex flex-col bg-white p-6 rounded-lg w-full max-w-4xl h-screen max-h-[90vh]">
+    <div class="bg-white p-6 rounded-lg w-3/4 md:w-1/2">
         <!-- Encabezado del modal -->
         <div class="flex justify-between items-center border-b-2 pb-2 mb-4">
             <h1 class="text-xl font-semibold">Documento Subido por: <span id="id_name" class="text-gray-500"></span></h1>
@@ -156,13 +168,13 @@
             </button>
         </div>
 
-        <!-- Contenedor para el PDF -->
-        <div class="flex-1 overflow-auto">
-            <canvas id="pdfCanvas" class="max-w-full"></canvas>
+        <div class="flex-1 overflow-auto p-4">
+            <div id="pdfContainerDocAcreditivo" class="flex-1 overflow-auto p-4 space-y-4 max-h-[60vh]">
+                <!-- Las páginas del PDF se insertarán aquí -->
+            </div>
+            <div id="imageContainerDocAcreditivo" class="max-w-full max-h-[70vh] mx-auto flex items-center justify-center"></div>
         </div>
 
-        <!-- Contenedor para las imágenes -->
-        <div id="imageContainer" class="max-w-full flex items-center justify-center"></div>
     </div>
 </div>
 
@@ -175,12 +187,11 @@
 
 <script>
 
-    // Función para abrir el modal y mostrar la imagen del Doc Acreditivo
     function openModalDocAcreditivo(url, nombres_completos) {
 
         var modal = document.getElementById('myModalDocAcreditivo');
-        var pdfCanvas = document.getElementById('pdfCanvas');
-        var imgContainer = document.getElementById('imageContainer'); // Contenedor para imágenes
+        var pdfCanvas = document.getElementById('pdfContainerDocAcreditivo');
+        var imgContainer = document.getElementById('imageContainerDocAcreditivo'); // Contenedor para imágenes
         var idName = document.getElementById('id_name');
     
         // Limpiamos el canvas y el contenedor de imágenes antes de usarlo
@@ -209,38 +220,152 @@
             pdfCanvas.classList.add('hidden');
 
             // Si el archivo es una imagen (JPG, PNG), la mostramos en una etiqueta <img>
-            showImage(url);
+            showImage(url, imgContainer);
         } else {
             // Si no es ni PDF ni imagen, mostramos un mensaje
             imgContainer.innerHTML = '<p>Archivo no compatible</p>';
         }
     }
+
+    function openModalVoucherPago(url, id, validado, nombres_completos) {
+
+        var modal = document.getElementById('myModalVoucherPago');
+        var pdfCanvas = document.getElementById('pdfContainerVoucher');
+        var imgContainer = document.getElementById('imageContainerVoucher'); // Contenedor para imágenes
+        var idName = document.getElementById('id_nameVoucher');
+
+        // Limpiamos el canvas y el contenedor de imágenes antes de usarlo
+        pdfCanvas.width = 0;
+        pdfCanvas.height = 0;
+        imgContainer.innerHTML = ''; // Limpiamos imágenes
     
-    // Función para mostrar un PDF en el canvas
-    function showPDF(url, pdfCanvas) {
-        pdfjsLib.getDocument(url).promise.then(function(pdf) {
-            // Renderizamos la primera página del PDF
-            pdf.getPage(1).then(function(page) {
-                var scale = 1.5; // Escala de la página para ajustarla al contenedor
-                var viewport = page.getViewport({ scale: scale });
-    
-                var context = pdfCanvas.getContext('2d');
-                pdfCanvas.height = viewport.height;
-                pdfCanvas.width = viewport.width;
-    
-                page.render({
-                    canvasContext: context,
-                    viewport: viewport
-                });
-            });
-        }, function(error) {
-            console.error('Error al cargar el PDF: ', error);
+        // Mostrar nombre completo
+        idName.innerHTML = nombres_completos;
+
+        const btnValidar = document.getElementById("btnValidar");
+        if (validado == "True") {
+            btnValidar.innerHTML = "Desvalidar";
+            btnValidar.classList.add("bg-red-500", "hover:bg-red-600");
+            btnValidar.classList.remove("bg-green-500", "hover:bg-green-600");
+            
+        } else {
+            btnValidar.innerHTML = "Validar";
+            btnValidar.classList.add("bg-green-500", "hover:bg-green-600");
+            btnValidar.classList.remove("bg-red-500", "hover:bg-red-600");
+        }
+
+        // document.getElementById('registroId').value = id;
+        // document.getElementById('validarForm').action = "/administrador/validar-inscrito/" + id + "/";
+
+        document.getElementById('validarForm').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            document.getElementById('registroId').value = id;
+            
+            fetch(`/administrador/validar-inscrito/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    this.textContent = this.textContent === 'Validar' ? 'Desvalidar' : 'Validar';
+                    location.reload();
+                }
+            })
+            .catch(error => console.error('Error:', error));
         });
+
+    
+        // Verificar la extensión del archivo
+        var extension = url.split('.').pop().toLowerCase(); // Extraemos la extensión del archivo
+    
+        modal.classList.remove('hidden'); // Abrimos el modal
+    
+        if (extension === 'pdf') {
+
+            pdfCanvas.classList.remove('hidden');
+            imgContainer.classList.add('hidden');
+
+            showPDF(url, pdfCanvas);
+
+        } else if (['jpg', 'jpeg', 'png'].includes(extension)) {
+
+            imgContainer.classList.remove('hidden');
+            pdfCanvas.classList.add('hidden');
+
+            // Si el archivo es una imagen (JPG, PNG), la mostramos en una etiqueta <img>
+            showImage(url, imgContainer);
+        } else {
+            // Si no es ni PDF ni imagen, mostramos un mensaje
+            imgContainer.innerHTML = '<p>Archivo no compatible</p>';
+        }
+    }
+
+    function closeModalDocAcreditivo() {
+        var modal = document.getElementById('myModalDocAcreditivo');
+        modal.classList.add('hidden');
+    }
+
+    function closeModalVoucherPago() {
+        const modal = document.getElementById('myModalVoucherPago');
+        modal.classList.add('hidden');
+    }
+
+    async function showPDF(url, pdfCanvas) {
+        const pdfContainer = pdfCanvas; // Contenedor para el PDF
+        pdfContainer.innerHTML = ''; // Limpiar contenedor
+    
+        try {
+            const loadingTask = pdfjsLib.getDocument(url);
+            const pdf = await loadingTask.promise;
+    
+            // Calcular ancho máximo disponible (considerando padding)
+            const containerWidth = pdfContainer.clientWidth - 32; // 32px = padding (16px x 2)
+    
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const viewport = page.getViewport({ scale: 1.0 });
+                
+                // Ajustar escala para que el PDF ocupe el ancho del contenedor
+                const scale = containerWidth / viewport.width;
+                const scaledViewport = page.getViewport({ scale });
+    
+                // Crear canvas para cada página
+                const canvas = document.createElement('canvas');
+                canvas.className = 'mx-auto max-w-full border shadow mb-4 ';
+                canvas.width = scaledViewport.width;
+                canvas.height = scaledViewport.height;
+    
+                // Renderizar página
+                await page.render({
+                    canvasContext: canvas.getContext('2d'),
+                    viewport: scaledViewport
+                }).promise;
+    
+                // Añadir número de página (opcional)
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'text-center mb-2 text-gray-500';
+                pageDiv.textContent = `Página ${i} de ${pdf.numPages}`;
+    
+                pdfContainer.appendChild(pageDiv);
+                pdfContainer.appendChild(canvas);
+            }
+    
+        } catch (error) {
+            console.error('Error al cargar PDF:', error);
+            pdfContainer.innerHTML = `
+                <div class="text-red-500 text-center p-8">
+                    Error al cargar el PDF: ${error.message}
+                </div>
+            `;
+        }
     }
     
     // Función para mostrar una imagen en el contenedor
-    function showImage(url) {
-        var imgContainer = document.getElementById('imageContainer');
+    function showImage(url, imgContainer) {
         var img = new Image();
         img.src = url;
         img.alt = 'Documento Imagen';
@@ -248,44 +373,6 @@
         img.style.marginBottom = '20px'; // Un pequeño margen
     
         imgContainer.appendChild(img);
-    }
-    
-    function closeModalDocAcreditivo() {
-        var modal = document.getElementById('myModalDocAcreditivo');
-        modal.classList.add('hidden');
-    }
-
-    // Función para abrir el modal y mostrar la imagen de Voucher
-    function openModal(url, id, validado) {
-        // console.log(url, id, validado);
-        const modal = document.getElementById('myModal');
-        const img = document.getElementById('mostrarImg');
-        const fullUrl = window.location.origin + url;  // Convierte la URL en absoluta
-        img.src = fullUrl;
-        img.alt = url;
-
-        const btnValidar = document.getElementById("btnValidar");
-        if (validado == "True") {
-            btnValidar.innerHTML = "Desvalidar";
-        } else {
-            btnValidar.innerHTML = "Validar";
-        }
-
-        // Establece el id del registro en el campo oculto
-        document.getElementById('registroId').value = id;
-
-        // Establece la acción del formulario a la URL correcta
-        document.getElementById('validarForm').action = "/administrador/validar-inscrito/" + id + "/";
-
-        modal.classList.remove('hidden');
-    }
-
-    // Función para cerrar el modal
-    function closeModal() {
-        const modal = document.getElementById('myModal');
-        const img = document.getElementById('mostrarImg');
-        img.src = '';
-        modal.classList.add('hidden');
     }
     
 </script>
