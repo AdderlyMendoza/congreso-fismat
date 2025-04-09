@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Congreso FISMAT{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <header
+        class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-50 text-white px-4 py-4 ">
+        <div class="flex items-end space-x-1 justify-center ">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
+                alt="" class="w-15">
+            <h1 class="border-l pl-2 md:text-md sm:text-sm">
+                Universidad <br>
+                Nacional del<br>
+                Altiplano de Puno
+            </h1>
+        </div>
+
+        <nav class="flex items-center md:text-md sm:text-sm">
+            <a href="/administrador/login" class="p-2 hover:bg-black/50 cursor-pointer">Iniciar Sesión</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- PRINCIPAL -->
+        <section class="h-screen flex flex-col items-center justify-center relative">
+
+
+            <!-- Imagen de fondo -->
+            <!-- <div class="absolute inset-0 bg-cover bg-center brightness-40"
+                style="background-image: url('https://mentor.pe/wp-content/uploads/2023/09/una-puno-frontis.jpg');">
+            </div> -->
+
+            <!-- <div class="absolute inset-0 w-full h-full">
+                <iframe class="w-full h-full object-cover" 
+                        src="https://www.youtube.com/embed/_ERODpDkDgU?autoplay=1&mute=1&loop=1&playlist=_ERODpDkDgU&controls=0&showinfo=0&modestbranding=1" 
+                        frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
+                </iframe>
+            </div>
+             -->
+
+
+            <div class="absolute inset-0 bg-cover bg-center brightness-40">
+                <video autoplay muted loop class="w-full h-full object-cover">
+                    <source src="{% static 'video/puno-peru.mp4' %}" type="video/mp4">
+                    Tu navegador no soporta el formato de video.
+                </video>
+            </div>
+
+
+            <!-- Contenido encima del fondo -->
+            <div class="z-10" data-aos="zoom-in">
+
+                <div class="flex flex-col sm:flex-row items-center justify-center sm:space-y-2 sm:space-x-2">
+
+                    <!-- Sección izquierda (Texto "XII" y "CIMAC") -->
+                    <div class="text-center sm:text-left">
+                        <h1 class="text-6xl sm:text-8xl font-black text-red-500">XII</h1>
+                        <div class="bg-sky-800 flex items-center justify-center sm:justify-start p-2">
+                            <h1 class="text-3xl sm:text-4xl font-black text-white">CIMAC</h1>
+                        </div>
+                    </div>
+
+                    <!-- Sección derecha (Texto del Congreso) -->
+                    <div class="font-black text-white sm:py-2 mt-2 space-y-2 text-center sm:text-left">
+                        <h2 class="text-2xl sm:text-3xl text-red-500 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
+                        <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
+                        <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">COMPUTACIONAL</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="bg-amber-400 text-center mt-2 p-2">
+                    <h1 class="text-2xl sm:text-3xl font-black text-black/50">DEL 11 AL 15 DE AGOSTO DEL 2025</h1>
+                </div>
+
+            </div>
+
+            <!-- Botón de inscripción -->
+            <div class="absolute top-1/2 mt-40 sm:mt-20 w-full flex justify-center" data-aos="zoom-in">
+
+                <button
+                    class="px-4 py-2 text-white text-lg bg-red-500 mt-15 font-semibold z-10 rounded-2xl cursor-pointer hover:bg-red-600 font-semibold">
+                    <a href="registro/">INSCRIBETE AHORA</a>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRESENTACION -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PRESENTACIÓN</h1>
+
+            <div class="sm:mt-20 mt-10 m-20 px-20" data-aos="fade-up">
+
+                <blockquote class="text-center text-2xl text-gray-900 italic">
+                    La Sociedad Peruana de Matemática Aplicada y Computacional <span
+                        class="font-semibold">(SPMAC)</span> y la Universidad Nacional del
+                    Altiplano de Puno <span class="font-semibold">(UNAP)</span> dan la bienvenida a todos los
+                    participantes al XII Congreso Internacional de Matemática Aplicada y Computacional
+                    <span
+                        class="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-sky-800 m-2">
+                        <span class="relative text-white">
+                            (XII-CIMAC)
+                        </span>
+                    </span>
+                    que se llevará a cabo durante los días <span class="font-semibold">11 al 15 de Agosto del 2025 en
+                        Puno-Perú</span>, el cual se
+                    desarrollará en forma Presencial, con algunas sesiones en forma Virtual.
+                </blockquote>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ENVIO DE TRABAJOS -->
+        <!-- <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">COSTOS DE INSCRIPCIÓN</h1>
+
+            <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10" data-aos="fade-up">
+
+                <div class="relative cursor-pointer">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg bg-blue-600"></span>
+                    <div
+                        class="relative p-6 bg-white  border-2 border-indigo-500 border-gray-300 rounded-lg hover:scale-107 transition duration-500 sm:w-100">
+                        <div class="flex items-center">
+                            <span class="text-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21.75 9v.906a2.25 2.25 0 0 1-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 0 0 1.183 1.981l6.478 3.488m8.839 2.51-4.66-2.51m0 0-1.023-.55a2.25 2.25 0 0 0-2.134 0l-1.022.55m0 0-4.661 2.51m16.5 1.615a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V8.844a2.25 2.25 0 0 1 1.183-1.981l7.5-4.039a2.25 2.25 0 0 1 2.134 0l7.5 4.039a2.25 2.25 0 0 1 1.183 1.98V19.5Z" />
+                                </svg>
+                            </span>
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Envío de resumenes y propuestas</h3>
+                        </div>
+                        <p class="text-gray-600 ">
+                            Hasta el 30 de junio de 2025
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative cursor-pointer sm:ml-6">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg bg-blue-600"></span>
+                    <div
+                        class="relative p-6 bg-white border-2 border-blue-500 border-blue-300 rounded-lg hover:scale-107 transition duration-500 mt-4 md:mt-0 sm:w-100">
+                        <div class="flex items-center">
+                            <span class="text-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                                </svg>
+                            </span>
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Notificación a los autores</h3>
+                        </div>
+                        <p class="text-gray-600 text-gray-300">
+                            05 de julio de 2025
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </section> -->
+
+
+        <!-- CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE -->
+        <section>
+
+            <div class="flex items-center justify-center sm:mt-20 mt-10 px-4" data-aos="fade-up">
+                <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE
+                </h1>
+            </div>
+
+            <div class="flex flex-col items-center justify-center bg-amber-400 mt-20" data-aos="fade-up">
+
+                <div class="sm:flex">
+
+                    <div class="flex-1">
+                        <img src="https://cartujacenter.com/wp-content/uploads/2020/01/EVENTOS-REUNIONES-2-1-1880x1254.jpg"
+                            alt="">
+                    </div>
+
+                    <div class="flex flex-1 items-center justify-center p-4">
+                        <div class="flex-1">
+                            <ul class="text-sm">
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>
+                                    Modelamiento Matemático en Ingeniería
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Ingeniería Matemática
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Análisis y Procesamiento de Imágenes
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Aplicaciones a las Operaciones de Procesos
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Teoría de Control
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Control Óptimo y Cálculo de Variaciones
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Estocástica y sus Aplicaciones
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Aplicaciones al Análisis y Métodos Numéricos
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Meteorología, Climatodología y Oceanografía
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Biomatemática
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Computación Científica
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex-1">
+                            <ul class="text-sm">
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Dinámica de Fluidos Computacional y Flujos en Medios Porosos
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Wavelets y sus Aplicaciones
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Sistemas Integrados de Computación
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Enseñanza de la Matemática
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Diseño Geométrico Asistido por Medios Computacionales
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Diseño de Sistemas óptimos con Múltiples Objetivos
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Iniciación Científica
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Estadística Aplicada
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                    </svg>Optimización Matemática
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- PROGRAMA -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PROGRAMA</h1>
+
+            <div class="sm:flex sm:flex-col sm:mt-20 mt-10 max-auto" data-aos="fade-up">
+
+                <div class="flex [&>button]:px-2 [&>button]:pt-2 [&>button]:cursor-pointer z-10">
+                    <button id="btn1" onclick="changeSection(1)"
+                        class="border-l border-t border-r border-b-4 border-b-white">DIA 1</button>
+                    <button id="btn2" onclick="changeSection(2)">DIA 2</button>
+                    <button id="btn3" onclick="changeSection(3)">DIA 3</button>
+                </div>
+
+                <!-- Contenedor del contenido -->
+                <div id="content" class="p-6 bg-white rounded-b-lg rounded-r-lg w-full border -mt-0.5">
+                    <!-- Sección 1 -->
+                    <div id="section1" class="section">
+                        <table class="min-w-full bg-white ">
+                            <thead>
+                                <tr class="text-left bg-black text-white">
+                                    <th></th>
+                                    <th class="px-6 py-4 text-lg font-medium">10 DE AGOSTO</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr class="bg-gray-200 text-left">
+                                    <th class="px-6 py-3 text-sm font-medium">Hora</th>
+                                    <th class="px-6 py-3 text-sm font-medium">Tema</th>
+                                    <th class="px-6 py-3 text-sm font-medium">Ponente</th>
+                                    <th class="px-6 py-3 text-sm font-medium">Lugar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm text-gray-800">11:00 AM</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Conferencia Magistral: Innovaciones en
+                                        Tecnología</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Ponente 01</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Sala 1</td>
+                                </tr>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm text-gray-800">02:00 PM</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Panel de Discusión: El Futuro de la
+                                        Educación</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Ponente 02</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Sala 2</td>
+                                </tr>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm text-gray-800">09:00 AM</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Taller: Nuevas Herramientas Digitales
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Ponente 03</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Sala 3</td>
+                                </tr>
+                                <!-- Puedes añadir más filas aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Sección 2 -->
+                    <div id="section2" class="section hidden">
+                        <table class="min-w-full bg-white ">
+                            <thead>
+                                <tr class="text-left bg-black text-white">
+                                    <th></th>
+                                    <th class="px-6 py-4 text-lg font-medium">11 DE AGOSTO</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr class="bg-gray-200 text-left">
+                                    <th class="px-6 py-3 text-sm font-medium">Hora</th>
+                                    <th class="px-6 py-3 text-sm font-medium">Tema</th>
+                                    <th class="px-6 py-3 text-sm font-medium">Ponente</th>
+                                    <th class="px-6 py-3 text-sm font-medium">Lugar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm text-gray-800">11:00 AM</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Conferencia Magistral: Innovaciones en
+                                        Tecnología</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Ponente 01</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Sala 1</td>
+                                </tr>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm text-gray-800">02:00 PM</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Panel de Discusión: El Futuro de la
+                                        Educación</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Ponente 02</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Sala 2</td>
+                                </tr>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm text-gray-800">09:00 AM</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Taller: Nuevas Herramientas Digitales
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Ponente 03</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Sala 3</td>
+                                </tr>
+                                <!-- Puedes añadir más filas aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Sección 3 -->
+                    <div id="section3" class="section hidden">
+                        <table class="min-w-full bg-white ">
+                            <thead>
+                                <tr class="text-left bg-black text-white">
+                                    <th></th>
+                                    <th class="px-6 py-4 text-lg font-medium">12 DE AGOSTO</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr class="bg-gray-200 text-left">
+                                    <th class="px-6 py-3 text-sm font-medium">Hora</th>
+                                    <th class="px-6 py-3 text-sm font-medium">Tema</th>
+                                    <th class="px-6 py-3 text-sm font-medium">Ponente</th>
+                                    <th class="px-6 py-3 text-sm font-medium">Lugar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm text-gray-800">11:00 AM</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Conferencia Magistral: Innovaciones en
+                                        Tecnología</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Ponente 01</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Sala 1</td>
+                                </tr>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm text-gray-800">02:00 PM</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Panel de Discusión: El Futuro de la
+                                        Educación</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Ponente 02</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Sala 2</td>
+                                </tr>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm text-gray-800">09:00 AM</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Taller: Nuevas Herramientas Digitales
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Ponente 03</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">Sala 3</td>
+                                </tr>
+                                <!-- Puedes añadir más filas aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- PONENTES -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PONENTES</h1>
+
+            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
+
+                <div class="flex flex-wrap justify-center items-center p-4 mx-20">
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center space-y-2 px-4 py-8 rounded-md shadow-lg mr-10">
+                        <img class="w-40 h-40 object-cover object-center"
+                            src="https://th.bing.com/th/id/OIP.a3GEolejjT8Avp4SFVGu7wHaHa?rs=1&pid=ImgDetMain"
+                            alt="Sunset in the mountains">
+                        <div class="flex w-full justify-between">
+                            <h1>PONENTE 01</h1>
+                            <span>🏴</span>
+                        </div>
+                        <p class="text-gray-500">Ing de Sistemas de la UNA PUNO</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- HOTELES -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">HOTELES</h1>
+
+            <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4" data-aos="fade-up">
+
+                <!-- card 1 -->
+                <div
+                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    <img class="w-100 h-100 object-cover object-center"
+                        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/db/81/a3/ghl-hotel-lago-titicaca.jpg?w=500&h=500&s=1"
+                        alt="Sunset in the mountains">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <p class="text-gray-700 text-base">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
+                            et perferendis eaque, exercitationem praesentium nihil.
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 mb-6">
+                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                            información</a>
+                    </div>
+                </div>
+
+                <!-- card 2 -->
+                <div
+                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    <img class="w-100 h-100 object-cover object-center"
+                        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/0e/64/7f/casa-andina-premium-puno.jpg?w=1400&h=800&s=1"
+                        alt="Sunset in the mountains">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <p class="text-gray-700 text-base">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
+                            et perferendis eaque, exercitationem praesentium nihil.
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 mb-6">
+                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                            información</a>
+                    </div>
+                </div>
+
+                <!-- card 3 -->
+                <div
+                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    <img class="w-100 h-100 object-cover object-center"
+                        src="https://d2l4159s3q6ni.cloudfront.net/resize/850x550/filters:max_age(2604800):quality(65)/s3/dam/photos/3f/fc/62/85/e8dab38530d2f3beadb0386b04b9d09fa48b1dcf4cc9b74954159407.jpg"
+                        alt="Sunset in the mountains">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <p class="text-gray-700 text-base">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
+                            et perferendis eaque, exercitationem praesentium nihil.
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 mb-6">
+                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                            información</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ORGANIZADORES -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">ORGANIZADORES</h1>
+
+            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
+
+                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
+
+                    <img class="w-40 h-40 object-cover object-center mx-10 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-10 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AUSPICIADORES -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+
+            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">AUSPICIADORES</h1>
+
+            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
+
+                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
+                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
+                        alt="Sunset in the mountains">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer class="mt-10 text-center p-4 text-gray-700 mx-10">
+        <hr class="border-t-2 border-gray-700 mb-4">
+        <h1>Universidad Nacional del Altiplano - Puno</h1>
+        <h1>Escuela Profesional de Ciencias Físico Matemáticas</h1>
+        <h1>© Adderly.M</h1>
+    </footer>
+
+
+</body>
+
+
+
+<!-- header -->
+<script>
+
+    function handleScroll() {
+        const header = document.querySelector('header');
+
+        if (header) {
+            if (window.scrollY > 0) {
+                header.classList.add('backdrop-filter', 'backdrop-blur-lg', 'bg-black/50', 'bg-opacity-60');
+            } else {
+                header.classList.remove('backdrop-filter', 'backdrop-blur-lg', 'bg-black/50', 'bg-opacity-60');
+            }
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+
+</script>
+
+
+<!-- sobre el evento -->
+<script>
+
+    function changeSection(sectionNumber) {
+
+        // Primero, ocultamos todas las secciones
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.add('hidden');
+        });
+
+
+        // QUE btn1 ESTE SELECCIONADO AL INICIO DE LA PAGINA
+
+
+        // Luego, mostramos la sección correspondiente
+        const selectedSection = document.getElementById('section' + sectionNumber);
+        selectedSection.classList.remove('hidden');
+
+        // Cambiar el estilo de los botones
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.classList.remove('border-l', 'border-t', 'border-r', 'border-b-4', 'border-b-white');
+        });
+
+        const btn = document.getElementById('btn' + sectionNumber);
+        btn.classList.add('border-l', 'border-t', 'border-r', 'border-b-4', 'border-b-white');
+
+    }
+
+</script>
+
+
+<!-- Añadir el script de AOS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init();  // Inicializa AOS
+</script>
+
+</html>
+
+{% comment %}
+
+Set-ExecutionPolicy Unrestricted -Scope Process
+venv\Scripts\activate
+
+{% endcomment %}

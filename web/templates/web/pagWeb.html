@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Congreso FISMAT{% endblock %}</title>
+    <meta name="google-site-verification" content="cgzK6xe8GuabhyqLtyfZOkkb8Lwl8J-bQtokK2CGoy4" />
+    <title>{% block title %}XII-CIMAC Puno{% endblock %}</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
@@ -19,24 +20,21 @@
 
 <body>
 
+
     <header
         class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-50 text-white px-4 py-4 ">
         <div class="flex items-end space-x-1 justify-center ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
-                alt="" class="w-15">
-            <h1 class="border-l pl-2 md:text-md sm:text-sm">
-                Universidad <br>
-                Nacional del<br>
-                Altiplano de Puno
-            </h1>
+                alt="logo unap" class="w-15">
+            <img src="{% static 'images/logo-cimac.png' %}" alt="logo cimac" class="w-16 h-16 ml-2">
+
         </div>
 
         <nav class="flex items-center md:text-md sm:text-sm">
-            <a href="/administrador/login" class="p-2 hover:bg-black/50 cursor-pointer">Iniciar Sesión</a>
+            <a href="/administrador/login" class="p-2 hover:bg-black/50 cursor-pointer">Log In</a>
         </nav>
 
     </header>
-
 
     <main>
 
@@ -58,7 +56,7 @@
              -->
 
 
-            <div class="absolute inset-0 bg-cover bg-center brightness-40">
+            <div class="absolute inset-0 bg-cover bg-center brightness-25">
                 <video autoplay muted loop class="w-full h-full object-cover">
                     <source src="{% static 'video/puno-peru.mp4' %}" type="video/mp4">
                     Tu navegador no soporta el formato de video.
@@ -73,7 +71,7 @@
 
                     <!-- Sección izquierda (Texto "XII" y "CIMAC") -->
                     <div class="text-center sm:text-left">
-                        <h1 class="text-6xl sm:text-8xl font-black text-red-500">XII</h1>
+                        <h1 class="text-6xl sm:text-8xl font-black text-amber-400">XII</h1>
                         <div class="bg-sky-800 flex items-center justify-center sm:justify-start p-2">
                             <h1 class="text-3xl sm:text-4xl font-black text-white">CIMAC</h1>
                         </div>
@@ -81,9 +79,9 @@
 
                     <!-- Sección derecha (Texto del Congreso) -->
                     <div class="font-black text-white sm:py-2 mt-2 space-y-2 text-center sm:text-left">
-                        <h2 class="text-2xl sm:text-3xl text-red-500 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
-                        <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
-                        <h2 class="text-2xl sm:text-3xl text-sky-500 drop-shadow-lg">COMPUTACIONAL</h2>
+                        <h2 class="text-2xl sm:text-3xl text-amber-400 drop-shadow-lg">CONGRESO INTERNACIONAL DE</h2>
+                        <h2 class="text-2xl sm:text-3xl text-sky-700 drop-shadow-lg">MATEMÁTICA APLICADA Y</h2>
+                        <h2 class="text-2xl sm:text-3xl text-sky-700 drop-shadow-lg">COMPUTACIONAL</h2>
                     </div>
 
                 </div>
@@ -109,14 +107,15 @@
 
 
         <!-- PRESENTACION -->
-        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10 px-4">
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PRESENTACIÓN</h1>
+            <h1 class="border-b-4 pb-2 text-3xl sm:text-4xl text-amber-400 font-black" data-aos="fade-up">PRESENTACIÓN
+            </h1>
 
-            <div class="sm:mt-20 mt-10 m-20 px-20" data-aos="fade-up">
+            <div class="sm:mt-20 mt-10 w-full sm:w-3/4 m-4 sm:m-20 px-4 sm:px-20" data-aos="fade-up">
 
-                <blockquote class="text-center text-2xl text-gray-900 italic">
+                <blockquote class="text-center text-xl sm:text-2xl text-gray-900 italic">
                     La Sociedad Peruana de Matemática Aplicada y Computacional <span
                         class="font-semibold">(SPMAC)</span> y la Universidad Nacional del
                     Altiplano de Puno <span class="font-semibold">(UNAP)</span> dan la bienvenida a todos los
@@ -133,7 +132,6 @@
                 </blockquote>
 
             </div>
-
 
         </section>
 
@@ -196,7 +194,7 @@
         <section>
 
             <div class="flex items-center justify-center sm:mt-20 mt-10 px-4" data-aos="fade-up">
-                <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black">CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE
+                <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black">CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE
                 </h1>
             </div>
 
@@ -205,13 +203,13 @@
                 <div class="sm:flex">
 
                     <div class="flex-1">
-                        <img src="https://cartujacenter.com/wp-content/uploads/2020/01/EVENTOS-REUNIONES-2-1-1880x1254.jpg"
-                            alt="">
+                        <img src="{% static 'images/docentes-fismat.webp' %}" alt="Ciencias Físico Matemáticas"
+                            class="w-full h-full object-contain">
                     </div>
 
                     <div class="flex flex-1 items-center justify-center p-4">
                         <div class="flex-1">
-                            <ul class="text-sm">
+                            <ul class="text-md">
                                 <li class="flex items-center">
                                     <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -294,7 +292,7 @@
                         </div>
 
                         <div class="flex-1">
-                            <ul class="text-sm">
+                            <ul class="text-md">
                                 <li class="flex items-center">
                                     <svg class="w-3.5 h-3.5 me-2 text-sky-800 shrink-0" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -369,7 +367,7 @@
 
 
         <!-- PROGRAMA -->
-        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+        {% comment %} <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
             <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PROGRAMA</h1>
@@ -521,11 +519,11 @@
 
             </div>
 
-        </section>
+        </section> {% endcomment %}
 
 
         <!-- PONENTES -->
-        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+        {% comment %} <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
             <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">PONENTES</h1>
@@ -611,73 +609,182 @@
             </div>
 
 
-        </section>
+        </section> {% endcomment %}
 
 
         <!-- HOTELES -->
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">HOTELES</h1>
+            <div class="flex items-center justify-center sm:mt-20 mt-10 px-4" data-aos="fade-up">
+                <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black">HOTELES EN LA CIUDAD DE PUNO</h1>
+            </div>
 
-            <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4" data-aos="fade-up">
+            <!-- <div class="sm:flex justify-center items-center p-4 sm:mt-20 mt-10 space-x-4" data-aos="fade-up"> -->
+            <div class="sm:mt-20 mt-10 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-1 p-4 sm:mx-10 space-x-2 space-y-4 md:space-y-2"
+                data-aos="fade-up">
 
-                <!-- card 1 -->
+                <!-- Royal Inn Puno -->
                 <div
-                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    class="max-w-sm max-h-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/db/81/a3/ghl-hotel-lago-titicaca.jpg?w=500&h=500&s=1"
-                        alt="Sunset in the mountains">
+                        src="https://media-cdn.tripadvisor.com/media/photo-s/0a/fb/3a/cb/royal-inn-hotel.jpg"
+                        alt="Hotel Royal Inn">
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <div class="font-bold text-xl mb-2">Royal Inn Puno</div>
                         <p class="text-gray-700 text-base">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
-                            et perferendis eaque, exercitationem praesentium nihil.
+                            El Royal Inn, ubicado en el centro de Puno, a 1 manzana de la plaza de Armas, ofrece alegres
+                            suites con conexión inalámbrica a internet gratuita.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 994 277 164</p>
+                        <p class="text-gray-700 text-base">Teléfono: (51) 364574 | (51) 365822</p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:reservas@royalinnhoteles.com"
+                                class="text-gray-700 text-base cursor-pointer">reservas@royalinnhoteles.com</a>
                         </p>
                     </div>
                     <div class="px-6 pt-4 mb-6">
-                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                        <a href="https://www.royalinnhoteles.com"
+                            class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
                             información</a>
                     </div>
                 </div>
 
-                <!-- card 2 -->
+                <!-- Sol Plaza hotel -->
                 <div
-                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/0e/64/7f/casa-andina-premium-puno.jpg?w=1400&h=800&s=1"
-                        alt="Sunset in the mountains">
+                        src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/512520650.jpg?k=b400e1db5074bd457682027837c24f072eb3dead8eecf05eb25b087ae0c495e7&o=&hp=1"
+                        alt="Sol Plaza Hotel">
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <div class="font-bold text-xl mb-2">Sol Plaza Hotel</div>
                         <p class="text-gray-700 text-base">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
-                            et perferendis eaque, exercitationem praesentium nihil.
+                            Nuestra moderna infraestructura le brindará comodidad, elegancia, confort y hará que su
+                            estadía en la ciudad de Puno sea placentera e inolvidable.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 956 132 412</p>
+                        <p class="text-gray-700 text-base">Teléfono: 051 - 352658</p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:reservas@solplazahotel.com"
+                                class="text-gray-700 text-base cursor-pointer">reservas@solplazahotel.com</a>
                         </p>
                     </div>
                     <div class="px-6 pt-4 mb-6">
-                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                        <a href="https://solplazahotel.com"
+                            class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
                             información</a>
                     </div>
                 </div>
 
-                <!-- card 3 -->
+                <!-- Hotel Qalasaya -->
                 <div
-                    class="max-w-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://d2l4159s3q6ni.cloudfront.net/resize/850x550/filters:max_age(2604800):quality(65)/s3/dam/photos/3f/fc/62/85/e8dab38530d2f3beadb0386b04b9d09fa48b1dcf4cc9b74954159407.jpg"
-                        alt="Sunset in the mountains">
+                        src="https://y.cdrst.com/foto/hotel-sf/1e60f/granderesp/hotel-qalasaya-general-ca2f6d9.jpg"
+                        alt="Sol Plaza Hotel">
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <div class="font-bold text-xl mb-2">Hotel Qalasaya</div>
                         <p class="text-gray-700 text-base">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
-                            et perferendis eaque, exercitationem praesentium nihil.
+                            Situado en el corazón de Puno, y ofrece habitaciones con vistas a la ciudad. El hotel atrae
+                            a los huéspedes con un aparcamiento privado gratuito en el lugar.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 951 303 312</p>
+                        <p class="text-gray-700 text-base">Teléfono: 051 - 203052 </p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:reservas.qalasaya@gmail.com"
+                                class="text-gray-700 text-base cursor-pointer">reservas.qalasaya@gmail.com</a>
                         </p>
                     </div>
                     <div class="px-6 pt-4 mb-6">
-                        <a href="#" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                        <a href="https://qalasaya.puno-hotels.net/es/"
+                            class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
                             información</a>
                     </div>
                 </div>
+
+                <!-- Hotel Tierra Viva -->
+                <div
+                    class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    <img class="w-100 h-100 object-cover object-center"
+                        src="https://tierravivahoteles.com/wp-content/uploads/2023/03/TVP-3-Fachada-1.jpg"
+                        alt="Sol Plaza Hotel">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">Hotel Tierra Viva</div>
+                        <p class="text-gray-700 text-base">
+                            Cuenta con 30 habitaciones, 3 son suites donde se pueden acomodar hasta 4 personas. Dentro
+                            de sus servicios encontrarás: desayuno buffet, internet y estación de bebidas.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 943 753 626</p>
+                        <p class="text-gray-700 text-base">Teléfono: 051 - 368005 | 051 - 368007 </p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:corporativo@tierravivahoteles.com"
+                                class="text-gray-700 text-base cursor-pointer">corporativo@tierravivahoteles.com</a>
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 mb-6">
+                        <a href="https://tierravivahoteles.com/tierra-viva-puno-plaza/"
+                            class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                            información</a>
+                    </div>
+                </div>
+
+                <!-- Hotel Sonesta -->
+                <div
+                    class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    <img class="w-100 h-100 object-cover object-center"
+                        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/91/14/da/sonesta-posadas-del-inca.jpg?w=500&h=-1&s=1"
+                        alt="Sol Plaza Hotel">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">Sonesta Posadas del Inca Puno </div>
+                        <p class="text-gray-700 text-base">
+                            A orillas del Lago Titicaca, este hotel ofrece un ambiente rodeado de belleza y tranquilidad, además de fácil acceso a todas las actividades turísticas.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 999 100 021</p>
+                        <p class="text-gray-700 text-base">Teléfono: (051) 364113 </p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:reservas.sonestapuno@ghlhoteles.com"
+                                class="text-gray-700 text-base cursor-pointer">reservas.sonestapuno@ghlhoteles.com</a>
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 mb-6">
+                        <a href="https://www.sonestapipuno.com/"
+                            class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                            información</a>
+                    </div>
+                </div>
+
+                <!-- Amaru tours -->
+                <div
+                    class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
+                    <img class="w-100 h-100 object-cover object-center"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvm6lOtL9WFPr1Gu10neKs77Ie218qmyX6-Q&s"
+                        alt="Amaru Tours">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">Amaru Tours</div>
+                        <p class="text-gray-700 text-base">
+                            +30 años en el mercado como Tour Operador en la Región de Puno. Somos un equipo profesional
+                            en el desarrollo de experiencias inolvidables con los visitantes de Puno.
+                        </p>
+                        <hr class="my-2">
+                        <p class="text-gray-700 text-base">Celular: 951 751 084</p>
+                        <p class="text-gray-700 text-base">Teléfono: (51) 353112</p>
+                        <p class="text-gray-700 text-base">Correo:
+                            <a href="mailto:reservas@amarutours.com"
+                                class="text-gray-700 text-base cursor-pointer">reservas@amarutours.com</a>
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 mb-6">
+                        <a href="https://www.amarutours.com"
+                            class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 cursor-pointer">Más
+                            información</a>
+                    </div>
+                </div>
+
 
 
             </div>
@@ -685,25 +792,120 @@
         </section>
 
 
+        <!-- RUTAS TURISTICAS -->
+        <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
+
+            <div class="flex items-center justify-center sm:mt-20 mt-10 px-4" data-aos="fade-up">
+                <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black">RUTAS TURISTICAS DE LA CIUDAD DE PUNO
+                </h1>
+            </div>
+
+            <div class="sm:mt-20 mt-10 grid grid-cols-1 lg:grid-cols-3 p-4 items-center justify-center gap-4"
+                data-aos="fade-up">
+
+                {% comment %} TAQUILE {% endcomment %}
+                <article
+                    class="relative flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
+                    <img src="https://imgmedia.larepublica.pe/640x371/larepublica/original/2023/05/10/645b9f6b55536617445cce4a.webp"
+                        alt="Isla de Taquile" class="absolute inset-0 h-100 w-100 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                    <a href="https://turismo.munipuno.gob.pe/isla-taquile/"
+                        class="z-10 mt-3 text-3xl font-bold text-white hover:underline">Taquile</a>
+                    <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Tierra flotante de
+                        tejedores ancestrales</div>
+                </article>
+
+                {% comment %} LOS UROS {% endcomment %}
+                <article
+                    class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
+                    <img src="https://www.civitatis.com/f/peru/puno/excursion-islas-uros-trekking-taquile-589x392.jpg"
+                        alt="Isla de los Uros" class="absolute inset-0 h-100 w-100 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                    <a href="https://turismo.munipuno.gob.pe/isla-de-los-uros/"
+                        class="z-10 mt-3 text-3xl font-bold text-white hover:underline">Uros</a>
+                    <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Todo tiene que ver con la
+                        totora</div>
+                </article>
+
+                {% comment %} Amantani {% endcomment %}
+                <article
+                    class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
+                    <img src="https://blog.machupicchuperutours.com/wp-content/uploads/2024/10/isla-amantani-1.jpg"
+                        alt="Isla Amantani" class="absolute inset-0 h-100 w-100 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                    <a href="https://turismo.munipuno.gob.pe/isla-amantani/"
+                        class="z-10 mt-3 text-3xl font-bold text-white hover:underline">Amantani</a>
+                    <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Paraíso rodeado de agua
+                    </div>
+                </article>
+
+                {% comment %} Chullpas de Sillustani {% endcomment %}
+                <article
+                    class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
+                    <img src="https://i.ibb.co/h9hwSw8/SILLUSTANI-DOS.jpg" alt="Chullpas de Sillustani"
+                        class="absolute inset-0 h-100 w-100 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                    <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-de-sillustani/"
+                        class="z-10 mt-3 text-3xl font-bold text-white hover:underline">Sillustani</a>
+                    <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Donde duermen por siempre
+                        los nobles Kolla</div>
+                </article>
+
+                {% comment %} Cutimbo {% endcomment %}
+                <article
+                    class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
+                    <img src="https://turismo.munipuno.gob.pe/wp-content/uploads/2023/04/Cutimbo_2.jpg" alt="Complejo arqueológico de Cutimbo"
+                        class="absolute inset-0 h-100 w-100 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                    <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-de-cutimbo/"
+                        class="z-10 mt-3 text-3xl font-bold text-white hover:underline">Cutimbo</a>
+                    <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Complejo arqueológico precolombino</div>
+                </article>
+
+                {% comment %} Inca Uyo {% endcomment %}
+                <article
+                    class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
+                    <img src="https://turismo.munipuno.gob.pe/wp-content/uploads/2023/04/incauyo_1.jpg" alt="Complejo arqueológico de Inca Uyo"
+                        class="absolute inset-0 h-100 w-100 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                    <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-inca-uyo/"
+                        class="z-10 mt-3 text-3xl font-bold text-white hover:underline">Inca Uyo</a>
+                    <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Morada o lugar del Inca</div>
+                </article>
+
+
+
+
+            </div>
+
+            <div class="hover:border-b-2 mt-2" data-aos="fade-up">
+                <a href="https://turismo.munipuno.gob.pe/" class="flex items-center text-xl text-gray-600 font-semibold transition duration-300" aria-label="Más información sobre turismo en Puno">
+                    <span>Más información</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="ml-1 h-5 w-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                </a>
+            </div>
+            
+        </section>
+
+
         <!-- ORGANIZADORES -->
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black sm:m-10" data-aos="fade-up">ORGANIZADORES</h1>
 
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">ORGANIZADORES</h1>
+            <div class="sm:mt-20 mt-10 flex justify-center items-center p-4 my-10 space-x-1 md:space-x-2 lg:space-x-4"
+                data-aos="fade-up">
 
-            <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
+                <img class="object-cover object-center h-30 md:h-40 lg:h-40 " src="{% static 'images/logo-cimac.png' %}"
+                    alt="Logo CIMAC">
 
-                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
+                <!-- <img class="object-cover object-center sm:mx-4 lg:mx-10 my-4 sm:w-40 sm:h-40 lg:w-48 lg:h-48"
+                    src="{% static 'images/logo-unap.png' %}" alt="Logo UNAP"> -->
 
-                    <img class="w-40 h-40 object-cover object-center mx-10 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-10 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
-
-                </div>
+                <img class="object-cover object-center h-35 md:h-45 lg:h-45" src="{% static 'images/logo-unap.png' %}"
+                    alt="Logo UNAP">
 
             </div>
 
@@ -713,32 +915,24 @@
         <!-- AUSPICIADORES -->
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
-
-            <h1 class="border-b-4 pb-2 text-2xl text-amber-400 font-black" data-aos="fade-up">AUSPICIADORES</h1>
+            <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black sm:m-10" data-aos="fade-up">AUSPICIADORES</h1>
 
             <div class="sm:flex sm:flex-col sm:mt-20 mt-10" data-aos="fade-up">
 
-                <div class="flex flex-wrap justify-center items-center p-4 mx-60">
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1 p-4  sm:mx-10">
 
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
-
-                    <img class="w-40 h-40 object-cover object-center mx-4 my-4"
-                        src="https://educateuma.com/wp-content/uploads/2020/10/logo-universidad-nacional-del-altiplano.png"
-                        alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-unap.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-mate.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-vra.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-vri.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-dad.png' %}" alt="Sunset in the mountains">
+                    <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
+                        src="{% static 'images/logo-comap.png' %}" alt="Sunset in the mountains">
 
                 </div>
 
@@ -746,15 +940,57 @@
 
         </section>
 
-
     </main>
 
 
-    <footer class="mt-10 text-center p-4 text-gray-700 mx-10">
-        <hr class="border-t-2 border-gray-700 mb-4">
-        <h1>Universidad Nacional del Altiplano - Puno</h1>
-        <h1>Escuela Profesional de Ciencias Físico Matemáticas</h1>
-        <h1>© Adderly.M</h1>
+    <footer class="bg-gray-900 mt-30">
+        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0 flex flex-col items-center justify-center md:flex-row md:justify-start">
+                    <img src="{% static 'images/logo-mate.png' %}" class="h-20 md:h-30" alt="FlowBite Logo" />
+                    <span class="text-sm md:text-xl font-semibold text-white">CS. FÍSICO MATEMÁTICAS</span>
+                </div>
+                <div class="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-1">
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase text-white">Contactos</h2>
+                        <ul class="text-gray-400 font-medium">
+                            <li class="mb-4 flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                </svg>
+                                <a href="mailto:jizavaleta@unap.edu.pe"
+                                    class="hover:underline">jizavaleta@unap.edu.pe</a>
+                            </li>
+                            <li class="mb-4 flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+                                </svg>
+                                <a href="https://www.spmac.org/xii-cimac/"
+                                    class="hover:underline">www.spmac.org/xii-cimac</a>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" width="26px" height="26px"
+                                    viewBox="0 0 256 256">
+                                    <path
+                                        d="M128.00049,28A100.02594,100.02594,0,0,0,41.11475,177.53908l-9.0044,31.51661a11.99971,11.99971,0,0,0,14.835,14.834l31.5166-9.00391A100.00677,100.00677,0,1,0,128.00049,28Zm0,192a91.87082,91.87082,0,0,1-46.95264-12.86719,3.99494,3.99494,0,0,0-3.14355-.4082l-33.15723,9.47363a3.99979,3.99979,0,0,1-4.94434-4.94531l9.47266-33.15625a4.00111,4.00111,0,0,0-.4082-3.14355A92.01077,92.01077,0,1,1,128.00049,220Zm50.51123-73.457-20.45947-11.69141a12.01054,12.01054,0,0,0-12.12745.12891l-13.80664,8.28418a44.04183,44.04183,0,0,1-19.38232-19.38281l8.28369-13.80664a12.0108,12.0108,0,0,0,.12891-12.127l-11.69092-20.46A10.91584,10.91584,0,0,0,100,72a32.00811,32.00811,0,0,0-32,31.88086A84.001,84.001,0,0,0,151.999,188h.12012A32.00842,32.00842,0,0,0,184,156,10.913,10.913,0,0,0,178.51172,146.543ZM152.10791,180h-.1084A75.99972,75.99972,0,0,1,76,103.8926,23.997,23.997,0,0,1,100,80a2.89975,2.89975,0,0,1,2.51172,1.457L114.20264,101.918a4.00418,4.00418,0,0,1-.043,4.042l-9.38916,15.64844a3.9987,3.9987,0,0,0-.21826,3.69824,52.04112,52.04112,0,0,0,26.1416,26.1416,3.99707,3.99707,0,0,0,3.69873-.21875L150.04,141.84084a4.006,4.006,0,0,1,4.043-.04394l20.46045,11.69238A2.89712,2.89712,0,0,1,176,156,23.99725,23.99725,0,0,1,152.10791,180Z" />
+                                </svg>
+
+                                <a href="https://wa.me/51976120007" class="hover:underline">(+51) 976 120 007</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto border-gray-700 lg:my-8" />
+            <div class="flex flex-col items-center justify-center space-y-1">
+                <span class="text-sm text-gray-300 text-center">© 2025 CS. FÍSICO MATEMÁTICAS</span>
+                <span class="text-sm text-gray-400 text-center">Todos los derechos reservados</span>
+            </div>
+        </div>
     </footer>
 
 
@@ -784,7 +1020,7 @@
 </script>
 
 
-<!-- sobre el evento -->
+<!-- Cronograma -->
 <script>
 
     function changeSection(sectionNumber) {
