@@ -35,7 +35,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-zunfrdph2p%m(
 DEBUG = 'RENDER' not in os.environ # - P
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'cimacpuno.org',
+    'www.cimacpuno.org',
+    os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+]
+
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME') # Obtener el nombre de host externo de Render - P
 if RENDER_EXTERNAL_HOSTNAME:    
