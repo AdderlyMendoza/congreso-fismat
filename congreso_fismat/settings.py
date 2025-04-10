@@ -35,7 +35,21 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-zunfrdph2p%m(
 DEBUG = 'RENDER' not in os.environ # - P
 
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'cimacpuno.org',
+    'www.cimacpuno.org',
+]
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+
+
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME') # Obtener el nombre de host externo de Render - P
 if RENDER_EXTERNAL_HOSTNAME:    
@@ -93,25 +107,25 @@ WSGI_APPLICATION = "congreso_fismat.wsgi.application"
 
 
 # DESARROLLO
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 
 # PRODUCCION
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
-#         conn_max_age=600
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
+        conn_max_age=600
+    )
+}
 
 
 # Password validation
