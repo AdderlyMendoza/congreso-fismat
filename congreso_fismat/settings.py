@@ -36,20 +36,14 @@ DEBUG = 'RENDER' not in os.environ # - P
 
 
 
+# CONFIGURACION DE HOSTS
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'cimacpuno.org',
     'www.cimacpuno.org',
+    "10.1.20.53"
 ]
-
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
-
-
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME') # Obtener el nombre de host externo de Render - P
 if RENDER_EXTERNAL_HOSTNAME:    
@@ -57,7 +51,6 @@ if RENDER_EXTERNAL_HOSTNAME:
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
