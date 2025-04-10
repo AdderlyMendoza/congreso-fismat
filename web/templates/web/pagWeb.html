@@ -33,7 +33,7 @@
         </div>
 
         <nav class="flex items-center md:text-md sm:text-sm">
-            <a href="/administrador/login" class="p-2 hover:bg-black/50 cursor-pointer">Log In</a>
+            <a href="/administrador/login" class="p-2 hover:bg-black/50 cursor-pointer">Iniciar sessión</a>
         </nav>
 
     </header>
@@ -808,7 +808,7 @@
                 {% comment %} TAQUILE {% endcomment %}
                 <article
                     class="relative flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://imgmedia.larepublica.pe/640x371/larepublica/original/2023/05/10/645b9f6b55536617445cce4a.webp"
+                    <img src="{% static 'images/logo-cimac.png' %}"
                         alt="Isla de Taquile" class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/isla-taquile/"
@@ -820,7 +820,7 @@
                 {% comment %} LOS UROS {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://www.civitatis.com/f/peru/puno/excursion-islas-uros-trekking-taquile-589x392.jpg"
+                    <img src="{% static 'images/logo-cimac.png' %}"
                         alt="Isla de los Uros" class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/isla-de-los-uros/"
@@ -832,7 +832,7 @@
                 {% comment %} Amantani {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://blog.machupicchuperutours.com/wp-content/uploads/2024/10/isla-amantani-1.jpg"
+                    <img src="{% static 'images/logo-cimac.png' %}"
                         alt="Isla Amantani" class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/isla-amantani/"
@@ -844,7 +844,7 @@
                 {% comment %} Chullpas de Sillustani {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://i.ibb.co/h9hwSw8/SILLUSTANI-DOS.jpg" alt="Chullpas de Sillustani"
+                    <img src="{% static 'images/logo-cimac.png' %}" alt="Chullpas de Sillustani"
                         class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-de-sillustani/"
@@ -856,7 +856,7 @@
                 {% comment %} Cutimbo {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://turismo.munipuno.gob.pe/wp-content/uploads/2023/04/Cutimbo_2.jpg" alt="Complejo arqueológico de Cutimbo"
+                    <img src="{% static 'images/logo-cimac.png' %}" alt="Complejo arqueológico de Cutimbo"
                         class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-de-cutimbo/"
@@ -867,7 +867,7 @@
                 {% comment %} Inca Uyo {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://turismo.munipuno.gob.pe/wp-content/uploads/2023/04/incauyo_1.jpg" alt="Complejo arqueológico de Inca Uyo"
+                    <img src="{% static 'images/logo-cimac.png' %}" alt="Complejo arqueológico de Inca Uyo"
                         class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-inca-uyo/"
@@ -902,9 +902,6 @@
 
                 <img class="object-cover object-center h-30 md:h-40 lg:h-40 " src="{% static 'images/logo-cimac.png' %}"
                     alt="Logo CIMAC">
-
-                <!-- <img class="object-cover object-center sm:mx-4 lg:mx-10 my-4 sm:w-40 sm:h-40 lg:w-48 lg:h-48"
-                    src="{% static 'images/logo-unap.png' %}" alt="Logo UNAP"> -->
 
                 <img class="object-cover object-center h-35 md:h-45 lg:h-45" src="{% static 'images/logo-unap.png' %}"
                     alt="Logo UNAP">
@@ -945,7 +942,7 @@
     </main>
 
 
-    {% comment %} <footer class="bg-gray-900 mt-30">
+    <footer class="bg-gray-900 mt-30">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0 flex flex-col items-center justify-center md:flex-row md:justify-start">
@@ -971,8 +968,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
                                 </svg>
-                                <a href="https://www.spmac.org/xii-cimac/"
-                                    class="hover:underline">www.spmac.org/xii-cimac</a>
+                                <a href="https://www.spmac.org/xii-cimac/" class="hover:underline">www.spmac.org/xii-cimac</a>
                             </li>
                             <li class="flex items-center space-x-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" width="26px" height="26px"
@@ -993,7 +989,7 @@
                 <span class="text-sm text-gray-400 text-center">Todos los derechos reservados</span>
             </div>
         </div>
-    </footer> {% endcomment %}
+    </footer>
 
 
 </body>
