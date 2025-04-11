@@ -107,7 +107,6 @@
 
 
         <!-- PRESENTACION -->
-
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10 px-4">
 
             <h1 class="border-b-4 pb-2 text-3xl sm:text-4xl text-amber-400 font-black" data-aos="fade-up">PRESENTACIÓN
@@ -131,11 +130,14 @@
                     desarrollará en forma Presencial, con algunas sesiones en forma Virtual.
                 </blockquote>
 
+                
             </div>
+            
+            <a href="{% static 'pdf/BASES_INICIACION_CIENTIFICA_CIMAC.pdf' %}" class="bg-blue-500 px-4 py-2 rounded-lg text-white cursor-pointer text-lg hover:bg-blue-600" data-aos="fade-up" target="_blank" rel="noopener noreferrer">Bases de Iniciación Científica</a>
 
         </section>
 
-
+ 
         <!-- ENVIO DE TRABAJOS -->
         <!-- <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
@@ -193,7 +195,7 @@
         <!-- CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE -->
         <section>
 
-            <div class="flex items-center justify-center sm:mt-20 mt-10 px-4" data-aos="fade-up">
+            <div class="flex items-center justify-center sm:mt-30 mt-20 px-4" data-aos="fade-up">
                 <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black">CONOCIMIENTO Y EXPERIENCIA A TU ALCANCE
                 </h1>
             </div>
@@ -792,11 +794,11 @@
         </section>
 
 
-        <!-- RUTAS TURISTICAS -->
+        <!-- LUGARES TURISTICOS -->
         <section class="flex flex-col items-center justify-center sm:mt-20 mt-10">
 
             <div class="flex items-center justify-center sm:mt-20 mt-10 px-4" data-aos="fade-up">
-                <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black">RUTAS TURISTICAS DE LA CIUDAD DE PUNO
+                <h1 class="border-b-4 pb-2 text-3xl text-amber-400 font-black">LUGARES TURISTICOS DE LA CIUDAD DE PUNO
                 </h1>
             </div>
 
@@ -870,10 +872,8 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-inca-uyo/"
                         class="z-10 mt-3 text-3xl font-bold text-white hover:underline">Inca Uyo</a>
-                    <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Morada o lugar del Inca</div>
+                    <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Morada del Inca</div>
                 </article>
-
-
 
 
             </div>
@@ -993,7 +993,6 @@
         </div>
     </footer>
 
-
 </body>
 
 
@@ -1030,9 +1029,6 @@
         sections.forEach(section => {
             section.classList.add('hidden');
         });
-
-
-        // QUE btn1 ESTE SELECCIONADO AL INICIO DE LA PAGINA
 
 
         // Luego, mostramos la sección correspondiente

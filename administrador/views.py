@@ -105,7 +105,7 @@ def validar_inscrito(request, id):
         except Registro.DoesNotExist:
             return JsonResponse({'status': 'error'}, status=404)
 
-
+# Funciona con pandas
 def excel_inscritos_validados(request):
     # Filtra los registros validados
     inscritos = Registro.objects.filter(validado=1)
