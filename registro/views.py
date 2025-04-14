@@ -32,12 +32,12 @@ def registro_view(request):
 
             # Lógica para calcular el monto dependiendo del mes y tipo de usuario
             if año == 2025 and mes in [4, 5]:  # Abril o Mayo de 2025
-                if tipo_usuario == 'estudiante (solo pregrado)':
+                if tipo_usuario == 'estudiante (pregrado)':
                     monto = 50.00
                 elif tipo_usuario == 'participante':
                     monto = 100.00
             elif año >= 2025 and mes >= 6:  # Junio en adelante de 2025
-                if tipo_usuario == 'estudiante (solo pregrado)':
+                if tipo_usuario == 'estudiante (pregrado)':
                     monto = 80.00
                 elif tipo_usuario == 'participante':
                     monto = 150.00

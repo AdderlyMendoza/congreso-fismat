@@ -1,13 +1,17 @@
 from django.db import models
 from django_countries.fields import CountryField
 
+import mimetypes
+from django.core.exceptions import ValidationError
+
+
 SELECCIONE = 'Seleccione'
-ESTUDIANTE = 'estudiante (solo pregrado)'
+ESTUDIANTE = 'estudiante (pregrado)'
 PARTICIPANTE = 'participante'
 
 TIPO_PARTICIPANTE_CHOICES = [
     ('', '(Seleccione)'),
-    (ESTUDIANTE, 'Estudiante (solo pregrado)'),
+    (ESTUDIANTE, 'Estudiante (pregrado)'),
     (PARTICIPANTE, 'Participante'),
 ]
 
@@ -21,6 +25,7 @@ class Registro(models.Model):
         blank=False, 
         null=False
     )
+
     doc_acreditivo = models.FileField(max_length=100, blank=True, null=True)  # Documento si es estudiante
     
     monto = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False, default=0.00)
@@ -31,7 +36,9 @@ class Registro(models.Model):
     apellido_materno = models.CharField(max_length=100)
     email = models.EmailField(unique=True)  # Correo electrónico único
     celular = models.CharField(max_length=15, blank=True, null=False, unique=True)  # Celular único
-    voucher_pago = models.FileField(upload_to='pdfs/', blank=True, null=True)  # Hacerlo opcional prueba para PRODUCCION
+
+    voucher_pago = models.FileField(upload_to='pdfs/', blank=True, null=False)  # Hacerlo opcional prueba para PRODUCCION
+
     validado = models.BooleanField(default=False)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 

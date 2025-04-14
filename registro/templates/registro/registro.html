@@ -102,12 +102,12 @@
                 </div>
 
                 <div class="mb-2">
-                    <label for="tipo_participante" class="text-gray-700 font-semibold">TIPO DE PARTICIPANTE</label>
+                    <label for="tipo_participante" class="text-gray-700 font-semibold">TIPO DE PARTICIPANTE:</label>
                     {{ form.tipo_participante }}
                 </div>
 
                 <div class="mb-2" id="div_doc_acreditivo">
-                    <label for="doc_acreditivo" class="text-gray-700 font-semibold">CARNET DE ESTUDIANTE Y/O SIMILAR
+                    <label for="doc_acreditivo" class="text-gray-700 font-semibold">CARNET DE ESTUDIANTE Y/O SIMILAR: <span class="text-gray-400 font-normal">(max: 2MB)</span>
                     </label>
                     {{ form.doc_acreditivo }}
                 </div>
@@ -195,7 +195,7 @@
                 </div>
 
                 <div class="mb-2">
-                    <label for="voucher_pago" class="flex-1 text-gray-700 font-semibold">VOUCHER DE PAGO:</label>
+                    <label for="voucher_pago" class="flex-1 text-gray-700 font-semibold">VOUCHER DE PAGO: <span class="text-gray-400 font-normal">(max: 2MB)</span></label>
                     <div class="flex">
                         {{ form.voucher_pago }}
                     </div>
@@ -281,7 +281,7 @@
             validarFormularioStep3().then(({ isValid, errorMessages }) => {
                 if (isValid) {
                     document.getElementById("headerContainer").classList.add("fixed");
-                document.getElementById("divAlterno").classList.add("hidden");
+                    document.getElementById("divAlterno").classList.add("hidden");
 
 
                     step3.classList.remove("active");
@@ -293,16 +293,15 @@
         });
 
         // PASO 4: informacion de pago
-        nextStep4Btn.addEventListener("click", function () {
-            const { isValid } = validarFormularioStep4();
+        nextStep4Btn.addEventListener("click", function (event) {
 
+            const { isValid, errorMessages } = validarFormularioStep4();
+            
             if (!isValid) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Por favor, corrija los errores antes de continuar',
-                    confirmButtonText: 'Aceptar',
-                });
+                event.preventDefault();
+                mostrarSweetAlertErrorValidacion(errorMessages || []);
             }
+
         });
 
     });
@@ -335,19 +334,17 @@
 
         let isValid = true;
         let errorMessages = [];
-
+    
         const fields = [
             { id: 'id_pais', type: 'text', name: 'Pais' },
             { id: 'id_entidad_procedencia', type: 'text', name: 'Entidad de Procedencia' },
             { id: 'id_tipo_participante', type: 'text', name: 'Tipo de Participante' },
-            // { id: 'id_doc_acreditivo', type: 'text', name: 'Documento Acreditivo' }, // si es estudiante (solo pregrado) sea obligatorio
         ];
-
+    
         fields.forEach(function (field) {
             const inputElement = document.getElementById(field.id);
             const value = inputElement.value.trim();
-
-            // Validación de campo no vacío
+    
             if (!value) {
                 isValid = false;
                 errorMessages.push(`${field.name} no puede estar vacío`);
@@ -356,9 +353,42 @@
                 toggleErrorClass(inputElement, true);
             }
         });
+    
+        // Validación específica si es estudiante (pregrado)
+        const tipoParticipante = document.getElementById('id_tipo_participante').value.trim();
+        if (tipoParticipante === 'estudiante (pregrado)') {
+            const docAcreditivoField = document.getElementById('id_doc_acreditivo');
 
+            if (!docAcreditivoField || !docAcreditivoField.files.length) {
+                isValid = false;
+                errorMessages.push('El Documento Acreditivo es obligatorio para estudiantes de pregrado');
+                toggleErrorClass(docAcreditivoField, false);
+            } else {
+                const archivo = docAcreditivoField.files[0];
+                const extensionesPermitidas = ['image/jpeg', 'image/png', 'application/pdf'];
+                const maxSizeMB = 2;
+                const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+                // Validación de tipo
+                if (!extensionesPermitidas.includes(archivo.type)) {
+                    isValid = false;
+                    errorMessages.push('El Documento Acreditivo debe tener formato: JPG, PNG o PDF');
+                    toggleErrorClass(docAcreditivoField, false);
+                }
+                // Validación de tamaño
+                else if (archivo.size > maxSizeBytes) {
+                    isValid = false;
+                    errorMessages.push(`El Documento Acreditivo no debe superar los ${maxSizeMB} MB`);
+                    toggleErrorClass(docAcreditivoField, false);
+                } else {
+                    toggleErrorClass(docAcreditivoField, true);
+                }
+            }
+        }
+    
         return { isValid, errorMessages };
     }
+    
 
     async function validarFormularioStep3() {
 
@@ -449,42 +479,40 @@
         });
     }
 
-    function validarFormularioStep4(event) {
-
+        function validarFormularioStep4() {
         let isValid = true;
         let errorMessages = [];
-
-        // Campos a validar
-        const fields = [
-            { id: 'id_voucher_pago', type: 'file', name: 'VOUCHER DE PAGO' },
-        ];
-
-        fields.forEach(function (field) {
-
-            const inputElement = document.getElementById(field.id);
-            let value;
-
-            // Validación para campos de tipo file
-            if (field.type === 'file') {
-                value = inputElement.files.length; // Verificar si se seleccionó un archivo
-            } else {
-                value = inputElement.value.trim();
-            }
-
-            // Validación de campo no vacío
-            if (!value) {
+    
+        const voucherInput = document.getElementById('id_voucher_pago');
+    
+        if (!voucherInput || !voucherInput.files.length) {
+            isValid = false;
+            errorMessages.push('Debe subir un Voucher de Pago.');
+            toggleErrorClass(voucherInput, false);
+        } else {
+            const archivo = voucherInput.files[0];
+            const extensionesPermitidas = ['image/jpeg', 'image/png', 'application/pdf'];
+            const maxMB = 2;
+            const maxSizeBytes = maxMB * 1024 * 1024;
+    
+            // Validación de tipo
+            if (!extensionesPermitidas.includes(archivo.type)) {
                 isValid = false;
-                errorMessages.push(`${field.name} no puede estar vacío`);
-                toggleErrorClass(inputElement, false);
+                errorMessages.push('El Voucher debe tener formato: JPG, PNG o PDF.');
+                toggleErrorClass(voucherInput, false);
+            } 
+            // Validación de tamaño
+            else if (archivo.size > maxSizeBytes) {
+                isValid = false;
+                errorMessages.push(`El archivo no debe superar los ${maxMB} MB.`);
+                toggleErrorClass(voucherInput, false);
+            } 
+            else {
+                toggleErrorClass(voucherInput, true);
             }
-        });
-
-        // Si es válido, enviar el formulario
-        if (isValid) {
-            event.preventDefault();  // Evitar el envío del formulario si hay un error
         }
-
-        return isValid;
+    
+        return { isValid, errorMessages };
     }
 
     function mostrarSweetAlertErrorValidacion(errorMessages) {
@@ -513,16 +541,16 @@
 
 </script>
 
-
 <!-- Manejo de documento acreditivo según el tipo de participante -->
 <script>
+
     document.addEventListener('DOMContentLoaded', function () {
         const tipoParticipanteSelect = document.querySelector('select[name="tipo_participante"]');
         const docAcreditivoField = document.querySelector('div#div_doc_acreditivo');
 
         function toggleDocAcreditivoField() {
 
-            if (tipoParticipanteSelect.value === 'estudiante (solo pregrado)') {
+            if (tipoParticipanteSelect.value === 'estudiante (pregrado)') {
                 docAcreditivoField.classList.remove('hidden'); 
             } else {
                 docAcreditivoField.classList.add('hidden');
@@ -536,7 +564,6 @@
     });
 
 </script>
-
 
 <!-- Manejo del monto -->
 <script>
@@ -553,13 +580,13 @@
         // Calculamos el monto a pagar según la lógica del mes y tipo de usuario
         let monto = 0;
         if (año === 2025 && [4, 5].includes(mes)) { // Abril y Mayo de 2025
-            if (tipoUsuario === 'estudiante (solo pregrado)') {
+            if (tipoUsuario === 'estudiante (pregrado)') {
                 monto = 50;
             } else if (tipoUsuario === 'participante') {
                 monto = 100;
             }
         } else if (año >= 2025 && mes >= 6) { // Junio en adelante de 2025
-            if (tipoUsuario === 'estudiante (solo pregrado)') {
+            if (tipoUsuario === 'estudiante (pregrado)') {
                 monto = 80;
             } else if (tipoUsuario === 'participante') {
                 monto = 150;
@@ -576,13 +603,13 @@
             let nuevoMonto = 0;
 
             if (año === 2025 && [4, 5].includes(mes)) { // Abril y Mayo de 2025
-                if (tipoUsuarioSeleccionado === 'estudiante (solo pregrado)') {
+                if (tipoUsuarioSeleccionado === 'estudiante (pregrado)') {
                     nuevoMonto = 50;
                 } else if (tipoUsuarioSeleccionado === 'participante') {
                     nuevoMonto = 100;
                 }
             } else if (año >= 2025 && mes >= 6) { // Junio en adelante de 2025
-                if (tipoUsuarioSeleccionado === 'estudiante (solo pregrado)') {
+                if (tipoUsuarioSeleccionado === 'estudiante (pregrado)') {
                     nuevoMonto = 80;
                 } else if (tipoUsuarioSeleccionado === 'participante') {
                     nuevoMonto = 150;

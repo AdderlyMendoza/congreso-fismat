@@ -25,7 +25,7 @@ urlpatterns = [
     # ADMINISTAR USUARIOS(ADMINISTRADORES)
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('register/', views.register_view, name='register'),
+    path('register-admin-2025/', views.register_view, name='register'),
     
     
     
