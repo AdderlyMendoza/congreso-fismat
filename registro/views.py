@@ -170,9 +170,9 @@ def generar_pdf(request, dni):
     text = f"""
     Se hace constar que: <br/><br/><br/>
     
-    <b>{nombre_completo}</b>, identificado con el número de DNI <b>{usuario.dni}</b>,
+    <b>{nombre_completo}</b>, identificado con el documento de identidad N°. <b>{usuario.dni}</b>,
     
-    ha completado exitosamente el proceso de inscripción y se encuentra registrado como <b>{usuario.tipo_participante.upper()}</b>. Además, ha realizado el pago correspondiente de <b>{usuario.monto} soles</b> (a verificar) para participar en el: <br/><br/>
+    ha completado exitosamente el proceso de inscripción y se encuentra registrado como <b>{usuario.tipo_participante.upper()}</b>. Además, ha realizado el pago correspondiente de <b>{usuario.monto} soles</b> (*a verificar) para participar en el: <br/><br/>
     
     <b>XII CONGRESO INTERNACIONAL DE MATEMÁTICA APLICADA Y COMPUTACIONAL (CIMAC)</b>, que se llevará a cabo del 11 al 15 de agosto de 2025 en la ciudad de Puno.<br/><br/>
     
