@@ -228,6 +228,7 @@
 
 <!-- Manejo del formulario por pasos -->
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
 
         const nextStep1Btn = document.getElementById("nextStep1");
@@ -306,7 +307,6 @@
 
     });
 
-
     function paso2to1() {
         const step1 = document.getElementById("step1");
         const step2 = document.getElementById("step2");
@@ -340,7 +340,7 @@
             { id: 'id_pais', type: 'text', name: 'Pais' },
             { id: 'id_entidad_procedencia', type: 'text', name: 'Entidad de Procedencia' },
             { id: 'id_tipo_participante', type: 'text', name: 'Tipo de Participante' },
-            // { id: 'id_doc_acreditivo', type: 'text', name: 'Documento Acreditivo' },
+            // { id: 'id_doc_acreditivo', type: 'text', name: 'Documento Acreditivo' }, // si es estudiante (solo pregrado) sea obligatorio
         ];
 
         fields.forEach(function (field) {
@@ -450,7 +450,9 @@
     }
 
     function validarFormularioStep4(event) {
+
         let isValid = true;
+        let errorMessages = [];
 
         // Campos a validar
         const fields = [
@@ -458,6 +460,7 @@
         ];
 
         fields.forEach(function (field) {
+
             const inputElement = document.getElementById(field.id);
             let value;
 
@@ -471,12 +474,13 @@
             // Validación de campo no vacío
             if (!value) {
                 isValid = false;
-                alert(`Por favor, ingresa el campo: ${field.name}`);
+                errorMessages.push(`${field.name} no puede estar vacío`);
+                toggleErrorClass(inputElement, false);
             }
         });
 
         // Si es válido, enviar el formulario
-        if (!isValid) {
+        if (isValid) {
             event.preventDefault();  // Evitar el envío del formulario si hay un error
         }
 
@@ -514,21 +518,20 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const tipoParticipanteSelect = document.querySelector('select[name="tipo_participante"]');
-        const docAcreditivoField = document.querySelector('div#div_doc_acreditivo'); // Se obtiene el contenedor del input.
+        const docAcreditivoField = document.querySelector('div#div_doc_acreditivo');
 
-        // Función para actualizar la visibilidad del campo doc_acreditivo
         function toggleDocAcreditivoField() {
+
             if (tipoParticipanteSelect.value === 'estudiante (solo pregrado)') {
-                docAcreditivoField.classList.remove('hidden'); // Muestra el campo si es estudiante
+                docAcreditivoField.classList.remove('hidden'); 
             } else {
-                docAcreditivoField.classList.add('hidden'); // Oculta el campo si no es estudiante
+                docAcreditivoField.classList.add('hidden');
             }
+
         }
 
-        // Inicializar visibilidad según el valor actual del select
         toggleDocAcreditivoField();
 
-        // Escuchar el cambio en el select para actualizar la visibilidad
         tipoParticipanteSelect.addEventListener('change', toggleDocAcreditivoField);
     });
 
