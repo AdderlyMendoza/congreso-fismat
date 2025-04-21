@@ -35,28 +35,28 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-zunfrdph2p%m(
 
 
 # DESARROLLO
-# DEBUG = True 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
-
-# PRODUCCION
-DEBUG = False 
+DEBUG = True 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 }
+
+# PRODUCCION
+# DEBUG = False 
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
+#         conn_max_age=600
+#     )
+# }
 
 
 # CONFIGURACION DE HOSTS
