@@ -24,9 +24,9 @@
     <header
         class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-50 text-white px-4 py-4 ">
         <div class="flex items-end space-x-1 justify-center ">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
-                alt="logo unap" class="w-15">
-            <img src="{% static 'images/logo-cimac.png' %}" alt="logo cimac" class="w-16 h-16 ml-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/logos/logo_UNAP.png?National_University_of_the_Altiplano1139965787"
+                alt="logos/logo unap" class="w-15">
+            <img src="{% static 'images/logos/logo-cimac.png' %}" alt="logos/logo cimac" class="w-16 h-16 ml-2">
 
         </div>
 
@@ -630,7 +630,7 @@
                 <div
                     class="max-w-sm max-h-sm rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://media-cdn.tripadvisor.com/media/photo-s/0a/fb/3a/cb/royal-inn-hotel.jpg"
+                        src="{% static 'images/hoteles/royal-inn.jpg' %}"
                         alt="Hotel Royal Inn">
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">Royal Inn Puno</div>
@@ -657,7 +657,7 @@
                 <div
                     class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/512520650.jpg?k=b400e1db5074bd457682027837c24f072eb3dead8eecf05eb25b087ae0c495e7&o=&hp=1"
+                        src="{% static 'images/hoteles/sol-plaza.jpg' %}"
                         alt="Sol Plaza Hotel">
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">Sol Plaza Hotel</div>
@@ -684,7 +684,7 @@
                 <div
                     class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://y.cdrst.com/foto/hotel-sf/1e60f/granderesp/hotel-qalasaya-general-ca2f6d9.jpg"
+                        src="{% static 'images/hoteles/qalasaya.jpg' %}"
                         alt="Sol Plaza Hotel">
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">Hotel Qalasaya</div>
@@ -711,7 +711,7 @@
                 <div
                     class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://tierravivahoteles.com/wp-content/uploads/2023/03/TVP-3-Fachada-1.jpg"
+                        src="{% static 'images/hoteles/tierra-viva.jpg' %}"
                         alt="Sol Plaza Hotel">
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">Hotel Tierra Viva</div>
@@ -738,7 +738,7 @@
                 <div
                     class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/91/14/da/sonesta-posadas-del-inca.jpg?w=500&h=-1&s=1"
+                        src="{% static 'images/hoteles/sonesta.jpg' %}"
                         alt="Sol Plaza Hotel">
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">Sonesta Posadas del Inca Puno </div>
@@ -764,7 +764,7 @@
                 <div
                     class="max-w-sm  rounded overflow-hidden shadow-lg hover:transition hover:duration-300 hover:transform hover:scale-102">
                     <img class="w-100 h-100 object-cover object-center"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvm6lOtL9WFPr1Gu10neKs77Ie218qmyX6-Q&s"
+                        src="{% static 'images/hoteles/amaru-tours.png' %}"
                         alt="Amaru Tours">
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">Amaru Tours</div>
@@ -787,8 +787,6 @@
                     </div>
                 </div>
 
-
-
             </div>
 
         </section>
@@ -808,7 +806,7 @@
                 {% comment %} TAQUILE {% endcomment %}
                 <article
                     class="relative flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://imgmedia.larepublica.pe/640x371/larepublica/original/2023/05/10/645b9f6b55536617445cce4a.webp"
+                    <img src="{% static 'images/turisticos/taquile.jpg' %}"
                         alt="Isla de Taquile" class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/isla-taquile/"
@@ -820,7 +818,7 @@
                 {% comment %} LOS UROS {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://www.civitatis.com/f/peru/puno/excursion-islas-uros-trekking-taquile-589x392.jpg"
+                    <img src="{% static 'images/turisticos/urus.jpg' %}"
                         alt="Isla de los Uros" class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/isla-de-los-uros/"
@@ -832,7 +830,7 @@
                 {% comment %} Amantani {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://blog.machupicchuperutours.com/wp-content/uploads/2024/10/isla-amantani-1.jpg"
+                    <img src="{% static 'images/turisticos/amantani.jpg' %}"
                         alt="Isla Amantani" class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/isla-amantani/"
@@ -844,7 +842,7 @@
                 {% comment %} Chullpas de Sillustani {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://i.ibb.co/h9hwSw8/SILLUSTANI-DOS.jpg" alt="Chullpas de Sillustani"
+                    <img src="{% static 'images/turisticos/sillustani.jpg' %}" alt="Chullpas de Sillustani"
                         class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-de-sillustani/"
@@ -856,7 +854,7 @@
                 {% comment %} Cutimbo {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://turismo.munipuno.gob.pe/wp-content/uploads/2023/04/Cutimbo_2.jpg" alt="Complejo arqueológico de Cutimbo"
+                    <img src="{% static 'images/turisticos/cutimbo.jpg' %}" alt="Complejo arqueológico de Cutimbo"
                         class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-de-cutimbo/"
@@ -867,7 +865,7 @@
                 {% comment %} Inca Uyo {% endcomment %}
                 <article
                     class="relative isolate flex flex-col justify-end max-w-full max-h-md rounded overflow-hidden rounded-2xl px-8 pb-8 hover:transition hover:duration-300 hover:transform hover:scale-102 h-100 w-100">
-                    <img src="https://turismo.munipuno.gob.pe/wp-content/uploads/2023/04/incauyo_1.jpg" alt="Complejo arqueológico de Inca Uyo"
+                    <img src="{% static 'images/turisticos/incauyo.jpg' %}" alt="Complejo arqueológico de Inca Uyo"
                         class="absolute inset-0 h-100 w-100 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <a href="https://turismo.munipuno.gob.pe/complejo-arqueologico-inca-uyo/"
@@ -898,14 +896,14 @@
             <div class="sm:mt-20 mt-10 flex justify-center items-center p-4 my-10 space-x-1 md:space-x-2 lg:space-x-4"
                 data-aos="fade-up">
 
-                <img class="object-cover object-center h-30 md:h-40 lg:h-40 " src="{% static 'images/logo-cimac.png' %}"
-                    alt="Logo CIMAC">
+                <img class="object-cover object-center h-30 md:h-40 lg:h-40 " src="{% static 'images/logos/logo-cimac.png' %}"
+                    alt="logos/logo CIMAC">
 
                 <!-- <img class="object-cover object-center sm:mx-4 lg:mx-10 my-4 sm:w-40 sm:h-40 lg:w-48 lg:h-48"
-                    src="{% static 'images/logo-unap.png' %}" alt="Logo UNAP"> -->
+                    src="{% static 'images/logos/logo-unap.png' %}" alt="logos/logo UNAP"> -->
 
-                <img class="object-cover object-center h-35 md:h-45 lg:h-45" src="{% static 'images/logo-unap.png' %}"
-                    alt="Logo UNAP">
+                <img class="object-cover object-center h-35 md:h-45 lg:h-45" src="{% static 'images/logos/logo-unap.png' %}"
+                    alt="logos/logo UNAP">
 
             </div>
 
@@ -922,17 +920,17 @@
                 <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1 p-4  sm:mx-10">
 
                     <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
-                        src="{% static 'images/logo-unap.png' %}" alt="Sunset in the mountains">
+                        src="{% static 'images/logos/logo-unap.png' %}" alt="Sunset in the mountains">
                     <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
-                        src="{% static 'images/logo-mate.png' %}" alt="Sunset in the mountains">
+                        src="{% static 'images/logos/logo-mate.png' %}" alt="Sunset in the mountains">
                     <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
-                        src="{% static 'images/logo-vra.png' %}" alt="Sunset in the mountains">
+                        src="{% static 'images/logos/logo-vra.png' %}" alt="Sunset in the mountains">
                     <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
-                        src="{% static 'images/logo-vri.png' %}" alt="Sunset in the mountains">
+                        src="{% static 'images/logos/logo-vri.png' %}" alt="Sunset in the mountains">
                     <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
-                        src="{% static 'images/logo-dad.png' %}" alt="Sunset in the mountains">
+                        src="{% static 'images/logos/logo-dad.png' %}" alt="Sunset in the mountains">
                     <img class="h-35 md:h-45 lg:h-45 object-cover object-center mx-4 my-4"
-                        src="{% static 'images/logo-comap.png' %}" alt="Sunset in the mountains">
+                        src="{% static 'images/logos/logo-comap.png' %}" alt="Sunset in the mountains">
 
                 </div>
 
@@ -947,7 +945,7 @@
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0 flex flex-col items-center justify-center md:flex-row md:justify-start">
-                    <img src="{% static 'images/logo-mate.png' %}" class="h-20 md:h-30" alt="FlowBite Logo" />
+                    <img src="{% static 'images/logos/logo-mate.png' %}" class="h-20 md:h-30" alt="FlowBite logos/logo" />
                     <span class="text-sm md:text-xl font-semibold text-white">CS. FÍSICO MATEMÁTICAS</span>
                 </div>
                 <div class="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-1">

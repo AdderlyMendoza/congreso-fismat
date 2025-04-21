@@ -31,9 +31,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-zunfrdph2p%m(
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True # Cambiar a False en producción
 # DEBUG = 'RENDER' not in os.environ # - P
-DEBUG = False
+
+# DEBUG = True # Cambiar a False en producción
+DEBUG = False # Cambiar a False en producción
+
 
 
 # CONFIGURACION DE HOSTS
