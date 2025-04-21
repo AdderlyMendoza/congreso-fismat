@@ -137,8 +137,8 @@ def generar_pdf(request, dni):
 
 
     # Insertar imagen del voucher de pago
-    c.drawImage("static/images/logo-cimac-fondo.png", -20, -40, width=70, height=70)  # Ajusta la ubicación de la imagen
-    c.drawImage("static/images/logo-unap-fondo.jpg", 420, -40, width=70, height=70)  # Ajusta la ubicación de la imagen
+    c.drawImage("static/images/logos/logo-cimac-fondo.png", -20, -40, width=70, height=70)  # Ajusta la ubicación de la imagen
+    c.drawImage("static/images/logos/logo-unap-fondo.jpg", 420, -40, width=70, height=70)  # Ajusta la ubicación de la imagen
     
     c.setFont("Helvetica", 14)
     c.drawString(120, 5, "CONGRESO INTERNACIONAL DE")
