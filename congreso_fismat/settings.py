@@ -49,7 +49,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-zunfrdph2p%m(
 # }
 
 # PRODUCCION
-DEBUG = False 
+DEBUG = True 
 
 DATABASES = {
     'default': dj_database_url.config(
