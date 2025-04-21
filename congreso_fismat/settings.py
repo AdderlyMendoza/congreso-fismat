@@ -68,6 +68,8 @@ ALLOWED_HOSTS = [
     "10.1.20.53"
 ]
 
+
+
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME') # Obtener el nombre de host externo de Render - P
 if RENDER_EXTERNAL_HOSTNAME:    
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -141,8 +143,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
-
 
 
 # Static files (CSS, JavaScript, Images)
