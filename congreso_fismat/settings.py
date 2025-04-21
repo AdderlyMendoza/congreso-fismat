@@ -33,9 +33,30 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-zunfrdph2p%m(
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = 'RENDER' not in os.environ # - P
 
-# DEBUG = True # Cambiar a False en producción
-DEBUG = False # Cambiar a False en producción
 
+# DESARROLLO
+# DEBUG = True 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
+
+# PRODUCCION
+DEBUG = False 
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
+        conn_max_age=600
+    )
+}
 
 
 # CONFIGURACION DE HOSTS
@@ -95,32 +116,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "congreso_fismat.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-
-# DESARROLLO
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
-
-
-# PRODUCCION
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
-        conn_max_age=600
-    )
-}
 
 
 # Password validation
