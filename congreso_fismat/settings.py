@@ -65,7 +65,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'cimacpuno.org',
     'www.cimacpuno.org',
-    "10.1.20.53"
+    "10.1.20.53",
+    "161.35.99.57",
 ]
 
 
