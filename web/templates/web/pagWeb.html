@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load static tailwind_tags %}
 <html lang="es">
 
 <head>
@@ -9,12 +10,12 @@
     <meta name="google-site-verification" content="J2MLV7DfS_lEK7g96SYwhecDLDt7_hGCvDPEazJDuOI" />
     <title>{% block title %}XII-CIMAC Puno{% endblock %}</title>
 
-    <!-- Favicon -->
     <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
 
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    {% tailwind_css %}
 
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="{% static 'js/aos.js' %}"></script>
+    <link href="{% static 'css/aos.css' %}" rel="stylesheet">
 
 </head>
 
@@ -25,7 +26,7 @@
         class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 z-50 text-white px-4 py-4 ">
 
         <div class="flex items-end space-x-1 justify-center ">
-            <img src="{% static 'images/logos/logo-unap-fondo.png' %}" alt="logo una puno" class="w-15">
+            <img src="{% static 'images/logos/logo-unap.png' %}" alt="logo una puno" class="w-15">
             <img src="{% static 'images/logos/logo-cimac.png' %}" alt="logos/logo cimac" class="w-16 h-16 ml-2">
         </div>
 
@@ -993,7 +994,6 @@
 </body>
 
 
-
 <!-- header -->
 <script>
 
@@ -1047,7 +1047,6 @@
 
 
 <!-- Añadir el script de AOS -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
     AOS.init();  // Inicializa AOS
 </script>

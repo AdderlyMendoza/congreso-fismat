@@ -35,28 +35,28 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-zunfrdph2p%m(
 
 
 # DESARROLLO
-# DEBUG = True 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
-
-# PRODUCCION
 DEBUG = True 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'congreso-fismat',  # Nombre de tu base de datos externa
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 }
+
+# PRODUCCION
+# DEBUG = True 
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
+#         conn_max_age=600
+#     )
+# }
 
 
 # CONFIGURACION DE HOSTS
@@ -86,7 +86,15 @@ INSTALLED_APPS = [
     'web', # incluir la app 'web' en la lista de aplicaciones instaladas
     'registro',
     'administrador',
+    'tailwind',
+    'theme'
 ]
+
+TAILWIND_APP_NAME = 'theme'
+
+
+NPM_BIN_PATH = "C:\\Program Files\\nodejs\\npm.cmd"
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
+{% load static tailwind_tags %}
+
 
 <html lang="es">
 
@@ -9,14 +11,14 @@
     <meta name="google-site-verification" content="J2MLV7DfS_lEK7g96SYwhecDLDt7_hGCvDPEazJDuOI" />
     <title>Registro</title>
 
-    <!-- Favicon -->
     <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
 
-    <!-- tailwindcss -->
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    {% tailwind_css %}
 
-    <!-- sweet alert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/sweetalert2.all.js' %}"></script>
+
+    <script src="{% static 'js/aos.js' %}"></script>
+    <link href="{% static 'css/aos.css' %}" rel="stylesheet">
 
     <style>
         /* Estilos adicionales para ocultar y mostrar pasos */
@@ -37,7 +39,7 @@
         class="fixed flex items-center justify-between w-full text-black md:px-20 md:py-4 text-white px-4 py-4 backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60"
         id="headerContainer">
         <div class="flex items-end space-x-1 justify-center ">
-            <img src="{% static 'images/logos/logo-unap-fondo.png' %}" alt="logo unap" class="h-17">
+            <img src="{% static 'images/logos/logo-unap.png' %}" alt="logo unap" class="h-17">
             <img src="{% static 'images/logos/logo-cimac.png' %}" alt="logo cimac" class="h-17 ml-2">
         </div>
         <nav class="flex items-center md:text-md sm:text-sm">
