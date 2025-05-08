@@ -130,6 +130,11 @@ def generar_pdf(request, dni):
 
     # Crear un lienzo de ReportLab
     c = canvas.Canvas(response, pagesize=letter)
+
+    # Establecer el título del PDF
+    c.setTitle("Constancia de Inscripción - CIMAC 2025")  # Aquí se establece el título
+
+
     width, height = letter
 
     # Agregar márgenes
@@ -155,7 +160,10 @@ def generar_pdf(request, dni):
     # Crear un estilo para el texto
     styles = getSampleStyleSheet()
     normal_style = styles['Normal']
+
     para_style = ParagraphStyle(name='Justified', parent=normal_style, alignment=4, fontSize=14, leading=18)  # Justificado
+
+    right_style = ParagraphStyle(name='RightAligned', parent=normal_style, alignment=2, fontSize=14, leading=18)  # Alineado a la derecha
     
     
     # Obtener la fecha en formato español
@@ -174,17 +182,25 @@ def generar_pdf(request, dni):
     
     ha completado exitosamente el proceso de inscripción y se encuentra registrado como <b>{usuario.tipo_participante.upper()}</b>. Además, ha realizado el pago correspondiente de <b>{usuario.monto} soles</b> (*a verificar) para participar en el: <br/><br/>
     
-    <b>XII CONGRESO INTERNACIONAL DE MATEMÁTICA APLICADA Y COMPUTACIONAL (CIMAC)</b>, que se llevará a cabo del 11 al 15 de agosto de 2025 en la ciudad de Puno.<br/><br/>
+    <b>XII CONGRESO INTERNACIONAL DE MATEMÁTICA APLICADA Y COMPUTACIONAL (CIMAC)</b>, que se llevará a cabo del 11 al 15 de agosto de 2025 en Puno, Perú.<br/><br/>
     
     Este evento congregará a destacados expertos, investigadores y profesionales del ámbito de la matemática aplicada y computacional, con el propósito de fomentar el intercambio de conocimientos, la colaboración académica y el avance en la investigación dentro de estas disciplinas. <br/><br/><br/>
     
-    {fecha_formateada}
+    """
+
+    text2 = f"""
+    Puno, {fecha_formateada}.<br/>
     """
 
     # Agregar párrafos al PDF con justificación y estilo
     p = Paragraph(text, style=para_style)
     p_width, p_height = p.wrap(width - (MARGEN_IZQUIERDO + MARGEN_DERECHO), height - (MARGEN_SUPERIOR + MARGEN_INFERIOR))
     p.drawOn(c, 0, -160 - p_height)
+
+    # Segundo párrafo (la fecha) alineado a la derecha
+    p2 = Paragraph(text2, style=right_style)
+    p2_width, p2_height = p2.wrap(width - (MARGEN_IZQUIERDO + MARGEN_DERECHO), height - (MARGEN_SUPERIOR + MARGEN_INFERIOR))
+    p2.drawOn(c, 0, -170 - p_height - p2_height)  # Posiciona justo después del anterior
 
 
     # Guardar el archivo PDF
