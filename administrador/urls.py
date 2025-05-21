@@ -28,5 +28,4 @@ urlpatterns = [
     path('register-admin-2025/', views.register_view, name='register'),
     
     
-    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

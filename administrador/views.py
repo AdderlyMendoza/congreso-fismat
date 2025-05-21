@@ -392,26 +392,37 @@ def ver_pdf(request):
 #     return render(request, 'administrador/login-administrador.html', {'form': form})
 
 
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            # Autenticar al usuario
+            # Obtiene el username y password
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
+            
+            # Autenticar al usuario
             user = authenticate(request, username=username, password=password)
+            
             if user is not None:
-                login(request, user)
-                
-                # Verifica el grupo al que pertenece el usuario
-                if user.groups.filter(name='Administrador').exists():
-                    return redirect('index-inscritos')  
-                elif user.groups.filter(name='Asistencia').exists():
-                    return redirect('entrada-inscritos') 
+                # Verifica si el usuario está activo
+                if user.is_active:
+                    login(request, user)
+                    
+                    # Verifica el grupo al que pertenece el usuario
+                    if user.groups.filter(name='Administrador').exists():
+                        return redirect('index-inscritos')  
+                    elif user.groups.filter(name='Asistencia').exists():
+                        return redirect('entrada-inscritos')
+                    else:
+                        messages.error(request, 'El usuario no tiene acceso a ninguna de las áreas disponibles.')
+                        return render(request, 'administrador/login-administrador.html', {'form': form})
+                else:
+                    messages.error(request, 'El usuario está inactivo. Contacta al administrador.')
             else:
                 messages.error(request, 'Usuario o contraseña incorrectos.')
         else:
-            messages.error(request, 'Usuario y/o contraseña incorrectos.')
+            messages.error(request, 'Formulario inválido. Por favor, revisa tus credenciales.')
     else:
         form = AuthenticationForm()
 
