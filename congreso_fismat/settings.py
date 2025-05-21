@@ -53,7 +53,7 @@ DEBUG = False
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost/postgres'),
+        default=os.getenv('DATABASE_URL', 'postgresql://postgres:dad2025@@localhost/postgres'),
         conn_max_age=600
     )
 }
