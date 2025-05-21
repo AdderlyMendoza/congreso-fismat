@@ -8,13 +8,25 @@
 
 <div class="mt-2 mb-4 mx-4 bg-white rounded-md shadow-lg p-6">
 
-    <div class="flex justify-between items-center">
-        <div>
-            <p class="text-md text-gray-700">Tomar la fecha y hora de salida de los inscritos</p>
-            <p class="text-md text-gray-700 mb-4">Cant. Salidas hoy: <span class="text-lg font-semibold">{{ asistenciaSalidaHoyCount }}</span></p>
-        </div>
-        <form method="POST" id="formDni">
+    <!-- inputs de asistencia -->
+    <div>
+
+        <form method="POST" id="formDni" class="flex justify-between items-center">
             {% csrf_token %}
+
+            <div class="mb-6">
+                <p class="text-md font-semibold text-gray-800 mb-4">Selecciona un lugar para tomar la salida:</p>
+                <div class="relative inline-block w-full">
+                    <select name="ubicacion" id="ubicacion"
+                        class="block w-full p-3 text-md bg-gray-50 border border-gray-300 rounded-xl shadow-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition-all duration-300 ease-in-out">
+                        <option value="">Selecciona una opción</option>
+                        <option value="A" {% if ubicacion_seleccionada == 'A' %}selected{% endif %}>Lugar A</option>
+                        <option value="B" {% if ubicacion_seleccionada == 'B' %}selected{% endif %}>Lugar B</option>
+                        <option value="C" {% if ubicacion_seleccionada == 'C' %}selected{% endif %}>Lugar C</option>
+                        <option value="D" {% if ubicacion_seleccionada == 'D' %}selected{% endif %}>Lugar D</option>
+                    </select>
+                </div>
+            </div>
 
             <!-- Campo DNI -->
             <div class="mb-4 flex justify-center items-center space-x-2">
@@ -24,13 +36,13 @@
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
 
                 {% if form.dni.errors %}
-                    <div class="text-red-700">
-                        <ul>
-                            {% for error in form.dni.errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                <div class="text-red-700">
+                    <ul>
+                        {% for error in form.dni.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 {% endif %}
 
             </div>
@@ -43,18 +55,19 @@
 
         </form>
 
+        <hr class="mb-4 text-gray-400">
+
+        <p class="text-md text-gray-700">Cantidad de registros (salidas) hoy: 
+            <span class="text-lg font-semibold text-indigo-600">{{ asistenciaSalidaHoyCount }}</span>
+        </p>
+
     </div>
 
-    <hr class="mb-4 text-gray-400">
-
-    <div class="mt-6">
-
-    </div>
-
-    <table class="w-full text-sm text-left mt-8">
+    <!-- tabla de registros de asistencia -->
+    <table class="w-full text-sm text-left mt-4">
         <thead class="text-sm font-semibold uppercase">
             <tr class="border-y-1">
-                <th scope="col" class="px-6 py-3">Nº</th>
+                <th scope="col" class="px-6 py-3">Nº </th>
                 <th scope="col" class="px-6 py-3">DNI</th>
                 <th scope="col" class="px-6 py-3">Apellidos y Nombres</th>
             </tr>
@@ -65,7 +78,7 @@
             <tr class="hover:bg-gray-100 border-y-1 border-gray-400 {% if forloop.first %}bg-blue-300{% endif %}">
                 <td class="px-6 py-4">{{ forloop.counter }}</td>
                 <td class="px-6 py-4">{{ asistencia.usuario.dni }}</td>
-                <td class="px-6 py-4">{{ asistencia.usuario.apellido_paterno }} {{ asistencia.usuario.apellido_materno }} {{ asistencia.usuario.nombres }} </td>
+                <td class="px-6 py-4">{{ asistencia.usuario.apellido_paterno }} {{ asistencia.usuario.apellido_materno}} {{ asistencia.usuario.nombres }} </td>
                 <td class="px-6 py-4"></td>
             </tr>
             {% endfor %}
@@ -76,11 +89,12 @@
 
 {% block scripts %}
 <script>
+
     // Hacer que el campo DNI siempre reciba el foco cuando la página se recarga
     document.getElementById("dni").focus();
 
     inputDni = document.getElementById("dni");
-    let formulario = document.getElementById("formDni"); // Suponiendo que el formulario tiene id "formDni"
+    let formulario = document.getElementById("formDni");
 
     // Verificar si el valor tiene 8 caracteres
     inputDni.addEventListener('input', function () {

@@ -28,7 +28,7 @@
     <main class="flex">
 
         <!-- SIDEBAR IZQUIERDO -->
-        <section class="p-4 w-100 min-h-screen bg-gray-800 h-100% text-white ">
+        <section class="p-4 w-100 min-h-screen bg-gray-800 h-100% text-white">
 
             <div class="text-center flex flex-col items-center">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_UNAP.png?National_University_of_the_Altiplano1139965787"
@@ -36,9 +36,24 @@
                 <h1 class="mt-2 text-xl">Universidad Nacional del Altiplano de Puno</h1>
             </div>
 
-            <hr class="mt-4">
+            <hr class="border-gray-500 mt-4">
+            <div class="py-2 flex items-center justify-center text-gray-400">
+
+                {% if is_admin %}
+                    ADMINISTRADOR
+                {% endif %}
+                
+                {% if is_asistencia %}
+                    SOPORTE TÉCNICO
+                {% endif %}
+
+            </div>
+            <hr class="border-gray-500 mb-2">
 
             <div class="mt-4">
+
+                {% if is_admin %}
+
                 <h1 class="font-semibold">MENU</h1>
                 <ul class="flex flex-col space-y-2 pt-2">
                     {% comment %} <a href=" {% url 'index-inscritos' %} " class="flex items-center px-4 py-2 hover:bg-gray-500"> {% endcomment %}
@@ -70,6 +85,9 @@
                         Usuarios
                     </a>
                 </ul>
+                {% endif %}
+
+                {% if is_asistencia or is_admin %}                
 
                 <h1 class="font-semibold mt-4">ASISTENCIA</h1>
                 <ul class="flex flex-col space-y-2 pt-2">
@@ -91,6 +109,9 @@
                         Salida
                     </a>
                 </ul>
+
+                {% endif %}
+
 
             </div>
 

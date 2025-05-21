@@ -27,15 +27,25 @@ from django.db.models import Count, Q
 from django.core.paginator import Paginator, EmptyPage
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+# Verifica que el usuario sea administrador
+def is_admin(user):
+    return user.groups.filter(name='Administrador').exists()
+
+# Verifica que el usuario sea de asistencia
+def is_asistencia(user):
+    return user.groups.filter(name='Asistencia').exists()
 
 
-
+@user_passes_test(is_admin)
 def index(request):
     # CANTIDADES
     inscritos_count = Registro.objects.all().count()
     inscritosValidados_count = Registro.objects.filter(validado=True).count() 
+
+
     
     # Obtener los conteos de entradas y salidas por fecha
     asistencias = Asistencia.objects.values('fecha') \
@@ -45,19 +55,54 @@ def index(request):
                                     ) \
                                     .order_by('-fecha')
     
+    # roles
+    is_admin = request.user.groups.filter(name='Administrador').exists()
+    is_asistencia = request.user.groups.filter(name='Asistencia').exists()
+
+    # registros lugar A
+    ubicacion_a = Asistencia.objects.filter(ubicacion='A').values('fecha') \
+                                    .annotate(
+                                        entradas_count=Count('entrada', filter=~Q(entrada=None)),
+                                        salidas_count=Count('salida', filter=~Q(salida=None))
+                                    ) \
+                                    .order_by('-fecha')
+    
+    ubicacion_b = Asistencia.objects.filter(ubicacion='B').values('fecha') \
+                                    .annotate(
+                                        entradas_count=Count('entrada', filter=~Q(entrada=None)),
+                                        salidas_count=Count('salida', filter=~Q(salida=None))
+                                    ) \
+                                    .order_by('-fecha')
+    
+    ubicacion_c = Asistencia.objects.filter(ubicacion='C').values('fecha') \
+                                    .annotate(
+                                        entradas_count=Count('entrada', filter=~Q(entrada=None)),
+                                        salidas_count=Count('salida', filter=~Q(salida=None))
+                                    ) \
+                                    .order_by('-fecha')
+    
+    ubicacion_d = Asistencia.objects.filter(ubicacion='D').values('fecha') \
+                                    .annotate(
+                                        entradas_count=Count('entrada', filter=~Q(entrada=None)),
+                                        salidas_count=Count('salida', filter=~Q(salida=None))
+                                    ) \
+                                    .order_by('-fecha')
+    
     return render(request, 'administrador/index-inscritos.html', {
         'inscritos_count': inscritos_count,
         'inscritosValidados_count': inscritosValidados_count,
-        'asistencias': asistencias
+        'asistencias': asistencias,
+        'ubicacion_a': ubicacion_a,
+        'ubicacion_b': ubicacion_b,
+        'ubicacion_c': ubicacion_c,
+        'ubicacion_d': ubicacion_d,
+        'is_admin': is_admin,
+        'is_asistencia': is_asistencia,
     })
 
 
 
-
-# def lista_inscritos(request):
-#     inscritos = Registro.objects.all().order_by('-fecha_registro')
-#     return render(request, 'administrador/lista-inscritos.html', {'inscritos': inscritos})
-
+@user_passes_test(is_admin)
 def lista_inscritos(request):
     # Obtén todos los registros de inscritos ordenados por fecha
     inscritos = Registro.objects.all().order_by('-fecha_registro')
@@ -73,18 +118,14 @@ def lista_inscritos(request):
     except:
         page_obj = paginator.page(paginator.num_pages)  # Si la página no existe, muestra la última página
 
-    return render(request, 'administrador/lista-inscritos.html', {'page_obj': page_obj})
+
+    # roles
+    is_admin = request.user.groups.filter(name='Administrador').exists()
+    is_asistencia = request.user.groups.filter(name='Asistencia').exists()
+
+    return render(request, 'administrador/lista-inscritos.html', {'page_obj': page_obj, 'is_admin': is_admin, 'is_asistencia': is_asistencia})
 
 
-
-# def validar_inscrito(request, id):
-#     if request.method == 'POST':
-#         id = request.POST.get('id', id)  # Usamos el id del formulario si está presente, o el id de la URL por defecto
-    
-#     inscrito = Registro.objects.get(id=id)
-#     inscrito.validado = 0 if inscrito.validado == 1 else 1
-#     inscrito.save()
-#     return redirect('lista-inscritos')
 
 def validar_inscrito(request, id):
     if request.method == 'POST':
@@ -105,7 +146,9 @@ def validar_inscrito(request, id):
         except Registro.DoesNotExist:
             return JsonResponse({'status': 'error'}, status=404)
 
-# Funciona con pandas
+
+
+
 def excel_inscritos_validados(request):
     # Filtra los registros validados
     inscritos = Registro.objects.filter(validado=1)
@@ -189,81 +232,13 @@ def excel_inscritos_validados(request):
     return response
 
 
-# def excel_inscritos_validados(request):
-#     inscritos = Registro.objects.filter(validado=1).values_list(
-#         'dni', 'nombres', 'apellido_paterno', 'apellido_materno', 
-#         'email', 'celular', 'fecha_registro'
-#     )
-
-#     # Crear el libro de Excel directamente con OpenPyXL
-#     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-#     response['Content-Disposition'] = 'attachment; filename=inscritos_validados.xlsx'
-
-#     wb = Workbook()
-#     ws = wb.active
-#     ws.title = "Inscritos"
-
-#     # Estilos reutilizables
-#     header_font = Font(bold=True, size=12)
-#     title_font = Font(bold=True, size=16)
-#     subtitle_font = Font(bold=True, size=14)
-#     center_alignment = Alignment(horizontal='center', vertical='center')
-#     thin_border = Border(
-#         left=Side(border_style="thin"), 
-#         right=Side(border_style="thin"),
-#         top=Side(border_style="thin"), 
-#         bottom=Side(border_style="thin")
-#     )
-
-#     # Cabeceras y títulos
-#     ws.merge_cells('A1:G1')
-#     ws['A2'] = 'CONGRESO CIMAC 2025'
-#     ws['A3'] = 'LISTA DE PERSONAS INSCRITAS'
-    
-#     # Aplicar estilos a los títulos
-#     for row in [2, 3]:
-#         ws.merge_cells(f'A{row}:G{row}')
-#         ws.row_dimensions[row].height = 30 if row == 2 else 20
-#         cell = ws[f'A{row}']
-#         cell.font = title_font if row == 2 else subtitle_font
-#         cell.alignment = center_alignment
-
-#     # Encabezados de columna
-#     columns = [
-#         'DNI', 'Nombre', 'Apellido Paterno', 
-#         'Apellido Materno', 'Email', 'Celular', 'Fecha de registro'
-#     ]
-    
-#     for col_num, column_title in enumerate(columns, 1):
-#         cell = ws.cell(row=5, column=col_num, value=column_title)
-#         cell.font = header_font
-
-#     # Datos
-#     for row_num, inscrito in enumerate(inscritos, 6):
-#         for col_num, cell_value in enumerate(inscrito, 1):
-#             if col_num == 7 and cell_value:  # Fecha de registro
-#                 cell_value = make_naive(cell_value).strftime('%Y-%m-%d %H:%M:%S')
-#             ws.cell(row=row_num, column=col_num, value=cell_value).border = thin_border
-
-#     # Ajustar ancho de columnas
-#     for col in ws.columns:
-#         max_length = 0
-#         column = col[0].column_letter
-#         for cell in col:
-#             try:
-#                 if len(str(cell.value)) > max_length:
-#                     max_length = len(str(cell.value))
-#             except:
-#                 pass
-#         adjusted_width = (max_length + 2)
-#         ws.column_dimensions[column].width = adjusted_width
-
-#     wb.save(response)
-#     return response
-
 
 
 def entrada_inscritos(request):
+    # roles
+    is_admin = request.user.groups.filter(name='Administrador').exists()
+    is_asistencia = request.user.groups.filter(name='Asistencia').exists()
+
     
     inicio_dia = timezone.make_aware(timezone.datetime.combine(timezone.now().date(), timezone.datetime.min.time()))
     fin_dia = inicio_dia + timedelta(days=1) - timedelta(seconds=1)
@@ -272,58 +247,62 @@ def entrada_inscritos(request):
         form = EntradaForm(request.POST)
         if form.is_valid():
             dni = form.cleaned_data['dni']
+            ubicacion = form.cleaned_data['ubicacion']
+
             try:
                 # Buscar al usuario con el DNI proporcionado
                 usuario = Registro.objects.get(dni=dni)
 
                 # Verificar si ya existe un registro de asistencia para este usuario y la fecha actual
                 asistencia = Asistencia.objects.filter(usuario=usuario, fecha=timezone.now().date()).first()
-                # print("registro de entrada: ", timezone.localtime(timezone.now()))
-
-                if not asistencia:
-                    # Si no existe el registro, creamos uno nuevo con la hora de entrada
-                    hora_ajustada = timezone.localtime(timezone.now()) - timedelta(hours=5)
-                    
-                    try:
-                        # Intentamos crear el registro
-                        asistencia = Asistencia.objects.create(
-                            usuario=usuario,
-                            entrada=hora_ajustada,
-                            fecha=timezone.now().date()
-                        )
-
-                    except IntegrityError:
-                        # Si ocurre un error de integridad (duplicado), se maneja aquí
-                        form.add_error('dni', 'DNI ya registrado.')
-         
-                else:
-                    # Si ya existe el registro, no hacemos nada
+                if asistencia:
                     form.add_error('dni', 'DNI ya registrado.')
-                    pass
-
-                # return redirect('entrada-inscritos')  # Redirige después de registrar
-                return render(request, 'administrador/entrada-inscritos.html', {'form': form, 'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada'), 'asistenciaEntradaHoyCount': Asistencia.objects.filter(entrada__gte=inicio_dia, entrada__lt=fin_dia).count()})            
+                else:
+                    hora_ajustada = timezone.localtime(timezone.now()) - timedelta(hours=5)
+                    # Intentamos crear el registro
+                    Asistencia.objects.create(
+                        usuario=usuario,
+                        entrada=hora_ajustada,
+                        fecha=timezone.now().date(),
+                        ubicacion=ubicacion
+                    )
+            
             except Registro.DoesNotExist:
                 form.add_error('dni', 'DNI no existe.')
+
+            # Redirigir o volver a renderizar la página después de procesar el formulario
+            return render(request, 'administrador/entrada-inscritos.html', {
+                'form': form,
+                'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada'),
+                'asistenciaEntradaHoyCount': Asistencia.objects.filter(entrada__gte=inicio_dia, entrada__lt=fin_dia).count(),
+                'is_admin': is_admin,
+                'is_asistencia': is_asistencia,
+                'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '')  # Mantén el valor de la ubicación seleccionada
+            })
+        
+        else:
+            form.add_error('dni', 'Seleccione una ubicación.')
+    
     else:
         form = EntradaForm()
 
-        
-    asistenciaEntrada = Asistencia.objects.all().order_by('-entrada')
-    asistenciaEntradaHoyCount = Asistencia.objects.filter(entrada__gte=inicio_dia, entrada__lt=fin_dia).count()
+    return render(request, 'administrador/entrada-inscritos.html', {
+        'form': form,
+        'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada'),
+        'asistenciaEntradaHoyCount': Asistencia.objects.filter(entrada__gte=inicio_dia, entrada__lt=fin_dia).count(),
+        'is_admin': is_admin,
+        'is_asistencia': is_asistencia,
+        'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '') if form.is_bound and form.is_valid() else ''
+    })
 
-
-    
-    return render(request, 'administrador/entrada-inscritos.html', 
-                { 
-                    'form': form, 
-                    'asistenciaEntrada':asistenciaEntrada,
-                    'asistenciaEntradaHoyCount':asistenciaEntradaHoyCount,
-                })
 
 
 
 def salida_inscritos(request):
+    # roles
+    is_admin = request.user.groups.filter(name='Administrador').exists()
+    is_asistencia = request.user.groups.filter(name='Asistencia').exists()
+
     
     inicio_dia = timezone.make_aware(timezone.datetime.combine(timezone.now().date(), timezone.datetime.min.time()))
     fin_dia = inicio_dia + timedelta(days=1) - timedelta(seconds=1)
@@ -332,13 +311,13 @@ def salida_inscritos(request):
         form = SalidaForm(request.POST)
         if form.is_valid():
             dni = form.cleaned_data['dni']
+            ubicacion = form.cleaned_data['ubicacion']
+
             try:
                 # Buscar al usuario con el DNI proporcionado
                 usuario = Registro.objects.get(dni=dni)
 
-                ## LA ENTRADA TIENE QUE ALMACENARSE CON HORA Y LA SALIDA TAMBIEN, LA COLUMNA FECHA QUE SIGA SIENDO SOLO AÑO/MES/DIA
-                asistencia = Asistencia.objects.filter(usuario=usuario, fecha=timezone.localtime(timezone.now()).date()).first()
-                # print("registro de salida: ", timezone.localtime(timezone.now()))
+                asistencia = Asistencia.objects.filter(usuario=usuario, fecha=timezone.now().date()).first()
                 
                 if asistencia:
                     if asistencia.entrada is not None and asistencia.salida is None:
@@ -352,25 +331,35 @@ def salida_inscritos(request):
                 else:
                     # Si no existe el registro de asistencia, mostramos un error
                     form.add_error('dni', 'DNI sin entrada hoy.')
-
-                # return redirect('salida-inscritos')  # Redirige después de registrar
-                return render(request, 'administrador/salida-inscritos.html', {'form': form, 'asistenciaSalida': Asistencia.objects.all().order_by('-salida'), 'asistenciaSalidaHoyCount': Asistencia.objects.filter(salida__gte=inicio_dia, entrada__lt=fin_dia).count()})
-
             
             except Registro.DoesNotExist:
                 form.add_error('dni', 'DNI no existe.')
+
+            # Redirigir o volver a renderizar la página después de procesar el formulario
+            return render(request, 'administrador/salida-inscritos.html', {
+                'form': form,
+                'asistenciaSalida': Asistencia.objects.filter(salida__isnull=False).order_by('-salida'),
+                'asistenciaSalidaHoyCount': Asistencia.objects.filter(salida__gte=inicio_dia, entrada__lt=fin_dia).count(), 
+                'is_admin': is_admin,
+                'is_asistencia': is_asistencia,
+                'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '') 
+            })
+        
+        else:
+            form.add_error('dni', 'Seleccione una ubicación.')
+    
     else:
         form = SalidaForm()
 
-    asistenciaSalida = Asistencia.objects.all().order_by('-salida')
-    asistenciaSalidaHoyCount = Asistencia.objects.filter(salida__gte=inicio_dia, entrada__lt=fin_dia).count()
-    
-    return render(request, 'administrador/salida-inscritos.html', 
-                  {
-                      'form': form, 
-                      'asistenciaSalida':asistenciaSalida,
-                      'asistenciaSalidaHoyCount':asistenciaSalidaHoyCount,
-               })
+    return render(request, 'administrador/salida-inscritos.html', {
+        'form': form,
+        'asistenciaSalida': Asistencia.objects.filter(salida__isnull=False).order_by('-salida'),
+        'asistenciaSalidaHoyCount': Asistencia.objects.filter(salida__gte=inicio_dia, entrada__lt=fin_dia).count(), 
+        'is_admin': is_admin,
+        'is_asistencia': is_asistencia,
+        'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '') if form.is_bound and form.is_valid() else ''
+    })
+
 
 
 
@@ -382,6 +371,27 @@ def ver_pdf(request):
 
 # CRAER Y LOGIN DEL ADMINISTRADOR
 
+# def login_view(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request, data=request.POST)
+#         if form.is_valid():
+#             # Autenticar al usuario
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
+#             user = authenticate(request, username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('index-inscritos')  # Redirige a la página de inicio
+#             else:
+#                 messages.error(request, 'Usuario o contraseña incorrectos.')
+#         else:
+#             messages.error(request, 'Usuario y/o contraseña incorrectos.')
+#     else:
+#         form = AuthenticationForm()
+
+#     return render(request, 'administrador/login-administrador.html', {'form': form})
+
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -392,7 +402,12 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index-inscritos')  # Redirige a la página de inicio
+                
+                # Verifica el grupo al que pertenece el usuario
+                if user.groups.filter(name='Administrador').exists():
+                    return redirect('index-inscritos')  
+                elif user.groups.filter(name='Asistencia').exists():
+                    return redirect('entrada-inscritos') 
             else:
                 messages.error(request, 'Usuario o contraseña incorrectos.')
         else:
@@ -403,23 +418,56 @@ def login_view(request):
     return render(request, 'administrador/login-administrador.html', {'form': form})
 
 
-
 def logout_view(request):
     logout(request)  # Cierra la sesión del usuario
     return redirect('login')  # Redirige a la página de login o cualquier otra página pública
 
 
 
+# def register_view(request):
+#     if request.method == 'POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()  # Guarda el nuevo usuario
+#             messages.success(request, '¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.')
+#             return redirect('login')  # Redirige al login después de crear la cuenta
+#         else:
+#             messages.error(request, 'Por favor, corrige los errores.')
+#     else:
+#         form = UserCreationForm()
+
+#     return render(request, 'administrador/crear-administrador.html', {'form': form})
+
+
+# roles y permisos
+from django.contrib.auth.models import Group
+from .forms import CustomUserCreationForm
+
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()  # Guarda el nuevo usuario
+            # Guarda el nuevo usuario
+            user = form.save()
+
+            # Asignar grupo según el rol elegido
+            role = form.cleaned_data['role']
+
+            if role == 'administrador':
+                # Asignar al grupo 'Administrador'
+                admin_group = Group.objects.get(name='Administrador')
+                user.groups.add(admin_group)
+            elif role == 'asistencia':
+                # Asignar al grupo 'Asistencia'
+                asistencia_group = Group.objects.get(name='Asistencia')
+                user.groups.add(asistencia_group)
+
+            # Mensaje de éxito
             messages.success(request, '¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.')
             return redirect('login')  # Redirige al login después de crear la cuenta
         else:
             messages.error(request, 'Por favor, corrige los errores.')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
 
     return render(request, 'administrador/crear-administrador.html', {'form': form})

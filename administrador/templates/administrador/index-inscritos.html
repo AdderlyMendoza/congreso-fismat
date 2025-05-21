@@ -45,7 +45,7 @@
 
         <!-- REPORTE DE ASISTENCIAS -->
 
-        <h1 class="mt-8 mb-4 font-bold">REGISTRO DE ASISTENCIAS</h1>
+        <h1 class="mt-8 mb-4 font-bold">REGISTRO DE ASISTENCIAS TOTAL</h1>
 
         <div class="my-4">
 
@@ -71,6 +71,115 @@
             </table>
 
         </div>
+
+        <h1 class="mt-8 mb-4 font-bold text-gray-400">REGISTRO DE ASISTENCIAS LUGAR A</h1>
+        
+        <div class="my-4">
+
+            <table class="w-full text-sm text-left">
+                <thead class="text-sm font-semibold uppercase">
+                    <tr class="border-y-1 border-gray-400">
+                        <th scope="col" class="px-6 py-3 text-gray-400">Nº</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Fecha</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Cantidad de Entradas</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Cantidad de Salidas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for asistencia in ubicacion_a %}
+                    <tr class="hover:bg-gray-100 border-y-1 border-gray-400">
+                        <td class="px-6 py-4 text-gray-400">{{ forloop.counter }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.fecha }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.entradas_count }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.salidas_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <h1 class="mt-8 mb-4 font-bold text-gray-400">REGISTRO DE ASISTENCIAS LUGAR B</h1>
+        
+        <div class="my-4">
+
+            <table class="w-full text-sm text-left">
+                <thead class="text-sm font-semibold uppercase">
+                    <tr class="border-y-1 border-gray-400">
+                        <th scope="col" class="px-6 py-3 text-gray-400">Nº</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Fecha</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Cantidad de Entradas</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Cantidad de Salidas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for asistencia in ubicacion_b %}
+                    <tr class="hover:bg-gray-100 border-y-1 border-gray-400">
+                        <td class="px-6 py-4 text-gray-400">{{ forloop.counter }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.fecha }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.entradas_count }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.salidas_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <h1 class="mt-8 mb-4 font-bold text-gray-400">REGISTRO DE ASISTENCIAS LUGAR C</h1>
+        
+        <div class="my-4">
+
+            <table class="w-full text-sm text-left">
+                <thead class="text-sm font-semibold uppercase">
+                    <tr class="border-y-1 border-gray-400">
+                        <th scope="col" class="px-6 py-3 text-gray-400">Nº</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Fecha</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Cantidad de Entradas</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Cantidad de Salidas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for asistencia in ubicacion_c %}
+                    <tr class="hover:bg-gray-100 border-y-1 border-gray-400">
+                        <td class="px-6 py-4 text-gray-400">{{ forloop.counter }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.fecha }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.entradas_count }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.salidas_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <h1 class="mt-8 mb-4 font-bold text-gray-400">REGISTRO DE ASISTENCIAS LUGAR D</h1>
+        
+        <div class="my-4">
+
+            <table class="w-full text-sm text-left">
+                <thead class="text-sm font-semibold uppercase">
+                    <tr class="border-y-1 border-gray-400">
+                        <th scope="col" class="px-6 py-3 text-gray-400">Nº</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Fecha</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Cantidad de Entradas</th>
+                        <th scope="col" class="px-6 py-3 text-gray-400">Cantidad de Salidas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for asistencia in ubicacion_d %}
+                    <tr class="hover:bg-gray-100 border-y-1 border-gray-400">
+                        <td class="px-6 py-4 text-gray-400">{{ forloop.counter }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.fecha }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.entradas_count }}</td>
+                        <td class="px-6 py-4 text-gray-400">{{ asistencia.salidas_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
 
 
 
