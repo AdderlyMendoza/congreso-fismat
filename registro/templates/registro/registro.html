@@ -58,15 +58,31 @@
 
             <!-- PASO 1: Información de montos y fechas -->
             <div class="step active" id="step1">
+
+                <!-- RECUERDA -->
+                <div class="px-8 py-4 my-4 max-w-lg w-full border-2 border-gray-300">
+                    <p class="text-center text-md text-red-600 font-semibold">
+                        <span class="text-lg text-red-800 font-bold">¡IMPORTANTE!</span>
+                        Antes de iniciar la inscripción, asegúrese de haber realizado el pago y de tener la imagen o el PDF del voucher.
+                    </p>
+                </div>
+
                 <!-- CUENTAS -->
                 <div class="px-8 mt-4 max-w-lg w-full">
                     <h1 class="text-center text-2xl font-bold mb-4">CUENTAS</h1>
 
                     <span class="text-lg font-bold">BCP:</span>
-                    <span class="text-lg text-gray-700 ml-1">945-05966479-0-23</span>
+                    <span class="text-lg text-gray-700 ml-1">495-05966479-0-23</span>
                     <br>
                     <span class="text-lg font-bold">CCI:</span>
                     <span class="text-lg text-gray-700 ml-2">002 49510596647902300</span>
+                    <br>
+                    <span class="text-lg font-bold">TITULAR:</span>
+                    <span class="text-lg text-gray-700 ml-2">Zavaleta Gomez Juana Idelza</span>
+                    <br>
+                    <span class="text-lg font-bold">MONEDA:</span>
+                    <span class="text-lg text-gray-700 ml-2">Soles</span>
+
                 </div>
 
                 <!-- MONTOS -->
@@ -110,7 +126,7 @@
                 </div>
 
                 <div class="mb-2" id="div_doc_acreditivo">
-                    <label for="doc_acreditivo" class="text-gray-700 font-semibold">CARNET DE ESTUDIANTE Y/O SIMILAR: <span class="text-gray-400 font-normal">(max: 2MB)</span>
+                    <label for="doc_acreditivo" class="text-gray-700 font-semibold">CARNET DE ESTUDIANTE Y/O SIMILAR: <span class="text-gray-400 font-normal">(max: 5MB)</span>
                     </label>
                     {{ form.doc_acreditivo }}
                 </div>
@@ -198,7 +214,7 @@
                 </div>
 
                 <div class="mb-2">
-                    <label for="voucher_pago" class="flex-1 text-gray-700 font-semibold">VOUCHER DE PAGO: <span class="text-gray-400 font-normal">(max: 2MB)</span></label>
+                    <label for="voucher_pago" class="flex-1 text-gray-700 font-semibold">VOUCHER DE PAGO: <span class="text-gray-400 font-normal">(max: 5MB)</span></label>
                     <div class="flex">
                         {{ form.voucher_pago }}
                     </div>
@@ -251,7 +267,7 @@
         nextStep1Btn.addEventListener("click", function () {
             Swal.fire({
                 icon: 'info',
-                title: 'Por favor, asegúrese de adjuntar la imagen del pago y completar correctamente todos los datos.',
+                title: 'Por favor, complete correctamente cada pregunta y no olvide subir los documentos que se le soliciten.',
                 confirmButtonText: 'Aceptar',
             })
                 .then((result) => {
@@ -369,7 +385,7 @@
             } else {
                 const archivo = docAcreditivoField.files[0];
                 const extensionesPermitidas = ['image/jpeg', 'image/png', 'application/pdf'];
-                const maxSizeMB = 2;
+                const maxSizeMB = 5;
                 const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
                 // Validación de tipo
@@ -482,7 +498,7 @@
         });
     }
 
-        function validarFormularioStep4() {
+    function validarFormularioStep4() {
         let isValid = true;
         let errorMessages = [];
     
@@ -495,7 +511,7 @@
         } else {
             const archivo = voucherInput.files[0];
             const extensionesPermitidas = ['image/jpeg', 'image/png', 'application/pdf'];
-            const maxMB = 2;
+            const maxMB = 5;
             const maxSizeBytes = maxMB * 1024 * 1024;
     
             // Validación de tipo
