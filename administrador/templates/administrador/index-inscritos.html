@@ -4,9 +4,11 @@
 
 {% block content %}
 
+
 <h1 class="text-2xl font-semibold p-4">DASHBOARD</h1>
 
 <div class="mt-2 mb-4 mx-4 bg-white rounded-md shadow-md">
+
     <p class="py-4 px-6 text-md">Reportes del congreso CIMAC 2025</p>
     <hr class="mb-4 text-gray-400">
 
@@ -14,11 +16,11 @@
 
         <h1 class="my-4 font-bold">REPORTE DE INSCRITOS Y VALIDADOS</h1>
 
-        <!-- REPORTES INSCRITOS Y VALIDADOS -->
+        <!-- REPORTE INSCRITOS Y VALIDADOS -->
         <div class="flex justify-between space-x-4">
 
             <div
-                class="flex flex-1 bg-blue-500 text-white p-4 rounded-md shadow-md items-center transition delay-150 duration-300 ease-in-out  hover:scale-105 ">
+                class="flex flex-1 bg-blue-500 text-white p-4 rounded-md shadow-md items-center transition delay-150 duration-300 ease-in-out  hover:scale-105">
 
                 <h1 class="text-5xl items-center m-2"> {{ inscritos_count }} </h1>
 
@@ -42,6 +44,18 @@
             </div>
 
         </div>
+
+
+
+        <!-- REPORTE VISUAL DE INSCRITOS -->
+        <div class="flex justify-between space-x-4 mt-4">
+
+            <div id="barChart" style="width: 50%; height: 380px; border: 2px solid gray; padding: 20px"></div>
+            <div id="pieChart" style="width: 50%; height: 380px; border: 2px solid gray; padding: 20px"></div>
+
+        </div>
+
+
 
         <!-- REPORTE DE ASISTENCIAS -->
 
@@ -182,10 +196,166 @@
 
 
 
-
-
-
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM cargado');
+
+            // Obtener los divs donde se mostrarán los gráficos
+            const barChartDiv = document.getElementById('barChart');
+            const pieChartDiv = document.getElementById('pieChart');
+
+            if (!barChartDiv) {
+                console.error('No se encontró el div con id "barChart"');
+                return;
+            }
+            if (!pieChartDiv) {
+                console.error('No se encontró el div con id "pieChart"');
+                return;
+            }
+
+            console.log('Divs encontrados:', barChartDiv, pieChartDiv);
+
+            var barChart = echarts.init(barChartDiv);
+            var pieChart = echarts.init(pieChartDiv);
+
+            console.log('Gráficos inicializados');
+
+            // Datos de registroPorFechas (recibidos desde Django como JSON)
+            console.log('Datos de registroPorFechas:', {{ registroPorFechas|safe }});
+            const registroPorFechas = {{ registroPorFechas|safe }};
+
+            // Preparar los datos para el gráfico de barras
+            var barXAxis = [];
+            var barData = [];
+
+            registroPorFechas.forEach(function(item) {
+                console.log('Fecha:', item.fecha, 'Total:', item.total);
+                const fechaPartes = item.fecha.split('-');  // Esto te da un array de [YYYY, MM, DD]
+                const fechaInvertida = `${fechaPartes[2]}-${fechaPartes[1]}-${fechaPartes[0]}`;
+                barXAxis.push(fechaInvertida);
+                barData.push(item.total);
+            });
+
+            // Configuración del gráfico de barras
+            var barOption = {
+                title: [
+                    {
+                        left: 'center',
+                        text: 'Inscritos por Fechas',
+                        top: 'bottom',
+                    }
+                ],
+                tooltip: {
+                    trigger: 'axis'  // Tooltip que aparece al pasar el mouse sobre el eje
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        {% comment %} dataView: { readOnly: false },  // Ver datos (editable) {% endcomment %}
+                        magicType: { type: ['line', 'bar'] },  // Permitir cambiar entre gráfico de líneas y barras
+                        restore: {},  // Botón para restaurar la vista original
+                        saveAsImage: {}  // Guardar gráfico como imagen
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: barXAxis // Usando tus datos de fechas (si son categorías)
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'Cantidad',  // Nombre del eje Y
+                    nameLocation: 'middle',  // Coloca el nombre en el medio del eje
+                    nameGap: 35,  // Espacio entre el nombre del eje y las etiquetas del eje
+                    nameTextStyle: {
+                        fontSize: 12,
+                        color: 'gray'
+                    },
+                    nameRotate: 90,  // Rota el nombre 90 grados para hacerlo vertical
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                series: [
+                    {
+                        name: 'Inscritos',  // Nombre de la serie (lo que aparece en la leyenda)
+                        type: 'line',  // Tipo de gráfico ahora es línea
+                        data: barData,  // Tus datos de la cantidad de inscritos
+                        {% comment %} barWidth: 30,  // Puedes especificar el ancho de las barras {% endcomment %}
+                        markPoint: {
+                            data: barData.map((value, index) => ({
+                                type: 'max',
+                                name: 'Punto ' + (index + 1),
+                                coord: [barXAxis[index], value],  // Coordenadas para marcar el punto
+                                value: value
+                            }))
+                        },
+                    }
+                ]
+            };
+
+            // Obtener los valores de participantes y estudiantes desde el contexto de Django
+            const participantes_count = {{ participantes_count }};
+            const estudiantes_count = {{ estudiantes_count }};
+
+            // Configuración del gráfico de pastel con los nuevos datos
+            var pieOption = {
+                title: [
+                    {
+                        left: 'center',
+                        text: 'Tipo de Participante',
+                        top: 'bottom',
+                    }
+                ],
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                },
+                series: [
+                    {
+                        name: 'Participantes',
+                        type: 'pie',
+                        radius: '60%',
+                        data: [
+                            { value: participantes_count, name: 'Participantes' },
+                            { value: estudiantes_count, name: 'Estudiantes' }
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        },
+                        label: {
+                            show: true,  // Mostrar etiquetas
+                            position: 'inside',  // Coloca la etiqueta fuera del segmento (en el borde)
+                            formatter: '{c}',  // Muestra el nombre y el valor del segmento
+                            fontSize: 20,  // Tamaño de la fuente
+                            fontWeight: 'bold',  // Grosor de la fuente
+                            color: 'white'  // Color de la fuente
+                        },
+                        labelLine: {
+                            show: true  // Muestra las líneas de las etiquetas (opcional)
+                        }
+                    }
+                ]
+            };
+
+            // Establecer las opciones para los gráficos
+            barChart.setOption(barOption);
+            console.log('Opción del gráfico de barras seteada');
+
+            pieChart.setOption(pieOption);
+            console.log('Opción del gráfico de pastel seteada');
+        });
+    </script>
+
+
 
 </div>
 

@@ -29,6 +29,9 @@ from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
 
+from django.db.models.functions import TruncDate
+
+
 
 # Verifica que el usuario sea administrador
 def is_admin(user):
@@ -59,7 +62,7 @@ def index(request):
     is_admin = request.user.groups.filter(name='Administrador').exists()
     is_asistencia = request.user.groups.filter(name='Asistencia').exists()
 
-    # registros lugar A
+    # registros lugares
     ubicacion_a = Asistencia.objects.filter(ubicacion='A').values('fecha') \
                                     .annotate(
                                         entradas_count=Count('entrada', filter=~Q(entrada=None)),
@@ -88,6 +91,30 @@ def index(request):
                                     ) \
                                     .order_by('-fecha')
     
+    # Registro por fechas
+    registro_fechas = Registro.objects.filter(fecha_registro__isnull=False)
+
+    fechas_contadas = {}
+
+    for registro in registro_fechas:
+        fecha = registro.fecha_registro.date()  # `.date()` obtiene solo la parte de la fecha
+        if fecha in fechas_contadas:
+            fechas_contadas[fecha] += 1
+        else:
+            fechas_contadas[fecha] = 1
+
+    registroPorFechas = []
+
+    for fecha, total in fechas_contadas.items():
+        registroPorFechas.append({'fecha': fecha.strftime('%Y-%m-%d'), 'total': total})
+
+    
+    # Participantes y estudiantes
+    participantes_count = Registro.objects.filter(tipo_participante='participante').count()
+    estudiantes_count = Registro.objects.filter(tipo_participante='estudiante (pregrado)').count()
+
+
+    # Renderizar
     return render(request, 'administrador/index-inscritos.html', {
         'inscritos_count': inscritos_count,
         'inscritosValidados_count': inscritosValidados_count,
@@ -98,6 +125,9 @@ def index(request):
         'ubicacion_d': ubicacion_d,
         'is_admin': is_admin,
         'is_asistencia': is_asistencia,
+        'registroPorFechas': registroPorFechas,
+        'participantes_count': participantes_count,
+        'estudiantes_count': estudiantes_count
     })
 
 
