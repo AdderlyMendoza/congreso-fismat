@@ -89,12 +89,12 @@
                 <div class="p-8 mt-4 max-w-lg w-full">
                     <h1 class="text-center text-2xl font-bold mb-4">MONTOS</h1>
                     <h1 class="text-lg font-bold">PARTICIPANTE</h1>
-                    <h2>S/. 100 (abril a mayo)</h2>
-                    <h2>S/. 150 (junio en adelante)</h2>
+                    <h2>S/. 100 (abril a 20 de junio)</h2>
+                    <h2>S/. 150 (21 de junio en adelante)</h2>
 
                     <h1 class="text-lg font-bold mt-4">ESTUDIANTE (pregrado)</h1>
-                    <h2>S/. 50 (abril a mayo)</h2>
-                    <h2>S/. 80 (junio en adelante)</h2>
+                    <h2>S/. 50 (abril a 20 de junio)</h2>
+                    <h2>S/. 80 (21 de junio en adelante)</h2>
                 </div>
 
                 <button type="button" id="nextStep1"
@@ -585,7 +585,7 @@
 </script>
 
 <!-- Manejo del monto -->
-<script>
+{% comment %} <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Obtenemos la fecha actual
         const hoy = new Date();
@@ -639,6 +639,55 @@
             montoPagoDiv.textContent = 'S/. ' + nuevoMonto;
         });
     });
+</script> {% endcomment %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtenemos la fecha actual
+        const hoy = new Date();
+        const dia = hoy.getDate();
+        const mes = hoy.getMonth() + 1; // 0-11, por eso sumamos 1
+        const año = hoy.getFullYear();
+
+        // Función para calcular monto según la fecha y tipo de usuario
+        function calcularMonto(tipoUsuario) {
+            let monto = 0;
+            const fechaLimite = new Date(2025, 5, 20); // 20 de junio de 2025 (mes 5 = junio)
+            if (hoy <= fechaLimite) {
+                if (tipoUsuario === 'estudiante (pregrado)') {
+                    monto = 50;
+                } else if (tipoUsuario === 'participante') {
+                    monto = 100;
+                }
+            } else {
+                if (tipoUsuario === 'estudiante (pregrado)') {
+                    monto = 80;
+                } else if (tipoUsuario === 'participante') {
+                    monto = 150;
+                }
+            }
+            return monto;
+        }
+
+        const tipoUsuarioSelect = document.getElementById("id_tipo_participante");
+        const montoPagoDiv = document.getElementById('monto_pago');
+
+        function actualizarMonto() {
+            const tipoUsuario = tipoUsuarioSelect ? tipoUsuarioSelect.value : "";
+            const monto = calcularMonto(tipoUsuario);
+            montoPagoDiv.textContent = 'S/. ' + monto;
+        }
+
+        // Inicializamos el monto
+        actualizarMonto();
+
+        // Actualizamos el monto cuando cambia el tipo de usuario
+        if (tipoUsuarioSelect) {
+            tipoUsuarioSelect.addEventListener("change", actualizarMonto);
+        }
+    });
 </script>
+
+
 
 </html>

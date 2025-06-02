@@ -138,7 +138,7 @@ def lista_inscritos(request):
     inscritos = Registro.objects.all().order_by('-fecha_registro')
 
     # Paginación
-    paginator = Paginator(inscritos, 5)  # Muestra 10 inscritos por página
+    paginator = Paginator(inscritos, 10)  # Muestra 10 inscritos por página
     page_number = request.GET.get('page')  # Obtén el número de página desde la URL
 
     try:

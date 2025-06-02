@@ -230,6 +230,10 @@
             var barXAxis = [];
             var barData = [];
 
+            registroPorFechas.sort(function(a, b) {
+                return new Date(a.fecha) - new Date(b.fecha);
+            });
+
             registroPorFechas.forEach(function(item) {
                 console.log('Fecha:', item.fecha, 'Total:', item.total);
                 const fechaPartes = item.fecha.split('-');  // Esto te da un array de [YYYY, MM, DD]
@@ -253,7 +257,7 @@
                 toolbox: {
                     show: true,
                     feature: {
-                        {% comment %} dataView: { readOnly: false },  // Ver datos (editable) {% endcomment %}
+                        dataView: { readOnly: false },  // Ver datos (editable)
                         magicType: { type: ['line', 'bar'] },  // Permitir cambiar entre gráfico de líneas y barras
                         restore: {},  // Botón para restaurar la vista original
                         saveAsImage: {}  // Guardar gráfico como imagen
