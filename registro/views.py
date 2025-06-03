@@ -20,23 +20,22 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 def registro_view(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST, request.FILES)  # Subir archivos (pdf) con request.FILES
+
         if form.is_valid():
-            
             
             # Obtener los datos del formulario
             cleaned_data = form.cleaned_data
-            tipo_usuario = cleaned_data.get('tipo_participante') # 'estudiante' o 'participante'
+            tipo_usuario = cleaned_data.get('tipo_participante')  # 'estudiante (pregrado)' o 'participante'
             hoy = datetime.now()
-            mes = hoy.month  # Obtiene el mes actual (1 = Enero, 12 = Diciembre)
-            año = hoy.year
+            fecha_limite = datetime(2025, 6, 21)  # 21 de junio de 2025
 
-            # Lógica para calcular el monto dependiendo del mes y tipo de usuario
-            if año == 2025 and mes in [4, 5]:  # Abril o Mayo de 2025
+            # Lógica para calcular el monto según la fecha y el tipo de usuario
+            if hoy < fecha_limite:
                 if tipo_usuario == 'estudiante (pregrado)':
                     monto = 50.00
                 elif tipo_usuario == 'participante':
                     monto = 100.00
-            elif año >= 2025 and mes >= 6:  # Junio en adelante de 2025
+            else:  # 21 de junio en adelante
                 if tipo_usuario == 'estudiante (pregrado)':
                     monto = 80.00
                 elif tipo_usuario == 'participante':
@@ -44,7 +43,6 @@ def registro_view(request):
 
             # Asignamos el monto calculado al formulario antes de guardar
             form.instance.monto = monto
-            
             
             print('Formulario válido:', form.cleaned_data)
             
