@@ -89,12 +89,12 @@
                 <div class="p-8 mt-4 max-w-lg w-full">
                     <h1 class="text-center text-2xl font-bold mb-4">MONTOS</h1>
                     <h1 class="text-lg font-bold">PARTICIPANTE</h1>
-                    <h2>S/. 100 (abril a 20 de junio)</h2>
-                    <h2>S/. 150 (21 de junio en adelante)</h2>
+                    <h2>S/. 100 (abril a 30 de junio)</h2>
+                    <h2>S/. 150 (julio en adelante)</h2>
 
                     <h1 class="text-lg font-bold mt-4">ESTUDIANTE (pregrado)</h1>
-                    <h2>S/. 50 (abril a 20 de junio)</h2>
-                    <h2>S/. 80 (21 de junio en adelante)</h2>
+                    <h2>S/. 50 (abril a 30 de junio)</h2>
+                    <h2>S/. 80 (julio en adelante)</h2>
                 </div>
 
                 <button type="button" id="nextStep1"
@@ -598,13 +598,13 @@
 
         // Calculamos el monto a pagar según la lógica del mes y tipo de usuario
         let monto = 0;
-        if (año === 2025 && [4, 5].includes(mes)) { // Abril y Mayo de 2025
+        if (año === 2025 && [4, 5, 6].includes(mes)) { // Abril y Mayo de 2025
             if (tipoUsuario === 'estudiante (pregrado)') {
                 monto = 50;
             } else if (tipoUsuario === 'participante') {
                 monto = 100;
             }
-        } else if (año >= 2025 && mes >= 6) { // Junio en adelante de 2025
+        } else if (año >= 2025 && mes >= 7) { // Julio en adelante de 2025
             if (tipoUsuario === 'estudiante (pregrado)') {
                 monto = 80;
             } else if (tipoUsuario === 'participante') {
@@ -621,13 +621,13 @@
             const tipoUsuarioSeleccionado = tipoUsuarioSelect.value;
             let nuevoMonto = 0;
 
-            if (año === 2025 && [4, 5].includes(mes)) { // Abril y Mayo de 2025
+            if (año === 2025 && [4, 5, 6].includes(mes)) { // Abril y Mayo de 2025
                 if (tipoUsuarioSeleccionado === 'estudiante (pregrado)') {
                     nuevoMonto = 50;
                 } else if (tipoUsuarioSeleccionado === 'participante') {
                     nuevoMonto = 100;
                 }
-            } else if (año >= 2025 && mes >= 6) { // Junio en adelante de 2025
+            } else if (año >= 2025 && mes >= 7) { // Julio en adelante de 2025
                 if (tipoUsuarioSeleccionado === 'estudiante (pregrado)') {
                     nuevoMonto = 80;
                 } else if (tipoUsuarioSeleccionado === 'participante') {
@@ -652,7 +652,7 @@
         // Función para calcular monto según la fecha y tipo de usuario
         function calcularMonto(tipoUsuario) {
             let monto = 0;
-            const fechaLimite = new Date(2025, 5, 20); // 20 de junio de 2025 (mes 5 = junio)
+            const fechaLimite = new Date(2025, 5, 30); // 30 de junio de 2025 (mes 5 = junio)
             if (hoy <= fechaLimite) {
                 if (tipoUsuario === 'estudiante (pregrado)') {
                     monto = 50;
