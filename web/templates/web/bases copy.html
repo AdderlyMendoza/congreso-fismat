@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+{% load static %}
+{% load static tailwind_tags %}
+<html lang="es">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="J2MLV7DfS_lEK7g96SYwhecDLDt7_hGCvDPEazJDuOI" />
+    <title>{% block title %}Bases de Iniciación Científica{% endblock %}</title>
+
+    <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
+
+    {% tailwind_css %}
+
+    <script src="{% static 'js/aos.js' %}"></script>
+    <link href="{% static 'css/aos.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="flex items-center justify-between w-full md:px-20 md:py-4 z-50 text-white px-4 py-4 bg-amber-700">
+        <div class="flex items-end space-x-1 justify-center">
+            <img src="{% static 'images/logos/logo-unap.png' %}" alt="logo una puno" class="w-20">
+            <img src="{% static 'images/logos/logo-cimac.png' %}" alt="logo cimac" class="w-20 h-20 ml-2">
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-amber-500 h-96 text-center text-white bg-gradient-to-tl from-blue-600 to-blue-900">
+        <h1 class="text-3xl md:text-5xl font-bold text-shadow-lg">XII Congreso de Matemática Aplicada y Computacional (XII CIMAC)</h1>
+        <p class="mt-4 text-xl">Evento Virtual del 11 al 15 de agosto del 2025</p>
+    </section>
+
+    <!-- Main Content -->
+    <section class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-semibold text-center mb-8">Bases del IX Concurso Nacional de Iniciación Científica en Matemática y sus Aplicaciones</h2>
+        <h3 class="text-xl font-semibold text-center mb-4">“Matemáticas para el Bicentenario”</h3>
+
+        <article class="bg-white p-6 rounded-lg shadow-lg">
+            <!-- Capítulo I -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO I: Finalidad del Concurso de Proyectos</h4>
+                <p>La finalidad del IX Concurso Nacional de Iniciación Científica en Matemática y sus Aplicaciones del XII CIMAC es impulsar la investigación científica y tecnológica de los estudiantes y recién egresados de las carreras de Matemática, Estadística, Biología, Economía, Medicina, Ingeniería y otras especialidades que aplican las matemáticas en sus campos.</p>
+            </section>
+
+            <!-- Capítulo II -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO II: Objetivos del Concurso</h4>
+                <p>El Concurso de Iniciación Científica tiene como objetivos:</p>
+                <ul class="list-disc ml-6">
+                    <li>Estimular el espíritu investigador e innovador en estudiantes de diversas carreras utilizando modelos y metodología matemática.</li>
+                    <li>Fomentar la creatividad y competitividad en investigación científica.</li>
+                    <li>Dar a conocer proyectos de interés para empresas, estimulando una visión empresarial.</li>
+                </ul>
+            </section>
+
+            <!-- Capítulo III -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO III: Comisión Organizadora y Jurado Evaluador</h4>
+                <p>La comisión organizadora está conformada por docentes de la Universidad Nacional del Altiplano de Puno, mientras que el jurado evaluador será integrado por miembros del Comité Científico del XII CIMAC.</p>
+            </section>
+
+            <!-- Capítulo IV -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO IV: Participantes</h4>
+                <p>Podrán participar estudiantes de los últimos años y egresados de las carreras de Matemática, Estadística, Biología, Economía, Medicina, Ingeniería y otras afines de universidades peruanas.</p>
+            </section>
+
+            <!-- Capítulo V -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO V: Normas de los Participantes</h4>
+                <p>Los trabajos pueden ser individuales o grupales (máximo de 2 integrantes), y deben ser innovadores y respetar los derechos de autor.</p>
+            </section>
+
+            <!-- Capítulo VI -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO VI: Perfil de los Trabajos</h4>
+                <p>Los trabajos deben estar relacionados con el uso de la matemática en diversas disciplinas y tener carácter innovador.</p>
+            </section>
+
+            <!-- Capítulo VII -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO VII: Etapas del Concurso</h4>
+                <ul class="list-decimal ml-6">
+                    <li><strong>Primera Etapa:</strong> Recepción y selección de trabajos.</li>
+                    <li><strong>Segunda Etapa:</strong> Evaluación y exposición frente al jurado.</li>
+                </ul>
+            </section>
+
+            <!-- Capítulo VIII -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO VIII: Cronograma de Actividades</h4>
+                <ul class="list-disc ml-6">
+                    <li>Recepción de trabajos: hasta el 30 de junio.</li>
+                    <li>Calificación interna y respuesta de aceptación: hasta el 7 de julio.</li>
+                    <li>Exposición del trabajo: durante las fechas del XII CIMAC.</li>
+                </ul>
+            </section>
+
+            <!-- Capítulo IX -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO IX: Presentación de los Trabajos</h4>
+                <p>Los trabajos deben seguir un esquema detallado que incluye título, resumen, introducción, objetivos, desarrollo, resultados, conclusiones, entre otros.</p>
+            </section>
+
+            <!-- Capítulo X -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO X: Exposición de Trabajos</h4>
+                <p>Los trabajos seleccionados serán expuestos frente a un jurado calificador. Cada exposición tendrá una duración de 25 minutos, con 10 minutos adicionales para preguntas.</p>
+            </section>
+
+            <!-- Capítulo XI -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO XI: Jurado Evaluador</h4>
+                <p>El jurado estará compuesto por expertos del Comité Científico del XII CIMAC, y su veredicto será inapelable.</p>
+            </section>
+
+            <!-- Capítulo XII -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO XII: Documentación</h4>
+                <p>Los participantes deberán adjuntar una constancia de matrícula del último ciclo de estudios concluidos.</p>
+            </section>
+
+            <!-- Capítulo XIII -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO XIII: Sanciones</h4>
+                <p>El Comité Organizador podrá descalificar a los participantes que no respeten las normas del concurso.</p>
+            </section>
+
+            <!-- Capítulo XIV -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO XIV: Premiación</h4>
+                <p>Se premiarán los tres primeros puestos con premios en efectivo y membresías gratuitas al SPMAC.</p>
+            </section>
+
+            <!-- Capítulo XV -->
+            <section class="mb-8">
+                <h4 class="text-lg font-semibold mb-4">CAPÍTULO XV: Otras Consideraciones</h4>
+                <p>Cualquier situación no contemplada en las bases será resuelta por la comisión organizadora.</p>
+            </section>
+        </article>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white py-4 text-center">
+        <p>&copy; 2025 XII Congreso de Matemática Aplicada y Computacional. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
