@@ -27,7 +27,7 @@ def registro_view(request):
             cleaned_data = form.cleaned_data
             tipo_usuario = cleaned_data.get('tipo_participante')  # 'estudiante (pregrado)' o 'participante'
             hoy = datetime.now()
-            fecha_limite = datetime(2025, 6, 21)  # 21 de junio de 2025
+            fecha_limite = datetime(2025, 6, 30)  # 30 de junio de 2025
 
             # Lógica para calcular el monto según la fecha y el tipo de usuario
             if hoy < fecha_limite:
