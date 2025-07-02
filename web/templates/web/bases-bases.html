@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+{% load static %}
+{% load static tailwind_tags %}
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="J2MLV7DfS_lEK7g96SYwhecDLDt7_hGCvDPEazJDuOI" />
+    <title>{% block title %}Bases de Iniciación Científica{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/icono.ico' %}" type="image/x-icon">
+
+    {% tailwind_css %}
+    <script src="{% static 'js/aos.js' %}"></script>
+    <link href="{% static 'css/aos.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header
+        class="flex items-center justify-between w-full md:px-20 md:py-4 text-white px-4 py-4 backdrop-filter backdrop-blur-lg bg-black/50 bg-opacity-60"
+        id="headerContainer">
+        <div class="flex items-end space-x-2 justify-center">
+            <img src="{% static 'images/logos/logo-unap.png' %}" alt="logo una puno" class="w-20" loading="lazy">
+            <img src="{% static 'images/logos/logo-cimac.png' %}" alt="logo cimac" class="w-20 h-20 ml-2"
+                loading="lazy">
+        </div>
+    </header>
+
+
+    <section class="container mx-auto px-4 py-8">
+
+        <h2 class="text-3xl font-bold text-center mb-4 text-amber-400 uppercase">
+            IX Concurso Nacional de Iniciación <br>
+            Científica en Matemática y sus Aplicaciones</h2>
+        <h3 class="text-xl font-semibold text-center mb-4">“Matemáticas para el Bicentenario”</h3>
+
+        <article class="bg-white p-6 sm:p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+
+            <!-- Capítulo I -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO I: Finalidad del Concurso de Proyectos
+                </h4>
+                <p class="text-sm text-gray-600 leading-relaxed">La finalidad del IX Concurso Nacional de Iniciación
+                    Científica en
+                    Matemática y sus Aplicaciones del XII CIMAC, es impulsar la investigación científica
+                    y tecnológica de los estudiantes y recién egresados de las carreras de: Matemática,
+                    Estadística, Biología, Economía, Medicina e, Ingeniería y aquellas especialidades que
+                    de alguna manera aplican las matemáticas a su especialidad, brindando la
+                    oportunidad de promocionar y difundir los logros alcanzados con el beneficio de
+                    adquirir nuevas experiencias e intercambiar conocimientos. </p>
+            </section>
+
+            <!-- Capítulo II -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO II: Objetivos del Concurso</h4>
+                <p class="text-sm text-gray-600 leading-relaxed mb-3">
+                    El Concurso de Iniciación Científica tiene como finalidad:
+                </p>
+                <ul class="list-disc pl-6 space-y-2 mt-2 text-sm text-gray-600">
+
+                    <li>
+                        Estimular en los estudiantes el espíritu investigador e innovador en carreras como Matemática,
+                        Estadística, Biología, Economía, Medicina e Ingeniería, entre otras, mediante el uso de modelos
+                        y metodologías matemáticas.
+                    </li>
+                    <li>
+                        Fomentar la creatividad y competitividad en investigación científica, promoviendo la búsqueda de
+                        nuevas aplicaciones matemáticas que ofrezcan soluciones innovadoras a las necesidades de su
+                        especialidad y de nuestra realidad social.
+                    </li>
+                    <li>
+                        Promover la difusión de proyectos y trabajos que empleen metodología matemática y sean de
+                        interés para empresas de diversos sectores, incentivando en los participantes una visión
+                        empresarial.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Capítulo III -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO III: Comisión Organizadora y Jurado
+                    Evaluador</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">La comisión organizadora está conformada por 02
+                    docentes de la
+                    Universidad Nacional del Altiplano de Puno. Los integrantes de la comisión
+                    organizadora se mantendrán en ella hasta que culmine dicha actividad. </p>
+                <p class="text-sm text-gray-600 leading-relaxed">El jurado evaluador estará integrado por una comisión
+                    del Comité
+                    Científico del XII CIMAC. </p>
+            </section>
+
+            <!-- Capítulo IV -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO IV: Participantes</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">Podrán participar de este concurso:
+                    Estudiantes de los últimos años y egresados del año 2023 en adelante de
+                    las escuelas profesionales de Matemática, Estadística, Biología, Economía,
+                    Medicina, Ingeniería y otras carreras afines de universidades peruanas.
+                    Deberán presentar un documento probatorio de la condición académica
+                    antes mencionada. .</p>
+            </section>
+
+            <!-- Capítulo V -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO V: Normas de los Participantes</h4>
+                <p class="text-sm text-gray-600 leading-relaxed"> Los concursantes deben respetar la siguiente norma:
+                    El trabajo puede ser individual o grupal. En caso de ser grupal, el número de
+                    integrantes debe ser como máximo de 2 personas. </p>
+            </section>
+
+            <!-- Capítulo VI -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO VI: Perfil de los Trabajos</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">Los trabajos deben tener un carácter innovador,
+                    respetando siempre los
+                    derechos de autor u otras restricciones. El trabajo deberá ser respaldado con una
+                    declaración jurada simple para que no genere problemas de autoría.</p>
+                <p class="text-sm text-gray-600 leading-relaxed"> Los trabajos deben basarse en temas relacionados con
+                    el uso o aplicación
+                    de la matemática en las carreras de Matemática, Estadística, Biología, Economía,
+                    Medicina, Ingeniería entre otras. </p>
+            </section>
+
+            <!-- Capítulo VII -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO VII: Etapas del Concurso</h4>
+                <ul class="list-inside list-decimal pl-6 space-y-4 text-sm text-gray-600">
+                    <li>
+                        <strong>Primera Etapa:</strong>
+                        <ul class="list-disc pl-6 space-y-2 mt-2">
+                            <li>
+                                Recepción de trabajos y documentos solicitados dentro del plazo establecido en el
+                                cronograma,
+                                enviados al correo electrónico
+                                <a href="mailto:trabajoscimac@spmac.org" class="font-bold">trabajoscimac@spmac.org</a>.
+                                Se debe incluir datos personales completos (nombres, apellidos, DNI), universidad de
+                                origen,
+                                número celular, y el área de la matemática o metodología matemática empleada. Se enviará
+                                un
+                                correo confirmando la recepción.
+                            </li>
+                            <li>
+                                Cada trabajo deberá contener un resumen en el que se explique claramente el área y/o la
+                                metodología matemática utilizada.
+                            </li>
+                            <li>
+                                Los trabajos deberán presentarse en formato MS Word o LaTeX, siguiendo el formato
+                                indicado en
+                                el Capítulo IX.
+                            </li>
+                            <li>
+                                Los resultados de la selección serán publicados en la página web del XII CIMAC y se
+                                notificará a cada participante seleccionado vía correo electrónico.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Segunda Etapa:</strong> Evaluación y exposición ante el jurado.
+                        <ul class="list-disc pl-6 space-y-2 mt-2">
+                            <li>Los trabajos serán sustentados frente a un jurado calificador.</li>
+                            <li>
+                                Los participantes seleccionados que confirmen su asistencia serán evaluados durante los
+                                días
+                                del XII CIMAC.
+                            </li>
+                            <li>
+                                Los participantes deberán presentarse el día asignado con 20 minutos de anticipación a
+                                su
+                                hora programada. Además, deberán informar con una semana de anticipación sobre cualquier
+                                requerimiento técnico o soporte necesario para su presentación.
+                            </li>
+                            <li>
+                                Cada exposición tendrá una duración máxima de 25 minutos para presentar el trabajo al
+                                jurado
+                                y público. A continuación, se dispondrá de 10 minutos para preguntas por parte del
+                                jurado.
+                            </li>
+                            <li>
+                                Cada miembro del jurado calificador asignará un puntaje de 0 a 100 en función de los
+                                criterios establecidos.
+                            </li>
+                            <li>
+                                Se calculará un puntaje total ponderado basado en los porcentajes indicados para cada
+                                criterio.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+
+                <div class="relative overflow-x-auto mt-4">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Originalidad</th>
+                                <th scope="col" class="px-6 py-3">Exposición</th>
+                                <th scope="col" class="px-6 py-3">Rigor Científico</th>
+                                <th scope="col" class="px-6 py-3">Aplicación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b border-gray-200">
+                                <td class="px-6 py-4">25%</td>
+                                <td class="px-6 py-4">15%</td>
+                                <td class="px-6 py-4">30%</td>
+                                <td class="px-6 py-4">30%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Capítulo VIII -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO VIII: Cronograma de Actividades</h4>
+                <ul class="list-disc pl-6 space-y-2 text-sm text-gray-600">
+                    <li><strong>Recepción de trabajos:</strong> hasta el 20 de julio.</li>
+                    <li><strong>Calificación interna y respuesta de aceptación:</strong> hasta el 7 de julio.</li>
+                    <li><strong>Exposición de los trabajos:</strong> durante las fechas del XII CIMAC.</li>
+                </ul>
+            </section>
+
+            <!-- Capítulo IX -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO IX: Presentación de los Trabajos</h4>
+
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Los trabajos aprobados en la primera etapa deben ser enviados antes de la fecha límite, siguiendo
+                    los aspectos generales y el siguiente esquema:
+                </p>
+
+                <h5 class="text-md font-semibold text-blue-600 mt-4 mb-2">ESQUEMA GENERAL DEL TRABAJO</h5>
+                <ul class="list-disc pl-6 space-y-2 text-sm text-gray-600">
+                    <li>Título</li>
+                    <li>Área de Investigación</li>
+                    <li>Autor(es) y Escuela Profesional</li>
+                    <li>Asesor(es)</li>
+                    <li>Índice</li>
+                    <li>Resumen</li>
+                    <li>Introducción</li>
+                    <li>Objetivos</li>
+                    <li>Desarrollo del trabajo</li>
+                    <li>Resultados</li>
+                    <li>Conclusiones</li>
+                    <li>Recomendaciones</li>
+                    <li>Referencias Bibliográficas</li>
+                    <li>Apéndice (opcional)</li>
+                    <li>Anexos (opcional)</li>
+                    <li>Declaración Jurada de veracidad de los datos y autoría del trabajo (hoja adicional)</li>
+                </ul>
+
+                <h5 class="text-md font-semibold text-blue-600 mt-4 mb-2">ASPECTOS GENERALES</h5>
+                <ul class="list-disc pl-6 space-y-2 text-sm text-gray-600">
+                    <li><strong>Tamaño de papel:</strong> A4</li>
+                    <li><strong>Fuente:</strong> Times New Roman, tamaño 11 puntos, interlineado simple.</li>
+                    <li><strong>Título:</strong> En mayúsculas, en negrita, tamaño 12 puntos, centrado en la parte
+                        superior. Dejar dos espacios debajo para el nombre(s) del autor(es), asesor(es) y e-mails
+                        correspondientes.</li>
+                    <li><strong>Resumen:</strong> Escribir tres espacios debajo del título, resumiendo los objetivos,
+                        alcances y conclusiones del trabajo.</li>
+                    <li><strong>Cuerpo del trabajo:</strong> Escribir en una sola columna, con interlineado simple y
+                        justificación completa del texto.</li>
+                    <li><strong>Títulos de secciones:</strong> En mayúsculas, centrados.</li>
+                    <li><strong>Encabezado:</strong> Incluir el título del proyecto en la parte superior.</li>
+                    <li><strong>Pie de página:</strong> Incluir el nombre de la universidad del autor y la numeración de
+                        la página.</li>
+                    <li><strong>Referencias bibliográficas:</strong> Todas las citas deben seguir las normas
+                        internacionales de citación.</li>
+                </ul>
+            </section>
+
+            <!-- Capítulo X -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO X: Exposición de Trabajos</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">Se hace de conocimiento de los expositores deben
+                    emplear los
+                    programas adecuados para realizar las presentaciones o simulaciones requeridas. </p>
+            </section>
+
+            <!-- Capítulo XI -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO XI: Jurado Evaluador</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">El jurado calificador en todas las etapas, estará
+                    compuesto por
+                    miembros del comité científico versado en las áreas temáticas de los participantes y
+                    su veredicto será inapelable. </p>
+            </section>
+
+            <!-- Capítulo XII -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO XII: Documentación</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">El participante deberá adjuntar una constancia de
+                    matrícula del último
+                    ciclo de estudios concluidos. </p>
+            </section>
+
+            <!-- Capítulo XIII -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO XIII: Sanciones</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    El Comité Organizador se reserva el derecho de descalificar del Concurso de Iniciación Científica en
+                    Matemática y sus Aplicaciones a los participantes (o equipos) que infrinjan las siguientes normas:
+                </p>
+
+                <ul class="list-disc pl-6 space-y-2 text-sm text-gray-600 mt-2">
+                    <li>Presionar, sobornar o chantajear a algún miembro del jurado.</li>
+                    <li>No presentarse a la exposición y sustentación de sus trabajos.</li>
+                    <li>Los documentos exigidos reglamentariamente deben ser originales, no pudiendo ser adulterados ni
+                        falsificados.</li>
+                    <li>Los participantes deben mantener una postura respetuosa y profesional durante su presentación,
+                        evitando comportamientos inapropiados, y no deben estar bajo los efectos del alcohol u otras
+                        sustancias.</li>
+                </ul>
+            </section>
+
+            <!-- Capítulo XIV -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO XIV: Premiación</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Se premiará a los tres primeros puestos del concurso. Los premios consisten en los siguientes
+                    beneficios:
+                </p>
+
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-4">
+
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Primer Lugar</th>
+                            <th scope="col" class="px-6 py-3">Segundo Lugar</th>
+                            <th scope="col" class="px-6 py-3">Tercer Lugar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b  border-gray-200">
+                            <td class="px-6 py-4">500 soles</td>
+                            <td class="px-6 py-4">300 soles</td>
+                            <td class="px-6 py-4">200 soles</td>
+                        </tr>
+                        <tr class="bg-white border-b  border-gray-200">
+                            <td class="px-6 py-4">
+                                Incorporación gratuita al SPMAC + pago de un año de membresía
+                            </td>
+                            <td class="px-6 py-4">
+                                Incorporación gratuita al SPMAC + pago de un año de membresía
+                            </td>
+                            <td class="px-6 py-4">
+                                Incorporación gratuita al SPMAC + pago de un año de membresía
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="text-sm text-gray-600 leading-relaxed mt-4">
+                    Los ganadores deberán presentar un recibo por honorarios (con su nombre) para poder recoger sus
+                    premios.
+                </p>
+            </section>
+
+            <!-- Capítulo XV -->
+            <section class="mb-6">
+                <h4 class="text-xl font-semibold text-blue-700 mb-3">CAPÍTULO XV: Otras Consideraciones</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">Cualquier situación no contemplada en las bases, será
+                    resuelta por la
+                    comisión organizadora. </p>
+            </section>
+
+            <!-- <a href="{% static 'pdf/bic-ultimo.pdf' %}" class="bg-blue-500 px-4 py-2 rounded-lg text-white cursor-pointer text-lg hover:bg-blue-600" target="_blank" rel="noopener noreferrer">Más información</a> -->
+
+        </article>
+
+    </section>
+
+
+    <footer class="bg-gray-900 mt-30">
+        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0 flex flex-col items-center justify-center md:flex-row md:justify-start">
+                    <img src="{% static 'images/logos/logo-mate.png' %}" class="h-20 md:h-30"
+                        alt="FlowBite logos/logo" />
+                    <span class="text-sm md:text-xl font-semibold text-white">CS. FÍSICO MATEMÁTICAS</span>
+                </div>
+                <div class="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-1">
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase ">Contactos</h2>
+                        <ul class="text-gray-400 font-medium">
+                            <li class="mb-4 flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                </svg>
+                                <a href="mailto:jizavaleta@unap.edu.pe"
+                                    class="hover:underline">jizavaleta@unap.edu.pe</a>
+                            </li>
+                            <li class="mb-4 flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+                                </svg>
+                                <a href="https://www.spmac.org/xii-cimac/"
+                                    class="hover:underline">www.spmac.org/xii-cimac</a>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" width="26px" height="26px"
+                                    viewBox="0 0 256 256">
+                                    <path
+                                        d="M128.00049,28A100.02594,100.02594,0,0,0,41.11475,177.53908l-9.0044,31.51661a11.99971,11.99971,0,0,0,14.835,14.834l31.5166-9.00391A100.00677,100.00677,0,1,0,128.00049,28Zm0,192a91.87082,91.87082,0,0,1-46.95264-12.86719,3.99494,3.99494,0,0,0-3.14355-.4082l-33.15723,9.47363a3.99979,3.99979,0,0,1-4.94434-4.94531l9.47266-33.15625a4.00111,4.00111,0,0,0-.4082-3.14355A92.01077,92.01077,0,1,1,128.00049,220Zm50.51123-73.457-20.45947-11.69141a12.01054,12.01054,0,0,0-12.12745.12891l-13.80664,8.28418a44.04183,44.04183,0,0,1-19.38232-19.38281l8.28369-13.80664a12.0108,12.0108,0,0,0,.12891-12.127l-11.69092-20.46A10.91584,10.91584,0,0,0,100,72a32.00811,32.00811,0,0,0-32,31.88086A84.001,84.001,0,0,0,151.999,188h.12012A32.00842,32.00842,0,0,0,184,156,10.913,10.913,0,0,0,178.51172,146.543ZM152.10791,180h-.1084A75.99972,75.99972,0,0,1,76,103.8926,23.997,23.997,0,0,1,100,80a2.89975,2.89975,0,0,1,2.51172,1.457L114.20264,101.918a4.00418,4.00418,0,0,1-.043,4.042l-9.38916,15.64844a3.9987,3.9987,0,0,0-.21826,3.69824,52.04112,52.04112,0,0,0,26.1416,26.1416,3.99707,3.99707,0,0,0,3.69873-.21875L150.04,141.84084a4.006,4.006,0,0,1,4.043-.04394l20.46045,11.69238A2.89712,2.89712,0,0,1,176,156,23.99725,23.99725,0,0,1,152.10791,180Z" />
+                                </svg>
+
+                                <a href="https://wa.me/51976120007" class="hover:underline">(+51) 976 120 007</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto border-gray-700 lg:my-8" />
+            <div class="flex flex-col items-center justify-center space-y-1">
+                <span class="text-sm text-gray-300 text-center">© 2025 CS. FÍSICO MATEMÁTICAS</span>
+                <span class="text-sm text-gray-400 text-center">Todos los derechos reservados</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -35,7 +35,7 @@ def registro_view(request):
                     monto = 50.00
                 elif tipo_usuario == 'participante':
                     monto = 100.00
-            else:  # 21 de junio en adelante
+            else:  # 30 de junio en adelante
                 if tipo_usuario == 'estudiante (pregrado)':
                     monto = 80.00
                 elif tipo_usuario == 'participante':
