@@ -1,5 +1,11 @@
 from django.shortcuts import render, redirect
+
 from registro.models import Registro
+
+from registro.forms import RegistroForm
+
+
+
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
@@ -31,6 +37,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.db.models.functions import TruncDate
 
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
 
 
 # Verifica que el usuario sea administrador
@@ -399,7 +407,43 @@ def ver_pdf(request):
 
 
 
-# CRAER Y LOGIN DEL ADMINISTRADOR
+@login_required
+def eliminar_inscrito(request, id):
+    inscrito = get_object_or_404(Registro, id=id)
+    if request.method == 'POST':
+        inscrito.delete()
+        return redirect('lista-inscritos')
+    # Podrías agregar una página de confirmación si quieres
+    return redirect('lista-inscritos')
+
+
+
+@login_required
+def editar_imagen(request, registro_id):
+    registro = get_object_or_404(Registro, pk=registro_id)
+
+    if request.method == 'POST':
+        form = RegistroForm(request.POST, request.FILES, instance=registro)
+        # Limitar solo el campo voucher_pago
+        for field in list(form.fields):
+            if field != 'voucher_pago':
+                form.fields.pop(field)
+
+        if form.is_valid():
+            form.save()
+            return redirect('lista-inscritos')
+    else:
+        form = RegistroForm(instance=registro)
+        # Limitar solo el campo voucher_pago
+        for field in list(form.fields):
+            if field != 'voucher_pago':
+                form.fields.pop(field)
+
+    return render(request, 'editar_voucher.html', {'form': form, 'registro': registro})
+
+
+
+# CREAR Y LOGIN DEL ADMINISTRADOR
 
 # def login_view(request):
 #     if request.method == 'POST':

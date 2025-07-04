@@ -30,6 +30,7 @@
                     <th scope="col" class="px-6 py-3">Doc. Acreditivo</th>
                     <th scope="col" class="px-6 py-3">Monto</th>
                     <th scope="col" class="px-6 py-3">Voucher de Pago</th>
+                    <th scope="col" class="px-6 py-3">Eliminar</th>
                 </tr>
             </thead>
 
@@ -58,7 +59,7 @@
 
                     <td class="px-6 py-4">S/. {{ registro.monto }}</td>
 
-            
+                    
                     <td class="px-6 py-4 flex items-center justify-center">
                         {% if registro.voucher_pago %}
                         <!-- Botón para abrir el modal con el archivo PDF -->
@@ -76,6 +77,29 @@
                         <span>No disponible</span>
                         {% endif %}
                     </td>
+
+                    <!-- Boton Eliminar -->
+                    <td class="px-6 py-4">
+                        {% if not registro.validado %}
+                            <form action="{% url 'eliminar-inscrito' registro.id %}" method="post" onsubmit="return confirm('¿Seguro que quieres eliminar este inscrito?');">
+                                {% csrf_token %}
+                                <button type="submit" class="font-medium bg-red-500 p-2 rounded-md hover:bg-red-600 text-white cursor-pointer flex items-center justify-center" title="Eliminar inscrito">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18.75V6.75a3 3 0 013-3h6a3 3 0 013 3v12a3 3 0 01-3 3H9a3 3 0 01-3-3zM9.75 6.75V4.5m4.5 2.25V4.5m-7.5 0h10.5m-10.5 0a1.5 1.5 0 01-1.5-1.5h13.5a1.5 1.5 0 01-1.5 1.5H6z" />
+                                    </svg>
+                                </button>
+                            </form>
+                        {% else %}
+                            <span class="text-gray-500" title="Inscrito validado - no se puede eliminar">
+                                <button disabled class="font-medium bg-gray-500 p-2 rounded-md text-white flex items-center justify-center cursor-not-allowed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18.75V6.75a3 3 0 013-3h6a3 3 0 013 3v12a3 3 0 01-3 3H9a3 3 0 01-3-3zM9.75 6.75V4.5m4.5 2.25V4.5m-7.5 0h10.5m-10.5 0a1.5 1.5 0 01-1.5-1.5h13.5a1.5 1.5 0 01-1.5 1.5H6z" />
+                                    </svg>
+                                </button>
+                            </span>
+                        {% endif %}
+                    </td>
+
                 </tr>
                 {% endfor %}
             </tbody>
@@ -142,7 +166,14 @@
         </div>
 
         {% comment %} Boton de validar o no validar {% endcomment %}
-        <div class="w-full text-end mt-4 space-x-2 bg-gray-200 p-2">
+        <div class="w-full flex justify-end text-end mt-4 space-x-2 bg-gray-200 p-2">
+
+            {% comment %} 
+                <button class="bg-yellow-400 hover:bg-yellow-500 text-white py-2 px-4 rounded-md cursor-pointer">
+                    Cambiar Imagen
+                </button> 
+            {% endcomment %}
+
             <form method="POST" id="validarForm" action="">
                 {% csrf_token %}
                 <!-- Campo oculto para el id del registro -->
@@ -151,6 +182,7 @@
                 <button id="btnValidar" type="submit" class="p-2 rounded-md text-white cursor-pointer">
                 </button>
             </form>
+            
         </div>
 
     </div>
