@@ -38,6 +38,7 @@ class Registro(models.Model):
     celular = models.CharField(max_length=15, blank=True, null=False, unique=True)  # Celular único
 
     voucher_pago = models.FileField(upload_to='pdfs/', blank=True, null=False)  # Hacerlo opcional prueba para PRODUCCION
+    operacion_pago = models.CharField(max_length=15, blank=True, null=True, unique=False)
 
     validado = models.BooleanField(default=False)
     fecha_registro = models.DateTimeField(auto_now_add=True)

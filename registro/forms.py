@@ -15,7 +15,7 @@ class RegistroForm(forms.ModelForm):
     
     class Meta:
         model = Registro
-        fields = ['pais', 'entidad_procedencia', 'tipo_participante', 'doc_acreditivo', 'dni', 'nombres', 'apellido_paterno' , 'apellido_materno', 'email', 'celular', 'voucher_pago']        
+        fields = ['pais', 'entidad_procedencia', 'tipo_participante', 'doc_acreditivo', 'dni', 'nombres', 'apellido_paterno' , 'apellido_materno', 'email', 'celular', 'voucher_pago', 'operacion_pago']        
         widgets = {
             'pais': forms.Select(attrs={'class': 'form-control mt-1 w-full border p-3 rounded-md focus:outline-none focus:border-2 focus:border-blue-500', 'placeholder': 'País', 'required': True}),
             'entidad_procedencia': forms.TextInput(attrs={'class': 'form-control mt-1 w-full border p-3 rounded-md focus:outline-none focus:border-2 focus:border-blue-500', 'placeholder': 'Entidad de Procedencia', 'required': True}),
@@ -30,6 +30,8 @@ class RegistroForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control mt-1 w-full border p-3 rounded-md focus:outline-none focus:border-2 focus:border-blue-500', 'placeholder': 'Email', 'required': True}),
             'celular': forms.TextInput(attrs={'class': 'form-control mt-1 w-full border p-3 rounded-md focus:outline-none focus:border-2 focus:border-blue-500', 'placeholder': 'Número de celular', 'required': True}),
             
+            'operacion_pago': forms.TextInput(attrs={'class': 'form-control mt-1 w-full border p-3 rounded-md focus:outline-none focus:border-2 focus:border-blue-500', 'placeholder': 'Número de operación de pago', 'required': True}),            
+
             'voucher_pago': forms.FileInput(attrs={'class': 'form-control w-full p-3 bg-gray-100 border-2 border-gray-300 py-2 px-4 mt-1 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 ease-in-out hover:border-blue-400 focus:outline-none', 'required': False}),
         }
         
