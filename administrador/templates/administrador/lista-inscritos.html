@@ -30,6 +30,7 @@
                     <th scope="col" class="px-6 py-3">Doc. Acreditivo</th>
                     <th scope="col" class="px-6 py-3">Monto</th>
                     <th scope="col" class="px-6 py-3">Voucher de Pago</th>
+                    <th scope="col" class="px-6 py-3">Num. Operación</th>
                     <th scope="col" class="px-6 py-3">Eliminar</th>
                 </tr>
             </thead>
@@ -77,6 +78,10 @@
                         <span>No disponible</span>
                         {% endif %}
                     </td>
+
+
+                    <td class="px-6 py-4">{{ registro.operacion_pago }}</td>
+
 
                     <!-- Boton Eliminar -->
                     <td class="px-6 py-4">

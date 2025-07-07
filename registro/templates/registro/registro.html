@@ -506,7 +506,39 @@
     function validarFormularioStep4() {
         let isValid = true;
         let errorMessages = [];
-    
+
+
+        const fields = [
+            { id: 'id_operacion_pago', type: 'integer', name: 'Número de Operación de Pago' },
+        ];
+
+        // Primero validamos todos los campos básicos
+        fields.forEach(function (field) {
+
+            const inputElement = document.getElementById(field.id);
+            const value = inputElement.value.trim();
+
+            if (!value) {
+                isValid = false;
+                errorMessages.push(`${field.name} no puede estar vacío`);
+                toggleErrorClass(inputElement, false);
+            } else if (field.type === 'integer' && isNaN(value)) {
+                isValid = false;
+                errorMessages.push(`${field.name} debe ser un número válido`);
+                toggleErrorClass(inputElement, false);
+            } else {
+                isValid = true;
+                toggleErrorClass(inputElement, true);
+            }
+        });
+
+        // Si hay errores básicos, no continuamos con la validación DEL VOUCHER DE PAGO
+        if (!isValid) {
+            return { isValid, errorMessages };
+        }
+
+
+        // VALIDAR VOUCHER DE PAGO
         const voucherInput = document.getElementById('id_voucher_pago');
     
         if (!voucherInput || !voucherInput.files.length) {
