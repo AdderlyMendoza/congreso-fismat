@@ -188,8 +188,10 @@ def validar_inscrito(request, id):
 
 
 def excel_inscritos_validados(request):
+
     # Filtra los registros validados
-    inscritos = Registro.objects.filter(validado=1)
+    # inscritos = Registro.objects.filter(validado=1)
+    inscritos = Registro.objects.filter(validado=1).order_by('-fecha_registro')
 
     # Organiza los datos en un diccionario
     data = {
