@@ -15,7 +15,6 @@ urlpatterns = [
 
     # Eliminar y editar registro
     path('eliminar-inscrito/<int:id>/', login_required(views.eliminar_inscrito), name='eliminar-inscrito'),
-    path('editar-voucher/<int:id>', login_required(views.editar_imagen), name='editar-imagen'),
 
     path('excel-inscritos-validados', login_required(views.excel_inscritos_validados), name='excel-inscritos-validados'),
 

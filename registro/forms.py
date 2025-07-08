@@ -44,3 +44,4 @@ class RegistroForm(forms.ModelForm):
             self.add_error('doc_acreditivo', 'El documento acreditivo es obligatorio para los estudiantes.')
         
         return cleaned_data
+    

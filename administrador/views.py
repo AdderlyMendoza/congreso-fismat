@@ -201,6 +201,8 @@ def excel_inscritos_validados(request):
         'Apellido Materno': [inscrito.apellido_materno for inscrito in inscritos],
         'Email': [inscrito.email for inscrito in inscritos],
         'Celular': [inscrito.celular for inscrito in inscritos],
+        'Tipo de participante': [inscrito.tipo_participante for inscrito in inscritos],
+        'Monto pagado': [inscrito.monto for inscrito in inscritos],
         'Fecha de registro': [
             # Accede a los atributos correctamente usando la notación de puntos
             make_naive(inscrito.fecha_registro).strftime('%Y-%m-%d %H:%M:%S') if inscrito.fecha_registro else None
@@ -417,31 +419,6 @@ def eliminar_inscrito(request, id):
         return redirect('lista-inscritos')
     # Podrías agregar una página de confirmación si quieres
     return redirect('lista-inscritos')
-
-
-
-@login_required
-def editar_imagen(request, registro_id):
-    registro = get_object_or_404(Registro, pk=registro_id)
-
-    if request.method == 'POST':
-        form = RegistroForm(request.POST, request.FILES, instance=registro)
-        # Limitar solo el campo voucher_pago
-        for field in list(form.fields):
-            if field != 'voucher_pago':
-                form.fields.pop(field)
-
-        if form.is_valid():
-            form.save()
-            return redirect('lista-inscritos')
-    else:
-        form = RegistroForm(instance=registro)
-        # Limitar solo el campo voucher_pago
-        for field in list(form.fields):
-            if field != 'voucher_pago':
-                form.fields.pop(field)
-
-    return render(request, 'editar_voucher.html', {'form': form, 'registro': registro})
 
 
 
