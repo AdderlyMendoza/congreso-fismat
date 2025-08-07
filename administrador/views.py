@@ -202,6 +202,7 @@ def excel_inscritos_validados(request):
         'Email': [inscrito.email for inscrito in inscritos],
         'Celular': [inscrito.celular for inscrito in inscritos],
         'Tipo de participante': [inscrito.tipo_participante for inscrito in inscritos],
+        'Procedencia': [inscrito.entidad_procedencia for inscrito in inscritos],
         'Monto pagado': [inscrito.monto for inscrito in inscritos],
         'Fecha de registro': [
             # Accede a los atributos correctamente usando la notación de puntos
