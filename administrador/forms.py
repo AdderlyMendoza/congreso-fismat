@@ -4,12 +4,14 @@ from django import forms
 class EntradaForm(forms.Form):
     dni = forms.CharField(max_length=8, required=True, label="DNI")
     ubicacion = forms.ChoiceField(choices=[('A', 'Lugar A'), ('B', 'Lugar B'), ('C', 'Lugar C'), ('D', 'Lugar D')])
+    turno = forms.ChoiceField(choices=[('M','Mañana'), ('T','Tarde')], initial='M')
+
 
 
 class SalidaForm(forms.Form):
     dni = forms.CharField(max_length=8, required=True, label="DNI")
     ubicacion = forms.ChoiceField(choices=[('A', 'Lugar A'), ('B', 'Lugar B'), ('C', 'Lugar C'), ('D', 'Lugar D')])
-
+    turno = forms.ChoiceField(choices=[('M','Mañana'), ('T','Tarde')], initial='M')
 
 
 

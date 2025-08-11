@@ -3,14 +3,21 @@ from registro.models import Registro
 
 class Asistencia(models.Model):
     usuario = models.ForeignKey(Registro, on_delete=models.CASCADE)
+    fecha = models.DateField()
+    TURNO_CHOICES = (
+        ('M', 'Mañana'),
+        ('T', 'Tarde'),
+    )
+    turno = models.CharField(max_length=1, choices=TURNO_CHOICES, default='M')
+
     entrada = models.DateTimeField(null=True, blank=True)  # Cambiado de DateTimeField a DateField
     salida = models.DateTimeField(null=True, blank=True)  # Cambiado de DateTimeField a DateField
-    fecha = models.DateField(auto_now_add=True)
     ubicacion = models.CharField(max_length=2, choices=[('A', 'Lugar A'), ('B', 'Lugar B'), ('C', 'Lugar C'), ('D', 'Lugar D')])
 
+    
 
     class Meta:
-        unique_together = ('usuario', 'fecha')  # Asegura que solo haya un registro por día
+        unique_together = ('usuario', 'fecha', 'turno')
 
     def __str__(self):
         # Concatenamos todos los campos en un solo string

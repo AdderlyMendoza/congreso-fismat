@@ -51,7 +51,7 @@ def is_asistencia(user):
 
 
 @user_passes_test(is_admin)
-def index(request):
+def index(request): 
     # CANTIDADES
     inscritos_count = Registro.objects.all().count()
     inscritosValidados_count = Registro.objects.filter(validado=True).count() 
@@ -59,45 +59,36 @@ def index(request):
 
     
     # Obtener los conteos de entradas y salidas por fecha
-    asistencias = Asistencia.objects.values('fecha') \
-                                    .annotate(
-                                        entradas_count=Count('entrada', filter=~Q(entrada=None)),
-                                        salidas_count=Count('salida', filter=~Q(salida=None))
-                                    ) \
-                                    .order_by('-fecha')
+    asistencias = (
+                    Asistencia.objects
+                    .values('fecha', 'turno')
+                    .annotate(
+                        entradas_count=Count('entrada', filter=Q(entrada__isnull=False)),
+                        salidas_count=Count('salida', filter=Q(salida__isnull=False))
+                    )
+                    .order_by('-fecha', 'turno')
+                )
     
     # roles
     is_admin = request.user.groups.filter(name='Administrador').exists()
     is_asistencia = request.user.groups.filter(name='Asistencia').exists()
 
     # registros lugares
-    ubicacion_a = Asistencia.objects.filter(ubicacion='A').values('fecha') \
-                                    .annotate(
-                                        entradas_count=Count('entrada', filter=~Q(entrada=None)),
-                                        salidas_count=Count('salida', filter=~Q(salida=None))
-                                    ) \
-                                    .order_by('-fecha')
-    
-    ubicacion_b = Asistencia.objects.filter(ubicacion='B').values('fecha') \
-                                    .annotate(
-                                        entradas_count=Count('entrada', filter=~Q(entrada=None)),
-                                        salidas_count=Count('salida', filter=~Q(salida=None))
-                                    ) \
-                                    .order_by('-fecha')
-    
-    ubicacion_c = Asistencia.objects.filter(ubicacion='C').values('fecha') \
-                                    .annotate(
-                                        entradas_count=Count('entrada', filter=~Q(entrada=None)),
-                                        salidas_count=Count('salida', filter=~Q(salida=None))
-                                    ) \
-                                    .order_by('-fecha')
-    
-    ubicacion_d = Asistencia.objects.filter(ubicacion='D').values('fecha') \
-                                    .annotate(
-                                        entradas_count=Count('entrada', filter=~Q(entrada=None)),
-                                        salidas_count=Count('salida', filter=~Q(salida=None))
-                                    ) \
-                                    .order_by('-fecha')
+
+    ubicaciones = ['A', 'B', 'C', 'D']
+    resumen_por_ubicacion = {}
+
+    for u in ubicaciones:
+        resumen_por_ubicacion[u] = (
+            Asistencia.objects
+            .filter(ubicacion=u)
+            .values('fecha', 'turno')
+            .annotate(
+                entradas_count=Count('entrada', filter=Q(entrada__isnull=False)),
+                salidas_count=Count('salida', filter=Q(salida__isnull=False))
+            )
+            .order_by('-fecha', 'turno')
+        )
     
     # Registro por fechas
     registro_fechas = Registro.objects.filter(fecha_registro__isnull=False)
@@ -127,10 +118,7 @@ def index(request):
         'inscritos_count': inscritos_count,
         'inscritosValidados_count': inscritosValidados_count,
         'asistencias': asistencias,
-        'ubicacion_a': ubicacion_a,
-        'ubicacion_b': ubicacion_b,
-        'ubicacion_c': ubicacion_c,
-        'ubicacion_d': ubicacion_d,
+        'resumen_por_ubicacion': resumen_por_ubicacion,
         'is_admin': is_admin,
         'is_asistencia': is_asistencia,
         'registroPorFechas': registroPorFechas,
@@ -282,7 +270,7 @@ def entrada_inscritos(request):
     is_admin = request.user.groups.filter(name='Administrador').exists()
     is_asistencia = request.user.groups.filter(name='Asistencia').exists()
 
-    
+    hoy = timezone.now().date()
     inicio_dia = timezone.make_aware(timezone.datetime.combine(timezone.now().date(), timezone.datetime.min.time()))
     fin_dia = inicio_dia + timedelta(days=1) - timedelta(seconds=1)
     
@@ -291,15 +279,20 @@ def entrada_inscritos(request):
         if form.is_valid():
             dni = form.cleaned_data['dni']
             ubicacion = form.cleaned_data['ubicacion']
+            turno = form.cleaned_data['turno']
+            
 
             try:
                 # Buscar al usuario con el DNI proporcionado
                 usuario = Registro.objects.get(dni=dni)
 
                 # Verificar si ya existe un registro de asistencia para este usuario y la fecha actual
-                asistencia = Asistencia.objects.filter(usuario=usuario, fecha=timezone.now().date()).first()
+                # asistencia = Asistencia.objects.filter(usuario=usuario, fecha=timezone.now().date()).first()
+                asistencia = Asistencia.objects.filter(usuario=usuario, fecha=timezone.now().date(), turno=turno).first()
+
+
                 if asistencia:
-                    form.add_error('dni', 'DNI ya registrado.')
+                    form.add_error('dni', 'DNI ya registrado en este turno.')
                 else:
                     hora_ajustada = timezone.localtime(timezone.now()) - timedelta(hours=5)
                     # Intentamos crear el registro
@@ -307,7 +300,8 @@ def entrada_inscritos(request):
                         usuario=usuario,
                         entrada=hora_ajustada,
                         fecha=timezone.now().date(),
-                        ubicacion=ubicacion
+                        ubicacion=ubicacion,
+                        turno=turno,
                     )
             
             except Registro.DoesNotExist:
@@ -316,29 +310,30 @@ def entrada_inscritos(request):
             # Redirigir o volver a renderizar la página después de procesar el formulario
             return render(request, 'administrador/entrada-inscritos.html', {
                 'form': form,
-                'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada'),
+                # 'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada'),
+                'asistenciaEntrada': Asistencia.objects.filter(fecha=hoy).order_by('-entrada'),
                 'asistenciaEntradaHoyCount': Asistencia.objects.filter(entrada__gte=inicio_dia, entrada__lt=fin_dia).count(),
                 'is_admin': is_admin,
                 'is_asistencia': is_asistencia,
-                'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '')  # Mantén el valor de la ubicación seleccionada
+                'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', ''),  # Mantén el valor de la ubicación seleccionada
+                'turno_seleccionado': form.cleaned_data.get('turno', '')  # Mantén el valor del turno seleccionada
             })
         
         else:
-            form.add_error('dni', 'Seleccione una ubicación.')
+            form.add_error('dni', 'Seleccione ubicacion o turno.')
     
     else:
         form = EntradaForm()
 
     return render(request, 'administrador/entrada-inscritos.html', {
         'form': form,
-        'asistenciaEntrada': Asistencia.objects.all().order_by('-entrada'),
+        'asistenciaEntrada': Asistencia.objects.filter(fecha=hoy).order_by('-entrada'),
         'asistenciaEntradaHoyCount': Asistencia.objects.filter(entrada__gte=inicio_dia, entrada__lt=fin_dia).count(),
         'is_admin': is_admin,
         'is_asistencia': is_asistencia,
-        'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '') if form.is_bound and form.is_valid() else ''
+        'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '') if form.is_bound and form.is_valid() else '',
+        'turno_seleccionado': form.cleaned_data.get('turno', '') if form.is_bound and form.is_valid() else ''
     })
-
-
 
 
 def salida_inscritos(request):
@@ -346,63 +341,73 @@ def salida_inscritos(request):
     is_admin = request.user.groups.filter(name='Administrador').exists()
     is_asistencia = request.user.groups.filter(name='Asistencia').exists()
 
-    
+
+    hoy = timezone.now().date()
     inicio_dia = timezone.make_aware(timezone.datetime.combine(timezone.now().date(), timezone.datetime.min.time()))
     fin_dia = inicio_dia + timedelta(days=1) - timedelta(seconds=1)
-    
+
     if request.method == 'POST':
         form = SalidaForm(request.POST)
         if form.is_valid():
             dni = form.cleaned_data['dni']
             ubicacion = form.cleaned_data['ubicacion']
+            turno = form.cleaned_data['turno']  # ← capturamos el turno correctamente
 
             try:
                 # Buscar al usuario con el DNI proporcionado
                 usuario = Registro.objects.get(dni=dni)
 
-                asistencia = Asistencia.objects.filter(usuario=usuario, fecha=timezone.now().date()).first()
-                
+                # Buscar el registro de asistencia del mismo día y turno
+                asistencia = Asistencia.objects.filter(
+                    usuario=usuario,
+                    fecha=timezone.now().date(),
+                    turno=turno
+                ).first()
+
                 if asistencia:
                     if asistencia.entrada is not None and asistencia.salida is None:
-                        # Si ya existe un registro de entrada y no tiene salida, actualizamos la salida
+                        # Tiene entrada y aún no tiene salida → registrar salida
                         hora_ajustada = timezone.localtime(timezone.now()) - timedelta(hours=5)
                         asistencia.salida = hora_ajustada
                         asistencia.save()
                     else:
-                        # Si no tiene entrada o ya tiene salida, mostramos un error
-                        form.add_error('dni', 'DNI sin entrada hoy.')
+                        form.add_error('dni', 'DNI sin entrada o ya registró salida en este turno.')
                 else:
-                    # Si no existe el registro de asistencia, mostramos un error
-                    form.add_error('dni', 'DNI sin entrada hoy.')
-            
+                    form.add_error('dni', 'DNI sin entrada registrada para este turno.')
+
             except Registro.DoesNotExist:
                 form.add_error('dni', 'DNI no existe.')
 
-            # Redirigir o volver a renderizar la página después de procesar el formulario
             return render(request, 'administrador/salida-inscritos.html', {
                 'form': form,
-                'asistenciaSalida': Asistencia.objects.filter(salida__isnull=False).order_by('-salida'),
-                'asistenciaSalidaHoyCount': Asistencia.objects.filter(salida__gte=inicio_dia, entrada__lt=fin_dia).count(), 
+                # 'asistenciaSalida': Asistencia.objects.filter(salida__isnull=False).order_by('-salida'),
+                'asistenciaSalida': Asistencia.objects.filter(salida__isnull=False, fecha=hoy).order_by('-salida'),
+                'asistenciaSalidaHoyCount': Asistencia.objects.filter(
+                    salida__gte=inicio_dia, salida__lt=fin_dia
+                ).count(),
                 'is_admin': is_admin,
                 'is_asistencia': is_asistencia,
-                'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '') 
+                'ubicacion_seleccionada': ubicacion,
+                'turno_seleccionado': turno
             })
-        
+
         else:
-            form.add_error('dni', 'Seleccione una ubicación.')
-    
+            form.add_error('dni', 'Seleccione una ubicación y turno.')
+
     else:
         form = SalidaForm()
 
     return render(request, 'administrador/salida-inscritos.html', {
         'form': form,
-        'asistenciaSalida': Asistencia.objects.filter(salida__isnull=False).order_by('-salida'),
-        'asistenciaSalidaHoyCount': Asistencia.objects.filter(salida__gte=inicio_dia, entrada__lt=fin_dia).count(), 
+        'asistenciaSalida': Asistencia.objects.filter(salida__isnull=False, fecha=hoy).order_by('-salida'),        
+        'asistenciaSalidaHoyCount': Asistencia.objects.filter(
+            salida__gte=inicio_dia, salida__lt=fin_dia
+        ).count(),
         'is_admin': is_admin,
         'is_asistencia': is_asistencia,
-        'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '') if form.is_bound and form.is_valid() else ''
+        'ubicacion_seleccionada': form.cleaned_data.get('ubicacion', '') if form.is_bound and form.is_valid() else '',
+        'turno_seleccionado': form.cleaned_data.get('turno', '') if form.is_bound and form.is_valid() else '',
     })
-
 
 
 

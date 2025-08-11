@@ -20,10 +20,21 @@
                     <select name="ubicacion" id="ubicacion"
                         class="block w-full p-3 text-md bg-gray-50 border border-gray-300 rounded-xl shadow-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition-all duration-300 ease-in-out">
                         <option value="">Selecciona una opción</option>
-                        <option value="A" {% if ubicacion_seleccionada == 'A' %}selected{% endif %}>Lugar A</option>
-                        <option value="B" {% if ubicacion_seleccionada == 'B' %}selected{% endif %}>Lugar B</option>
-                        <option value="C" {% if ubicacion_seleccionada == 'C' %}selected{% endif %}>Lugar C</option>
-                        <option value="D" {% if ubicacion_seleccionada == 'D' %}selected{% endif %}>Lugar D</option>
+                        <option value="A" {% if ubicacion_seleccionada == 'A' %}selected{% endif %}>Ing. Civil</option>
+                        <option value="B" {% if ubicacion_seleccionada == 'B' %}selected{% endif %}>Ing. Agrícola</option>
+                        <option value="C" {% if ubicacion_seleccionada == 'C' %}selected{% endif %}>Ing. Geológica</option>
+                        {% comment %} <option value="D" {% if ubicacion_seleccionada == 'D' %}selected{% endif %}>Lugar D</option> {% endcomment %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <p class="text-md font-semibold text-gray-800 mb-4">Selecciona el turno:</p>
+                <div class="relative inline-block w-full">
+                    <select name="turno" id="turno" class="block w-full p-3 text-md bg-gray-50 border border-gray-300 rounded-xl shadow-md appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition-all duration-300 ease-in-out">
+                        <option value="">Selecciona un turno</option>
+                        <option value="M" {% if turno_seleccionado == 'M' %}selected{% endif %}>Mañana</option>
+                        <option value="T" {% if turno_seleccionado == 'T' %}selected{% endif %}>Tarde</option>
                     </select>
                 </div>
             </div>
@@ -70,6 +81,7 @@
                 <th scope="col" class="px-6 py-3">Nº </th>
                 <th scope="col" class="px-6 py-3">DNI</th>
                 <th scope="col" class="px-6 py-3">Apellidos y Nombres</th>
+                <th scope="col" class="px-6 py-3">Turno</th>
             </tr>
         </thead>
         <tbody>
@@ -79,6 +91,16 @@
                 <td class="px-6 py-4">{{ forloop.counter }}</td>
                 <td class="px-6 py-4">{{ asistencia.usuario.dni }}</td>
                 <td class="px-6 py-4">{{ asistencia.usuario.apellido_paterno }} {{ asistencia.usuario.apellido_materno}} {{ asistencia.usuario.nombres }} </td>
+                <td class="px-6 py-4">
+                    {% if asistencia.turno == 'M' %}
+                        Mañana
+                    {% elif asistencia.turno == 'T' %}
+                        Tarde
+                    {% else %}
+                        No especificado
+                    {% endif %}
+
+                </td>
                 <td class="px-6 py-4"></td>
             </tr>
             {% endfor %}
