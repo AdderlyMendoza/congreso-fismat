@@ -192,6 +192,7 @@ def excel_inscritos_validados(request):
         'Tipo de participante': [inscrito.tipo_participante for inscrito in inscritos],
         'Procedencia': [inscrito.entidad_procedencia for inscrito in inscritos],
         'Monto pagado': [inscrito.monto for inscrito in inscritos],
+        'Num Operacion pago': [inscrito.operacion_pago for inscrito in inscritos],
         'Fecha de registro': [
             # Accede a los atributos correctamente usando la notación de puntos
             make_naive(inscrito.fecha_registro).strftime('%Y-%m-%d %H:%M:%S') if inscrito.fecha_registro else None
